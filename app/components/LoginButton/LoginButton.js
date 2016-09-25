@@ -24,7 +24,6 @@ var FBLoginButton = React.createClass({
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {
                     alert(data.accessToken.toString())
-                    return (<MainScreen />)
                   }
                 )
               }
