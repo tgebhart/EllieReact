@@ -17,6 +17,7 @@ import Nav from './global-widgets/nav'
 import SwipeCards from './SwipeCards/SwipeCards.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
+import LinearGradientView from 'react-native-linear-gradient'
 
 var image1 = require('../assets/images/image1.png')
 var image2 = require('../assets/images/image2.png')
@@ -28,51 +29,99 @@ var image6 = require('../assets/images/image6.png')
 const Cards = [{
   "id": 1,
   "title": "Set Up",
+  "category": "Comedy",
   "age": "21+",
   "dancing": "Dancing",
   "openbar": "Open Bar",
+  "volume": "Quiet",
+  "dress": "Casual",
+  "friends": 5,
   "image": image1,
-  "color": 'rgb(126, 88, 221)'
+  "color": 'rgba(126, 88, 221, 1.0)',
+  "colorFade" : 'rgba(126, 88, 221, 0.12)',
+  "distance": 1.1,
+  "price": "$15",
+  "start_time": "Thursday, 8:00pm"
 }, {
   "id": 2,
   "title": "Fall Into Diversity",
+  "category": "Social",
   "age": "All Ages",
   "dancing": "Diversity",
   "openbar": "Open Bar",
+  "volume": "Quiet",
+  "dress": "Casual",
+  "friends": 10,
   "image": image2,
-  "color": 'rgb(221, 83, 149)'
+  "color": 'rgba(221, 83, 149, 1.0)',
+  "colorFade": 'rgba(221, 83, 149, 0.12)',
+  "distance": 2.1,
+  "price": "$25",
+  "start_time": "Friday, 8:00pm"
 }, {
   "id": 3,
   "title": "DanceFridays",
+  "category": "Party",
   "age": "18+",
   "dancing": "Dancing",
   "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Dress Code",
+  "friends": 2,
   "image": image3,
-  "color": 'rgb(81, 136, 219)'
+  "color": 'rgba(81, 136, 219, 1.0)',
+  "colorFade": 'rgba(81, 136, 219, 0.12)',
+  "distance": 0.8,
+  "price": "$10",
+  "start_time": "Friday, 10:00pm"
 }, {
   "id": 4,
   "title": "The Russian Party",
+  "category": "Party",
   "age": "All Ages",
   "dancing": "Music",
   "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Casual",
+  "friends": 3,
   "image": image4,
-  "color": 'rgb(221, 109, 83)'
+  "color": 'rgba(221, 109, 83, 1.0)',
+  "colorFade": 'rgba(221, 109, 83, 0.12)',
+  "distance": 1.8,
+  "price": "Free",
+  "start_time": "Saturday, 9:00pm"
 }, {
   "id": 5,
   "title": "Techno Awakening",
+  "category": "Party",
   "age": "21+",
   "dancing": "Comedy",
   "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Dress Code",
+  "friends": 10,
   "image": image5,
-  "color": 'rgb(126, 88, 221)'
+  "color": 'rgba(126, 88, 221, 1.0)',
+  "colorFade": 'rgba(126, 88, 221, 0.12)',
+  "distance": 1.9,
+  "price": "$5",
+  "start_time": "Friday, 9:00pm"
 }, {
   "id": 6,
   "title": "Young Cali Takeover",
+  "category": "Party",
   "age": "18+",
   "dancing": "Dancing",
   "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Casual",
+  "friends": 5,
   "image": image6,
-  "color": 'rgb(221, 83, 149)'
+  "color": 'rgba(221, 83, 149, 1.0)',
+  "colorFade": 'rgba(221, 83, 149, 0.12)',
+  "distance": 1.4,
+  "price": "$5",
+  "start_time": "Thursday, 11:00pm"
 }]
 
 export default class Home extends Component {
@@ -85,18 +134,34 @@ export default class Home extends Component {
   Card(x){
     return (
       <View style={styles.card}>
-        <Image source ={x.image} resizeMode="cover" style={styles.cardImage}/>
-        <View style={{flex: 1, backgroundColor: x.color, alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
+        <Image source ={x.image} resizeMode="cover" style={styles.cardImage}>
+        <LinearGradientView style={styles.linearGradient} colors={[x.colorFade, x.color]}>
+          <View style={{backgroundColor:x.color, marginLeft:140, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
+            <Text style={styles.categoryText}>{x.category}</Text>
+          </View>
+          </LinearGradientView>
+        </Image>
+        <View style={{flex: 1, backgroundColor: x.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
           <Text style={styles.titleText}>{x.title} </Text>
-        </View>
-        <View style={{width:350, height:70, flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
-        <View style={{flexDirection:'row', margin:15, marginTop:25,}} >
-        <Text style={{fontSize:16, fontWeight:'200', color:'#444', marginTop:2}}>{x.age}</Text>
-        </View>
-        <View style={{flexDirection:'column'}}>
-        <View style={{padding:13,  borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}><Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.dancing}</Text></View>
-        <View style={{padding:13, borderLeftWidth:1,borderColor:'#e3e3e3', alignItems:'center', justifyContent:'space-between'}}><Text style={{fontSize:16, fontWeight:'200', color:'#555'}}>{x.openbar}</Text></View>
-        </View>
+          <View style={styles.tagContainerMaster}>
+            <View style={styles.tagContainer}>
+              <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.dancing}</Text>
+              <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.volume}</Text>
+            </View>
+            <View style={styles.tagContainer}>
+              <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.openbar}</Text>
+              <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.dress}</Text>
+            </View>
+            <View style={styles.tagContainer}>
+              <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.age}</Text>
+              <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.friends} friends</Text>
+            </View>
+          </View>
+          <View style={styles.bottomInfoContainer}>
+            <Text style={styles.bottomInfoText}>{x.distance} miles</Text>
+            <Text style={styles.bottomInfoText}>{x.price} </Text>
+            <Text style={styles.bottomInfoText}>{x.start_time} </Text>
+          </View>
         </View>
       </View>
     )
@@ -137,7 +202,7 @@ this.refs['swiper']._goToNextCard()  }
           handleYup={this.handleYup}
           handleNope={this.handleNope} />
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
-            <TouchableOpacity style = {styles.buttons} onPress = {() => this.prop.toSearch()}>
+            <TouchableOpacity style = {styles.buttons} onPress = {() => this.props.toSearch}>
               <Image name='search' size={30} color="#888" style={{marginTop:0}} source={require('../assets/icons/search.png')} />
             </TouchableOpacity>
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.nope()}>
@@ -149,7 +214,7 @@ this.refs['swiper']._goToNextCard()  }
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.yup()}>
               <Image name='yup' size={45} color="#888" style={{marginLeft:0}} source={require('../assets/icons/like.png')} />
             </TouchableOpacity>
-            <TouchableOpacity style = {styles.buttons} onPress = {() => this.props.toProfile}>
+            <TouchableOpacity style = {styles.buttons} onPress = {() => this.props.navigator.replace({id:'likedlist'})}>
               <Image name='likeList' size={30} color="#888" style={{marginTop:0}} source={require('../assets/icons/likeList.png')} />
             </TouchableOpacity>
           </View>
@@ -162,6 +227,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f7f7f7',
+  },
+  categoryText:{
+    color: 'rgba(255,255,255, 0.8)',
+    fontSize: 12,
+    fontWeight: 'bold',
+    fontFamily: 'System'
   },
   textContainer:{
     flex: 1,
@@ -191,20 +262,53 @@ const styles = StyleSheet.create({
     borderRadius:25
   },
   titleText:{
+    fontFamily: 'System',
     backgroundColor: 'transparent',
-    fontSize: 26,
+    fontSize: 24,
+    fontWeight: '400',
+    color: 'rgba(255, 255, 255, 0.8)'
+  },
+  bottomInfoText:{
+    fontSize: 14,
     fontWeight: '400',
     color: 'rgb(255, 255, 255)'
+  },
+  tagContainerMaster:{
+    width: 300,
+    marginTop: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  tagContainer:{
+    width: 100,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  bottomInfoContainer:{
+    width: 330,
+    marginTop: 35,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
   },
    card: {
     flex: 1,
     alignItems: 'center',
     alignSelf:'center',
-    borderWidth:2,
-    borderColor:'#888',
     width: 350,
     height: 450,
-    shadowColor: "#888"
+    borderRadius: 5,
+    shadowRadius: 10,
+    shadowOpacity: 1.0,
+    shadowColor: 'rgb(0, 0, 0)',
+    overflow: 'hidden',
+  },
+  linearGradient: {
+    flex: 1,
+    paddingLeft: 15,
+    paddingRight: 15,
   }
 
 });

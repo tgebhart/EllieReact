@@ -12,6 +12,7 @@ import {
 import Home from './home';
 import Messages from './messages';
 import Profile from './profile';
+import LikedList from './LikedList/LikedList'
 
 export default class Index extends Component {
   constructor(props){
@@ -46,6 +47,14 @@ export default class Index extends Component {
         userData ={route.userData}
         navigator={navigator} />
         );
+    }
+    if (routeId === 'likedlist') {
+      return (
+        <LikedList
+        {...this.props}
+        userData={route.userData}
+        navigator={navigator} />
+      );
     }
   }
 

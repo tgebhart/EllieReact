@@ -25,13 +25,12 @@ export default class Nav extends Component {
   profile(){
     return (
       <View  style={styles.container}>
-      <Image source ={require('../../assets/images/logo.png')} resizeMode = "contain" style={{width:100, height:30}} />
-     <TouchableOpacity onPress ={this.props.onPress}>
+      <TouchableOpacity onPress ={this.props.onPress}>
+        <Image source ={require('../../assets/images/logo.png')} resizeMode = "contain" style={{width:100, height:30}} />
       </TouchableOpacity>
       </View>
     );
   }
-
     message(){
     return (
       <View  style={styles.container}>
@@ -39,6 +38,16 @@ export default class Nav extends Component {
       <Image source = {require('../../assets/images/tinder.png')} style = {{width:25, height:25, margin:10}}/>
       </TouchableOpacity>
       <Image source ={require('../../assets/images/logo.png')} resizeMode = "contain" style={{width:100, height:30}} />
+      <View style = {{width:25, height:25, margin:10}}/>
+      </View>
+    );
+  }
+  likedlist(){
+    return (
+      <View  style={styles.container}>
+      <TouchableOpacity onPress ={this.props.onPress}>
+        <Image source ={require('../../assets/images/logo.png')} resizeMode = "contain" style={{width:100, height:30}} />
+      </TouchableOpacity>
       <View style = {{width:25, height:25, margin:10}}/>
       </View>
     );

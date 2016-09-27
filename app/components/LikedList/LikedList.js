@@ -17,21 +17,21 @@ import {
   View
 } from 'react-native';
 
-import Nav from './global-widgets/nav'
-import SwipeCards from './SwipeCards/SwipeCards.js';
+import Nav from '../global-widgets/nav'
+import SwipeCards from '../SwipeCards/SwipeCards.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-var image1 = require('../assets/images/image1.png')
-var image2 = require('../assets/images/image2.png')
-var image3 = require('../assets/images/image3.png')
-var image4 = require('../assets/images/image4.png')
-var image5 = require('../assets/images/image5.png')
-var image6 = require('../assets/images/image6.png')
-var image7 = require('../assets/images/image7.png')
-var image8 = require('../assets/images/image8.png')
-var image9 = require('../assets/images/image9.png')
-var image10 = require('../assets/images/image10.png')
-var image11 = require('../assets/images/image11.png')
+var image1 = require('../../assets/images/image1.png')
+var image2 = require('../../assets/images/image2.png')
+var image3 = require('../../assets/images/image3.png')
+var image4 = require('../../assets/images/image4.png')
+var image5 = require('../../assets/images/image5.png')
+var image6 = require('../../assets/images/image6.png')
+var image7 = require('../../assets/images/image7.png')
+var image8 = require('../../assets/images/image8.png')
+var image9 = require('../../assets/images/image9.png')
+var image10 = require('../../assets/images/image10.png')
+var image11 = require('../../assets/images/image11.png')
 
 var convos = [{
   "id": 1,
@@ -129,7 +129,7 @@ var newMatches = [{
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-export default class Messages extends Component {
+export default class LikedList extends Component {
   constructor(props){
     super(props)
 
@@ -164,7 +164,7 @@ export default class Messages extends Component {
   render() {
     return (
       <View style = {{flex:1}}>
-      <Nav type = 'message' onPress = {() => this.props.navigator.replace({id:'home'})} />
+      <Nav type = 'likedlist' onPress = {() => this.props.navigator.replace({id:'home'})} />
       <ScrollView style={styles.container}>
       <TextInput
       style = {{height:50, }}
