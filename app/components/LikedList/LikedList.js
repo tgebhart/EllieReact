@@ -17,9 +17,20 @@ import {
   View
 } from 'react-native';
 
+import {
+  MKButton,
+  MKColor,
+  MKIconToggle,
+  getTheme,
+} from 'react-native-material-kit';
+
 import Nav from '../global-widgets/nav'
-import SwipeCards from '../SwipeCards/SwipeCards.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Swiper from 'react-native-swiper';
+
+import LikedCardFront from '../LikedCards/LikedCardFront.js'
+import LikedCardMenu from '../LikedCards/LikedCardMenu.js'
+import LikedCardVenue from '../LikedCards/LikedCardVenue.js'
 
 var image1 = require('../../assets/images/image1.png')
 var image2 = require('../../assets/images/image2.png')
@@ -33,56 +44,102 @@ var image9 = require('../../assets/images/image9.png')
 var image10 = require('../../assets/images/image10.png')
 var image11 = require('../../assets/images/image11.png')
 
-var convos = [{
+const events = [{
   "id": 1,
-  "name": "Diane",
-  "message": "Suspendisse accumsan tortor quis turpis.",
-  "image" : image1
+  "title": "Set Up",
+  "category": "Comedy",
+  "age": "21+",
+  "dancing": "Dancing",
+  "openbar": "Open Bar",
+  "volume": "Quiet",
+  "dress": "Casual",
+  "friends": 5,
+  "image": image1,
+  "color": 'rgba(126, 88, 221, 1.0)',
+  "colorFade" : 'rgba(126, 88, 221, 0.12)',
+  "distance": 1.1,
+  "price": "$15",
+  "start_time": "Thursday, 8:00pm"
 }, {
   "id": 2,
-  "name": "Lois",
-  "message": "Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.",
-  "image" : image2
+  "title": "Fall Into Diversity",
+  "category": "Social",
+  "age": "All Ages",
+  "dancing": "Diversity",
+  "openbar": "Open Bar",
+  "volume": "Quiet",
+  "dress": "Casual",
+  "friends": 10,
+  "image": image2,
+  "color": 'rgba(221, 83, 149, 1.0)',
+  "colorFade": 'rgba(221, 83, 149, 0.12)',
+  "distance": 2.1,
+  "price": "$25",
+  "start_time": "Friday, 8:00pm"
 }, {
   "id": 3,
-  "name": "Mary",
-  "message": "Duis bibendum.",
-  "image" : image3
+  "title": "DanceFridays",
+  "category": "Party",
+  "age": "18+",
+  "dancing": "Dancing",
+  "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Dress Code",
+  "friends": 2,
+  "image": image3,
+  "color": 'rgba(81, 136, 219, 1.0)',
+  "colorFade": 'rgba(81, 136, 219, 0.12)',
+  "distance": 0.8,
+  "price": "$10",
+  "start_time": "Friday, 10:00pm"
 }, {
   "id": 4,
-  "name": "Susan",
-  "message": "Praesent blandit.",
-  "image" : image4
+  "title": "The Russian Party",
+  "category": "Party",
+  "age": "All Ages",
+  "dancing": "Music",
+  "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Casual",
+  "friends": 3,
+  "image": image4,
+  "color": 'rgba(221, 109, 83, 1.0)',
+  "colorFade": 'rgba(221, 109, 83, 0.12)',
+  "distance": 1.8,
+  "price": "Free",
+  "start_time": "Saturday, 9:00pm"
 }, {
   "id": 5,
-  "name": "Betty",
-  "message": "Mauris enim leo, rhoncus sed, vestibulum, cursus id, turpis.",
-  "image" : image5
+  "title": "Techno Awakening",
+  "category": "Party",
+  "age": "21+",
+  "dancing": "Comedy",
+  "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Dress Code",
+  "friends": 10,
+  "image": image5,
+  "color": 'rgba(126, 88, 221, 1.0)',
+  "colorFade": 'rgba(126, 88, 221, 0.12)',
+  "distance": 1.9,
+  "price": "$5",
+  "start_time": "Friday, 9:00pm"
 }, {
   "id": 6,
-  "name": "Deborah",
-  "message": "Aliquam sit amet diam in magna bibendum imperdiet.",
-  "image" : image6
-}, {
-  "id": 7,
-  "name": "Frances",
-  "message": "Phasellus sit amet erat.",
-  "image" : image7
-}, {
-  "id": 8,
-  "name": "Joan",
-  "message": "Vestibulum ante ipsum bilia Curae; Duis faucibus accumsan odio.",
-  "image" : image8
-}, {
-  "id": 9,
-  "name": "Denise",
-  "message": "Aliquam non mauris.",
-  "image" : image9
-}, {
-  "id": 10,
-  "name": "Rachel",
-  "message": "Nulla ac enim.",
-  "image" : image10
+  "title": "Young Cali Takeover",
+  "category": "Party",
+  "age": "18+",
+  "dancing": "Dancing",
+  "openbar": "Open Bar",
+  "volume": "Loud",
+  "dress": "Casual",
+  "friends": 5,
+  "image": image6,
+  "color": 'rgba(221, 83, 149, 1.0)',
+  "colorFade": 'rgba(221, 83, 149, 0.12)',
+  "distance": 1.4,
+  "price": "$5",
+  "start_time": "Thursday, 11:00pm"
 }]
 
 var newMatches = [{
@@ -135,110 +192,69 @@ export default class LikedList extends Component {
 
     this.state = {
       dataSource: ds.cloneWithRows(newMatches),
-      convoData: ds.cloneWithRows(convos),
+      convoData: ds.cloneWithRows(events),
+      items: [],
     }
-
   }
 
-  eachPic(x){
+  eventSummary(x) {
     return(
-      <TouchableOpacity style={{alignItems:'center'}}>
-      <Image source = {x.image} style={{width:70, height:70, borderRadius:35, margin:10}} />
-      <Text style={{fontWeight:'600', color:'#444'}}>{x.first_name}</Text>
-      </TouchableOpacity>
-      )}
+      <View style={styles.eventSummaryContainer}>
+        <Swiper>
+          <View >
+            <LikedCardFront></LikedCardFront>
+          </View>
+          <View>
+            <LikedCardVenue></LikedCardVenue>
+          </View>
+        </Swiper>
+      </View>
+  )}
 
-    convoRender(x){
-      return(
-              <TouchableOpacity style={{alignItems:'center', flexDirection:'row', marginTop:5, marginBottom:5, borderBottomWidth:1, borderColor:'#e3e3e3'}}>
-              <Image source = {x.image} style={{width:70, height:70, borderRadius:35, margin:10}} />
-              <View>
-              <Text style={{fontWeight:'600', color:'#111'}}>{x.name}</Text>
-              <Text
-              numberOfLines ={1}
-              style={{fontWeight:'400', color:'#888', width:200}}>{x.message}</Text>
-              </View>
-              </TouchableOpacity>)}
-
+  renderCards(x) {
+    return(
+      <View style={styles.eventCard}>
+        <LikedCardFront>
+        </LikedCardFront>
+      </View>
+    )
+  }
 
   render() {
     return (
       <View style = {{flex:1}}>
-      <Nav type = 'likedlist' onPress = {() => this.props.navigator.replace({id:'home'})} />
-      <ScrollView style={styles.container}>
-      <TextInput
-      style = {{height:50, }}
-      placeholder="Search"
-      />
-      <View style={styles.matches}>
-      <Text style = {{color:'#da533c', fontWeight:'600', fontSize:12}}>THIS PARTY'S BUZZING WITH BAD BITCHES</Text>
-      <ListView
-      horizontal={true}
-      showsHorizontalScrollIndicator = {false}
-    dataSource={this.state.dataSource}
-    pageSize = {5}
-      renderRow={(rowData) =>this.eachPic(rowData)}
-      />
+        <Nav type = 'likedlist' onPress = {() => this.props.navigator.replace({id:'home'})} />
+        <ListView
+          horizontal={false}
+          scrollEnabled = {true}
+          showsHorizontalScrollIndicator = {false}
+          dataSource={this.state.convoData}
+          pageSize = {2}
+          renderRow={(rowData) =>this.eventSummary(rowData)} >
+        </ListView>
       </View>
-      <View style = {{margin:10}}>
-      <Text style = {{color:'#da533c', fontWeight:'600', fontSize:12}}>List View</Text>
-      <ListView
-      horizontal={false}
-      scrollEnabled = {false}
-      showsHorizontalScrollIndicator = {false}
-    dataSource={this.state.convoData}
-    pageSize = {5}
-      renderRow={(rowData) =>this.convoRender(rowData)}
-      />
-      </View>
-
-        </ScrollView>
-        </View>
     )
+  }
 }
-}
-//onPress = {() => this.renderNope()}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10
-
+    margin: 0
   },
   matches:{
-  borderTopWidth:1,
-  paddingTop:15,
   borderTopColor:'#da533c',
-  borderBottomWidth:1,
-  paddingBottom:15,
   borderBottomColor:'#e3e3e3'
   },
-  buttons:{
-    width:80,
-    height:80,
-    borderWidth:10,
-    borderColor:'#fff',
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:40
-  },
-  buttonSmall:{
-    width:50,
-    height:50,
-    borderWidth:10,
-    borderColor:'#e7e7e7',
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:25
-  },
-   card: {
+  eventCard: {
     flex: 1,
-    alignItems: 'center',
-    alignSelf:'center',
-    borderWidth:2,
-    borderColor:'#e3e3e3',
-    width: 350,
-    height: 420,
-  }
+    width: 300,
+    height: 300
+  },
+  eventSummaryContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 300,
+  },
 
 });
