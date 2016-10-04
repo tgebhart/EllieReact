@@ -1,8 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+
 
 import React, { Component } from 'react';
 import {
@@ -13,18 +9,20 @@ import {
   View
 } from 'react-native';
 
-import Nav from './global-widgets/nav'
-import SwipeCards from './SwipeCards/SwipeCards.js';
+import Nav from '../global-widgets/nav'
+import SwipeCards from '../SwipeCards/SwipeCards.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
 import LinearGradientView from 'react-native-linear-gradient'
 
-var image1 = require('../assets/images/image1.png')
-var image2 = require('../assets/images/image2.png')
-var image3 = require('../assets/images/image3.png')
-var image4 = require('../assets/images/image4.png')
-var image5 = require('../assets/images/image5.png')
-var image6 = require('../assets/images/image6.png')
+const styles = require('./styles');
+
+var image1 = require('../../assets/images/image1.png')
+var image2 = require('../../assets/images/image2.png')
+var image3 = require('../../assets/images/image3.png')
+var image4 = require('../../assets/images/image4.png')
+var image5 = require('../../assets/images/image5.png')
+var image6 = require('../../assets/images/image6.png')
 
 const Cards = [{
   "id": 1,
@@ -203,112 +201,22 @@ this.refs['swiper']._goToNextCard()  }
           handleNope={this.handleNope} />
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.props.toSearch}>
-              <Image name='search' size={30} color="#888" style={{marginTop:0}} source={require('../assets/icons/search.png')} />
+              <Image name='search' size={30} color="#888" style={{marginTop:0}} source={require('../../assets/icons/search.png')} />
             </TouchableOpacity>
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.nope()}>
-              <Image name='nope' size={45} color="#888" style={{marginRight:0}} source={require('../assets/icons/dislike.png')} />
+              <Image name='nope' size={45} color="#888" style={{marginRight:0}} source={require('../../assets/icons/dislike.png')} />
             </TouchableOpacity>
             {/* <TouchableOpacity style = {styles.buttonSmall}>
               <Iconz name='ios-information' size={25} color="#888" style={{}} />
             </TouchableOpacity> */}
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.yup()}>
-              <Image name='yup' size={45} color="#888" style={{marginLeft:0}} source={require('../assets/icons/like.png')} />
+              <Image name='yup' size={45} color="#888" style={{marginLeft:0}} source={require('../../assets/icons/like.png')} />
             </TouchableOpacity>
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.props.navigator.replace({id:'likedlist'})}>
-              <Image name='likeList' size={30} color="#888" style={{marginTop:0}} source={require('../assets/icons/likeList.png')} />
+              <Image name='likeList' size={30} color="#888" style={{marginTop:0}} source={require('../../assets/icons/likeList.png')} />
             </TouchableOpacity>
           </View>
         </View>
     )
 }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f7f7f7',
-  },
-  categoryText:{
-    color: 'rgba(255,255,255, 0.8)',
-    fontSize: 12,
-    fontWeight: 'bold',
-    fontFamily: 'System'
-  },
-  textContainer:{
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 350,
-  },
-  cardImage:{
-    height: 275,
-    width: 350,
-  },
-  buttons:{
-    width:80,
-    height:80,
-    borderColor:'#e7e7e7',
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:40
-  },
-  buttonSmall:{
-    width:50,
-    height:50,
-    borderWidth:10,
-    borderColor:'#e7e7e7',
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:25
-  },
-  titleText:{
-    fontFamily: 'System',
-    backgroundColor: 'transparent',
-    fontSize: 24,
-    fontWeight: '400',
-    color: 'rgba(255, 255, 255, 0.8)'
-  },
-  bottomInfoText:{
-    fontSize: 14,
-    fontWeight: '400',
-    color: 'rgb(255, 255, 255)'
-  },
-  tagContainerMaster:{
-    width: 300,
-    marginTop: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  tagContainer:{
-    width: 100,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-  bottomInfoContainer:{
-    width: 330,
-    marginTop: 35,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between'
-  },
-   card: {
-    flex: 1,
-    alignItems: 'center',
-    alignSelf:'center',
-    width: 350,
-    height: 450,
-    borderRadius: 5,
-    shadowRadius: 10,
-    shadowOpacity: 1.0,
-    shadowColor: 'rgb(0, 0, 0)',
-    overflow: 'hidden',
-  },
-  linearGradient: {
-    flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
-  }
-
-});

@@ -12,6 +12,8 @@ import {
 
 var {height, width} = Dimensions.get('window');
 import Nav from './global-widgets/nav'
+import MapView from 'react-native-maps';
+
 
 export default class Profile extends Component {
   constructor(props){
@@ -31,11 +33,21 @@ export default class Profile extends Component {
       <View style={{flex:1}}>
       <Nav  type = "profile" onPress = {() => this.props.navigator.replace({id:'home'})} />
       <ScrollView style={styles.container}>
+      <MapView
+      initialRegion={{
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }}
+     />
       <Image source ={require('../assets/images/profile.png')} resizeMode="center" style={{height:350, width:width}} />
        <View style={[styles.row, {marginTop:15}]}>
        <Text style = {{fontSize:19, fontWeight:'400'}}>Bruce Wayne, </Text><Text style={{fontSize:21, fontWeight:'300', marginBottom:-2}}>23</Text>
        </View>
-       <View style={styles.row}>
+
+
+      <View style={styles.row}>
        <Text style={{color:'#444', fontSize:15}}>Same Sweater Productions</Text>
        </View>
        <View style={styles.row}>

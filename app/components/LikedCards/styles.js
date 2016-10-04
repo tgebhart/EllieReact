@@ -27,6 +27,34 @@ module.exports = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  card: {
+   flex: 2,
+   alignItems: 'center',
+   alignSelf:'center',
+   borderRadius: 5,
+   shadowRadius: 10,
+   shadowOpacity: 1.0,
+   shadowColor: 'rgb(0, 0, 0)',
+   overflow: 'hidden',
+   height: 300
+ },
+ textContainer:{
+   flex: 1,
+   alignItems: 'center',
+   justifyContent: 'center',
+   width: 300,
+ },
+ cardImage: {
+   height: 150,
+   width: 300,
+ },
+ bottomInfoContainer:{
+   width: 280,
+   marginTop: 10,
+   flexDirection:'row',
+   alignItems:'center',
+   justifyContent:'space-between'
+ },
   instructions: {
     textAlign: 'center',
     color: '#333333',
@@ -56,5 +84,6 @@ module.exports = StyleSheet.create({
   },
   fab: {
   },
-  
+
+
 });

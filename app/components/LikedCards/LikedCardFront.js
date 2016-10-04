@@ -15,11 +15,14 @@ import {
   getTheme,
 } from 'react-native-material-kit';
 
+import LinearGradientView from 'react-native-linear-gradient'
+
 import LikedCardMenu from './LikedCardMenu.js'
 
 
 const theme = getTheme();
 const styles = require('./styles');
+const homeStyles = require('../Home/styles')
 
 const LikedCardFront = React.createClass({
   render(){
@@ -45,33 +48,33 @@ const LikedCardFront = React.createClass({
           <View style={{padding: 5}}>
           </View>
           <View style={styles.card}>
-            <Image source ={x.image} resizeMode="cover" style={styles.cardImage}>
-            <LinearGradientView style={styles.linearGradient} colors={[x.colorFade, x.color]}>
-              <View style={{backgroundColor:x.color, marginLeft:140, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
-                <Text style={styles.categoryText}>{x.category}</Text>
+            <Image source ={this.props.image} resizeMode="cover" style={styles.cardImage}>
+            <LinearGradientView style={homeStyles.linearGradient} colors={[this.props.colorFade, this.props.color]}>
+              <View style={{backgroundColor:this.props.color, marginLeft:110, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
+                <Text style={homeStyles.categoryText}>{this.props.category}</Text>
               </View>
               </LinearGradientView>
             </Image>
-            <View style={{flex: 1, backgroundColor: x.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
-              <Text style={styles.titleText}>{x.title} </Text>
-              <View style={styles.tagContainerMaster}>
-                <View style={styles.tagContainer}>
-                  <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.dancing}</Text>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.volume}</Text>
+            <View style={{flex: 1, backgroundColor: this.props.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
+              <Text style={homeStyles.titleText}>{this.props.title} </Text>
+              <View style={homeStyles.tagContainerMaster}>
+                <View style={homeStyles.tagContainer}>
+                  <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.dancing}</Text>
+                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.volume}</Text>
                 </View>
-                <View style={styles.tagContainer}>
-                  <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.openbar}</Text>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.dress}</Text>
+                <View style={homeStyles.tagContainer}>
+                  <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.openbar}</Text>
+                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.dress}</Text>
                 </View>
-                <View style={styles.tagContainer}>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.age}</Text>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.friends} friends</Text>
+                <View style={homeStyles.tagContainer}>
+                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.age}</Text>
+                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.friends} friends</Text>
                 </View>
               </View>
               <View style={styles.bottomInfoContainer}>
-                <Text style={styles.bottomInfoText}>{x.distance} miles</Text>
-                <Text style={styles.bottomInfoText}>{x.price} </Text>
-                <Text style={styles.bottomInfoText}>{x.start_time} </Text>
+                <Text style={homeStyles.bottomInfoText}>{this.props.distance} miles</Text>
+                <Text style={homeStyles.bottomInfoText}>{this.props.price} </Text>
+                <Text style={homeStyles.bottomInfoText}>{this.props.start_time} </Text>
               </View>
             </View>
           </View>

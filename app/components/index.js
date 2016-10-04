@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 
-import Home from './home';
+import Home from './Home/home';
 import Messages from './messages';
 import Profile from './profile';
 import LikedList from './LikedList/LikedList'

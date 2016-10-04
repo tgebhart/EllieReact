@@ -184,6 +184,8 @@ var newMatches = [{
   "image" : image11
 }]
 
+import MapView from 'react-native-maps';
+
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 export default class LikedList extends Component {
@@ -202,7 +204,22 @@ export default class LikedList extends Component {
       <View style={styles.eventSummaryContainer}>
         <Swiper>
           <View >
-            <LikedCardFront></LikedCardFront>
+            <LikedCardFront
+            image={x.image}
+            colorFade={x.colorFade}
+            color={x.color}
+            category={x.category}
+            title={x.title}
+            dancing={x.dancing}
+            volume={x.volume}
+            openbar={x.openbar}
+            dress={x.dress}
+            age={x.age}
+            friends={x.friends}
+            distance={x.distance}
+            price={x.price}
+            start_time={x.start_time}
+            />
           </View>
           <View>
             <LikedCardVenue></LikedCardVenue>
