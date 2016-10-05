@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -24,7 +25,6 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		1A5058C864E8409ABB7F4A28 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26823DA2169F47B597E2D2AF /* libRCTFBSDK.a */; };
-		26E196EAB9B74C12BA0041AC /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A0A173EC6E4925863C9067 /* libAirMaps.a */; };
 		2C25D3198A454117B8557265 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D92830EE76FF47878FAA35F9 /* FontAwesome.ttf */; };
 		7FA27D624FC042FBAF65A720 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7D1D6B62EDA04D658652D2EA /* Foundation.ttf */; };
 		7FB7E0C4C07A438CA5DFA5F3 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D2F856C8DE34EDB8457C0AD /* libRNVectorIcons.a */; };
@@ -35,25 +35,9 @@
 		B534A12A1D47436ABF769DC4 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B3F566339C9408CAC2246BF /* Zocial.ttf */; };
 		DCC9EEC4D45D4E5AB7AC37C6 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52D801CBE90746279194F785 /* Ionicons.ttf */; };
 		E37BFD5BFD7C45AE91D25EF2 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BA027B762B064243BE6B5088 /* libBVLinearGradient.a */; };
-		EF0A59811DA34A3900FEC95C /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0A59801DA34A3900FEC95C /* libAirMaps.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		EF722FA91D9346B900680A5B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF722FA61D9346B900680A5B /* FBSDKCoreKit.framework */; };
 		EF722FAA1D9346B900680A5B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF722FA71D9346B900680A5B /* FBSDKLoginKit.framework */; };
 		EF722FAB1D9346B900680A5B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF722FA81D9346B900680A5B /* FBSDKShareKit.framework */; };
-		EFC2C7641DA330A600D2834E /* AIRMap.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7431DA330A600D2834E /* AIRMap.m */; };
-		EFC2C7651DA330A600D2834E /* AIRMapCallout.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7451DA330A600D2834E /* AIRMapCallout.m */; };
-		EFC2C7661DA330A600D2834E /* AIRMapCalloutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7471DA330A600D2834E /* AIRMapCalloutManager.m */; };
-		EFC2C7671DA330A600D2834E /* AIRMapCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7491DA330A600D2834E /* AIRMapCircle.m */; };
-		EFC2C7681DA330A600D2834E /* AIRMapCircleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C74B1DA330A600D2834E /* AIRMapCircleManager.m */; };
-		EFC2C7691DA330A600D2834E /* AIRMapCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C74D1DA330A600D2834E /* AIRMapCoordinate.m */; };
-		EFC2C76A1DA330A600D2834E /* AIRMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C74F1DA330A600D2834E /* AIRMapManager.m */; };
-		EFC2C76B1DA330A600D2834E /* AIRMapMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7511DA330A600D2834E /* AIRMapMarker.m */; };
-		EFC2C76C1DA330A600D2834E /* AIRMapMarkerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7531DA330A600D2834E /* AIRMapMarkerManager.m */; };
-		EFC2C76D1DA330A600D2834E /* AIRMapPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7551DA330A600D2834E /* AIRMapPolygon.m */; };
-		EFC2C76E1DA330A600D2834E /* AIRMapPolygonManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7571DA330A600D2834E /* AIRMapPolygonManager.m */; };
-		EFC2C76F1DA330A600D2834E /* AIRMapPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7591DA330A600D2834E /* AIRMapPolyline.m */; };
-		EFC2C7701DA330A600D2834E /* AIRMapPolylineManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C75B1DA330A600D2834E /* AIRMapPolylineManager.m */; };
-		EFC2C7711DA330A600D2834E /* SMCalloutView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C75E1DA330A600D2834E /* SMCalloutView.m */; };
-		EFC2C7721DA330A600D2834E /* RCTConvert+MoreMapKit.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC2C7601DA330A600D2834E /* RCTConvert+MoreMapKit.m */; };
 		EFDB5DB71D94ADC600670F0A /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFDB5DAF1D94ADC600670F0A /* Entypo.ttf */; };
 		EFDB5DB81D94ADC600670F0A /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFDB5DB01D94ADC600670F0A /* EvilIcons.ttf */; };
 		EFDB5DB91D94ADC600670F0A /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFDB5DB11D94ADC600670F0A /* FontAwesome.ttf */; };
@@ -62,6 +46,7 @@
 		EFDB5DBC1D94ADC600670F0A /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFDB5DB41D94ADC600670F0A /* MaterialIcons.ttf */; };
 		EFDB5DBD1D94ADC600670F0A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFDB5DB51D94ADC600670F0A /* Octicons.ttf */; };
 		EFDB5DBE1D94ADC600670F0A /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFDB5DB61D94ADC600670F0A /* Zocial.ttf */; };
+		EFF0E6D21DA468D800A7CFE7 /* libAirMaps.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EFF0E6D11DA468BE00A7CFE7 /* libAirMaps.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,13 +127,6 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		EF0A597F1DA34A3900FEC95C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = EFC2C7611DA330A600D2834E /* AirMaps.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
-			remoteInfo = AirMaps;
-		};
 		EF564B751D988740006963B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8A925438E73046AA9ED3EB3B /* BVLinearGradient.xcodeproj */;
@@ -177,6 +155,13 @@
 			remoteGlobalIDString = 8A1B8E771B22E4E300DB45C2;
 			remoteInfo = RCTMaterialKit;
 		};
+		EFF0E6D01DA468BE00A7CFE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EFF0E6CC1DA468BE00A7CFE7 /* AirMaps.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 11FA5C511C4A1296003AC2EE;
+			remoteInfo = AirMaps;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -189,7 +174,6 @@
 		00E356EE1AD99517003FC87E /* EllieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EllieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* EllieTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EllieTests.m; sourceTree = "<group>"; };
-		129715357D804998A8D7F522 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Ellie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ellie.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -221,37 +205,6 @@
 		EF722FA61D9346B900680A5B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		EF722FA71D9346B900680A5B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		EF722FA81D9346B900680A5B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
-		EFC2C7421DA330A600D2834E /* AIRMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMap.h; sourceTree = "<group>"; };
-		EFC2C7431DA330A600D2834E /* AIRMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMap.m; sourceTree = "<group>"; };
-		EFC2C7441DA330A600D2834E /* AIRMapCallout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCallout.h; sourceTree = "<group>"; };
-		EFC2C7451DA330A600D2834E /* AIRMapCallout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCallout.m; sourceTree = "<group>"; };
-		EFC2C7461DA330A600D2834E /* AIRMapCalloutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCalloutManager.h; sourceTree = "<group>"; };
-		EFC2C7471DA330A600D2834E /* AIRMapCalloutManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCalloutManager.m; sourceTree = "<group>"; };
-		EFC2C7481DA330A600D2834E /* AIRMapCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCircle.h; sourceTree = "<group>"; };
-		EFC2C7491DA330A600D2834E /* AIRMapCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCircle.m; sourceTree = "<group>"; };
-		EFC2C74A1DA330A600D2834E /* AIRMapCircleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCircleManager.h; sourceTree = "<group>"; };
-		EFC2C74B1DA330A600D2834E /* AIRMapCircleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCircleManager.m; sourceTree = "<group>"; };
-		EFC2C74C1DA330A600D2834E /* AIRMapCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapCoordinate.h; sourceTree = "<group>"; };
-		EFC2C74D1DA330A600D2834E /* AIRMapCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapCoordinate.m; sourceTree = "<group>"; };
-		EFC2C74E1DA330A600D2834E /* AIRMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapManager.h; sourceTree = "<group>"; };
-		EFC2C74F1DA330A600D2834E /* AIRMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapManager.m; sourceTree = "<group>"; };
-		EFC2C7501DA330A600D2834E /* AIRMapMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapMarker.h; sourceTree = "<group>"; };
-		EFC2C7511DA330A600D2834E /* AIRMapMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapMarker.m; sourceTree = "<group>"; };
-		EFC2C7521DA330A600D2834E /* AIRMapMarkerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapMarkerManager.h; sourceTree = "<group>"; };
-		EFC2C7531DA330A600D2834E /* AIRMapMarkerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapMarkerManager.m; sourceTree = "<group>"; };
-		EFC2C7541DA330A600D2834E /* AIRMapPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolygon.h; sourceTree = "<group>"; };
-		EFC2C7551DA330A600D2834E /* AIRMapPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolygon.m; sourceTree = "<group>"; };
-		EFC2C7561DA330A600D2834E /* AIRMapPolygonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolygonManager.h; sourceTree = "<group>"; };
-		EFC2C7571DA330A600D2834E /* AIRMapPolygonManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolygonManager.m; sourceTree = "<group>"; };
-		EFC2C7581DA330A600D2834E /* AIRMapPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolyline.h; sourceTree = "<group>"; };
-		EFC2C7591DA330A600D2834E /* AIRMapPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolyline.m; sourceTree = "<group>"; };
-		EFC2C75A1DA330A600D2834E /* AIRMapPolylineManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapPolylineManager.h; sourceTree = "<group>"; };
-		EFC2C75B1DA330A600D2834E /* AIRMapPolylineManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapPolylineManager.m; sourceTree = "<group>"; };
-		EFC2C75D1DA330A600D2834E /* SMCalloutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMCalloutView.h; sourceTree = "<group>"; };
-		EFC2C75E1DA330A600D2834E /* SMCalloutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMCalloutView.m; sourceTree = "<group>"; };
-		EFC2C75F1DA330A600D2834E /* RCTConvert+MoreMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+MoreMapKit.h"; sourceTree = "<group>"; };
-		EFC2C7601DA330A600D2834E /* RCTConvert+MoreMapKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RCTConvert+MoreMapKit.m"; sourceTree = "<group>"; };
-		EFC2C7611DA330A600D2834E /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AirMaps.xcodeproj; sourceTree = "<group>"; };
 		EFDB5DAF1D94ADC600670F0A /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
 		EFDB5DB01D94ADC600670F0A /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
 		EFDB5DB11D94ADC600670F0A /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -260,7 +213,8 @@
 		EFDB5DB41D94ADC600670F0A /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		EFDB5DB51D94ADC600670F0A /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		EFDB5DB61D94ADC600670F0A /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
-		F9A0A173EC6E4925863C9067 /* libAirMaps.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAirMaps.a; sourceTree = "<group>"; };
+		EFF0E6AE1DA465AE00A7CFE7 /* libAirMaps.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAirMaps.a; path = "../../../../Library/Developer/Xcode/DerivedData/Ellie-fkdyhyowqmjblmeeozkxfpqcbams/Build/Products/Debug-iphonesimulator/libAirMaps.a"; sourceTree = "<group>"; };
+		EFF0E6CC1DA468BE00A7CFE7 /* AirMaps.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AirMaps.xcodeproj; path = "../node_modules/react-native-maps/ios/AirMaps.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
+				EFF0E6D21DA468D800A7CFE7 /* libAirMaps.a in Frameworks */,
 				EF722FA91D9346B900680A5B /* FBSDKCoreKit.framework in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -288,13 +243,11 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				EF722FAB1D9346B900680A5B /* FBSDKShareKit.framework in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
-				EF0A59811DA34A3900FEC95C /* libAirMaps.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				1A5058C864E8409ABB7F4A28 /* libRCTFBSDK.a in Frameworks */,
 				7FB7E0C4C07A438CA5DFA5F3 /* libRNVectorIcons.a in Frameworks */,
 				E37BFD5BFD7C45AE91D25EF2 /* libBVLinearGradient.a in Frameworks */,
 				B3EBDC3BD7C04550A43F2844 /* libRCTMaterialKit.a in Frameworks */,
-				26E196EAB9B74C12BA0041AC /* libAirMaps.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +360,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				EFC2C7401DA330A600D2834E /* ios */,
+				EFF0E6CC1DA468BE00A7CFE7 /* AirMaps.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -422,7 +375,6 @@
 				D2D0F9C446C649D3BD52E9A3 /* RNVectorIcons.xcodeproj */,
 				8A925438E73046AA9ED3EB3B /* BVLinearGradient.xcodeproj */,
 				75CB2F7EF1AB43859E6CF03A /* RCTMaterialKit.xcodeproj */,
-				129715357D804998A8D7F522 /* AirMaps.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -501,6 +453,7 @@
 		EF722F9F1D93458A00680A5B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EFF0E6AE1DA465AE00A7CFE7 /* libAirMaps.a */,
 				EF722FA61D9346B900680A5B /* FBSDKCoreKit.framework */,
 				EF722FA71D9346B900680A5B /* FBSDKLoginKit.framework */,
 				EF722FA81D9346B900680A5B /* FBSDKShareKit.framework */,
@@ -512,69 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				EFC2C7381DA3306000D2834E /* libRCTMaterialKit.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EFC2C7401DA330A600D2834E /* ios */ = {
-			isa = PBXGroup;
-			children = (
-				EFC2C7411DA330A600D2834E /* AirMaps */,
-				EFC2C7611DA330A600D2834E /* AirMaps.xcodeproj */,
-			);
-			name = ios;
-			path = "../node_modules/react-native-maps/ios";
-			sourceTree = "<group>";
-		};
-		EFC2C7411DA330A600D2834E /* AirMaps */ = {
-			isa = PBXGroup;
-			children = (
-				EFC2C7421DA330A600D2834E /* AIRMap.h */,
-				EFC2C7431DA330A600D2834E /* AIRMap.m */,
-				EFC2C7441DA330A600D2834E /* AIRMapCallout.h */,
-				EFC2C7451DA330A600D2834E /* AIRMapCallout.m */,
-				EFC2C7461DA330A600D2834E /* AIRMapCalloutManager.h */,
-				EFC2C7471DA330A600D2834E /* AIRMapCalloutManager.m */,
-				EFC2C7481DA330A600D2834E /* AIRMapCircle.h */,
-				EFC2C7491DA330A600D2834E /* AIRMapCircle.m */,
-				EFC2C74A1DA330A600D2834E /* AIRMapCircleManager.h */,
-				EFC2C74B1DA330A600D2834E /* AIRMapCircleManager.m */,
-				EFC2C74C1DA330A600D2834E /* AIRMapCoordinate.h */,
-				EFC2C74D1DA330A600D2834E /* AIRMapCoordinate.m */,
-				EFC2C74E1DA330A600D2834E /* AIRMapManager.h */,
-				EFC2C74F1DA330A600D2834E /* AIRMapManager.m */,
-				EFC2C7501DA330A600D2834E /* AIRMapMarker.h */,
-				EFC2C7511DA330A600D2834E /* AIRMapMarker.m */,
-				EFC2C7521DA330A600D2834E /* AIRMapMarkerManager.h */,
-				EFC2C7531DA330A600D2834E /* AIRMapMarkerManager.m */,
-				EFC2C7541DA330A600D2834E /* AIRMapPolygon.h */,
-				EFC2C7551DA330A600D2834E /* AIRMapPolygon.m */,
-				EFC2C7561DA330A600D2834E /* AIRMapPolygonManager.h */,
-				EFC2C7571DA330A600D2834E /* AIRMapPolygonManager.m */,
-				EFC2C7581DA330A600D2834E /* AIRMapPolyline.h */,
-				EFC2C7591DA330A600D2834E /* AIRMapPolyline.m */,
-				EFC2C75A1DA330A600D2834E /* AIRMapPolylineManager.h */,
-				EFC2C75B1DA330A600D2834E /* AIRMapPolylineManager.m */,
-				EFC2C75C1DA330A600D2834E /* Callout */,
-				EFC2C75F1DA330A600D2834E /* RCTConvert+MoreMapKit.h */,
-				EFC2C7601DA330A600D2834E /* RCTConvert+MoreMapKit.m */,
-			);
-			path = AirMaps;
-			sourceTree = "<group>";
-		};
-		EFC2C75C1DA330A600D2834E /* Callout */ = {
-			isa = PBXGroup;
-			children = (
-				EFC2C75D1DA330A600D2834E /* SMCalloutView.h */,
-				EFC2C75E1DA330A600D2834E /* SMCalloutView.m */,
-			);
-			path = Callout;
-			sourceTree = "<group>";
-		};
-		EFC2C7621DA330A600D2834E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				EF0A59801DA34A3900FEC95C /* libAirMaps.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -593,6 +483,14 @@
 			);
 			name = Fonts;
 			path = "../node_modules/react-native-vector-icons/Fonts";
+			sourceTree = "<group>";
+		};
+		EFF0E6CD1DA468BE00A7CFE7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EFF0E6D11DA468BE00A7CFE7 /* libAirMaps.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -662,8 +560,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = EFC2C7621DA330A600D2834E /* Products */;
-					ProjectRef = EFC2C7611DA330A600D2834E /* AirMaps.xcodeproj */;
+					ProductGroup = EFF0E6CD1DA468BE00A7CFE7 /* Products */;
+					ProjectRef = EFF0E6CC1DA468BE00A7CFE7 /* AirMaps.xcodeproj */;
 				},
 				{
 					ProductGroup = EF564B701D988740006963B3 /* Products */;
@@ -801,13 +699,6 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		EF0A59801DA34A3900FEC95C /* libAirMaps.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libAirMaps.a;
-			remoteRef = EF0A597F1DA34A3900FEC95C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		EF564B761D988740006963B3 /* libBVLinearGradient.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -834,6 +725,13 @@
 			fileType = archive.ar;
 			path = libRCTMaterialKit.a;
 			remoteRef = EFC2C7371DA3306000D2834E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		EFF0E6D11DA468BE00A7CFE7 /* libAirMaps.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAirMaps.a;
+			remoteRef = EFF0E6D01DA468BE00A7CFE7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -903,23 +801,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFC2C7681DA330A600D2834E /* AIRMapCircleManager.m in Sources */,
-				EFC2C7651DA330A600D2834E /* AIRMapCallout.m in Sources */,
-				EFC2C7671DA330A600D2834E /* AIRMapCircle.m in Sources */,
-				EFC2C76B1DA330A600D2834E /* AIRMapMarker.m in Sources */,
-				EFC2C76D1DA330A600D2834E /* AIRMapPolygon.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				EFC2C76E1DA330A600D2834E /* AIRMapPolygonManager.m in Sources */,
-				EFC2C7721DA330A600D2834E /* RCTConvert+MoreMapKit.m in Sources */,
-				EFC2C7661DA330A600D2834E /* AIRMapCalloutManager.m in Sources */,
-				EFC2C7711DA330A600D2834E /* SMCalloutView.m in Sources */,
-				EFC2C7701DA330A600D2834E /* AIRMapPolylineManager.m in Sources */,
-				EFC2C7641DA330A600D2834E /* AIRMap.m in Sources */,
-				EFC2C7691DA330A600D2834E /* AIRMapCoordinate.m in Sources */,
-				EFC2C76F1DA330A600D2834E /* AIRMapPolyline.m in Sources */,
-				EFC2C76A1DA330A600D2834E /* AIRMapManager.m in Sources */,
-				EFC2C76C1DA330A600D2834E /* AIRMapMarkerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,14 +33,15 @@ export default class Profile extends Component {
       <View style={{flex:1}}>
       <Nav  type = "profile" onPress = {() => this.props.navigator.replace({id:'home'})} />
       <ScrollView style={styles.container}>
-      <MapView
-      initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}
-     />
+      <MapView style={styles.map}
+  initialRegion={{
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  }}
+/>
+
       <Image source ={require('../assets/images/profile.png')} resizeMode="center" style={{height:350, width:width}} />
        <View style={[styles.row, {marginTop:15}]}>
        <Text style = {{fontSize:19, fontWeight:'400'}}>Bruce Wayne, </Text><Text style={{fontSize:21, fontWeight:'300', marginBottom:-2}}>23</Text>
@@ -157,6 +158,22 @@ const styles = StyleSheet.create({
     borderColor:'#e3e3e3',
     width: 350,
     height: 420,
-  }
+  },
+  mapContainer: {
+   position: 'absolute',
+   top: 0,
+   left: 0,
+   right: 0,
+   bottom: 0,
+   justifyContent: 'flex-end',
+   alignItems: 'center',
+ },
+ map: {
+   position: 'absolute',
+   top: 0,
+   left: 0,
+   right: 0,
+   bottom: 0,
+ },
 
 });

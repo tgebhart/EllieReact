@@ -43,19 +43,19 @@ const LikedCardFront = React.createClass({
     );
     return (
         <View style={styles.container}>
-            <LikedCardMenu>
-            </LikedCardMenu>
-          <View style={{padding: 5}}>
+           <LikedCardMenu>
+          </LikedCardMenu>
+          <View style={{padding: 3}}>
           </View>
           <View style={styles.card}>
             <Image source ={this.props.image} resizeMode="cover" style={styles.cardImage}>
             <LinearGradientView style={homeStyles.linearGradient} colors={[this.props.colorFade, this.props.color]}>
-              <View style={{backgroundColor:this.props.color, marginLeft:110, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
+              <View style={{backgroundColor:this.props.color, marginLeft: 155, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
                 <Text style={homeStyles.categoryText}>{this.props.category}</Text>
               </View>
               </LinearGradientView>
             </Image>
-            <View style={{flex: 1, backgroundColor: this.props.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
+            <View style={{flex: 1, backgroundColor: this.props.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
               <Text style={homeStyles.titleText}>{this.props.title} </Text>
               <View style={homeStyles.tagContainerMaster}>
                 <View style={homeStyles.tagContainer}>

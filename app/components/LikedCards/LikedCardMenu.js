@@ -43,8 +43,7 @@ const LikedCardMenu = React.createClass({
     );
     return (
       <View>
-          <View style={theme.cardStyle}>
-            <View style={styles.menuButtonContainer} >
+          <View style={styles.menuButtonContainer} >
               <TouchableOpacity style = {styles.buttons} onPress = {() => ''}>
                 <ColoredFab>
                   <Image style={{width:20, height:20}} source={require('../../assets/icons/dislike_blank.png')} />
@@ -57,7 +56,6 @@ const LikedCardMenu = React.createClass({
                 <Text style={{fontSize:16}}>$15</Text>
               </ColoredFab>
             </View>
-          </View>
       </View>
     )
   }

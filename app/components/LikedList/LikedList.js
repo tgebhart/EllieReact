@@ -1,9 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
 
@@ -32,6 +26,8 @@ import LikedCardFront from '../LikedCards/LikedCardFront.js'
 import LikedCardMenu from '../LikedCards/LikedCardMenu.js'
 import LikedCardVenue from '../LikedCards/LikedCardVenue.js'
 
+const styles = require('./styles');
+
 var image1 = require('../../assets/images/image1.png')
 var image2 = require('../../assets/images/image2.png')
 var image3 = require('../../assets/images/image3.png')
@@ -59,7 +55,14 @@ const events = [{
   "colorFade" : 'rgba(126, 88, 221, 0.12)',
   "distance": 1.1,
   "price": "$15",
-  "start_time": "Thursday, 8:00pm"
+  "start_time": "Thursday, 8:00pm",
+  "latitude": 37.75789,
+  "longitude": -122.42154,
+  "venue": {
+    "name": "Ashkenaz Music and Dance",
+    "open": "2pm",
+    "phone" : "(510) 525-5099"
+  }
 }, {
   "id": 2,
   "title": "Fall Into Diversity",
@@ -75,7 +78,14 @@ const events = [{
   "colorFade": 'rgba(221, 83, 149, 0.12)',
   "distance": 2.1,
   "price": "$25",
-  "start_time": "Friday, 8:00pm"
+  "start_time": "Friday, 8:00pm",
+  "latitude": 37.8801345825,
+  "longitude": -122.2953414,
+  "venue": {
+    "name" : "Back to the Picture",
+    "open" : "5pm",
+    "phone" : "(415) 826-2321"
+  }
 }, {
   "id": 3,
   "title": "DanceFridays",
@@ -91,7 +101,14 @@ const events = [{
   "colorFade": 'rgba(81, 136, 219, 0.12)',
   "distance": 0.8,
   "price": "$10",
-  "start_time": "Friday, 10:00pm"
+  "start_time": "Friday, 10:00pm",
+  "latitude": 37.8218367537,
+  "longitude": -122.25999623,
+  "venue": {
+    "name": "Martuni's",
+    "open" : "6pm",
+    "phone" : "(415) 241-0205"
+  }
 }, {
   "id": 4,
   "title": "The Russian Party",
@@ -107,7 +124,14 @@ const events = [{
   "colorFade": 'rgba(221, 109, 83, 0.12)',
   "distance": 1.8,
   "price": "Free",
-  "start_time": "Saturday, 9:00pm"
+  "start_time": "Saturday, 9:00pm",
+  "latitude": 37.8670371075,
+  "longitude": -122.300466993,
+  "venue": {
+    "name": "City College of San Francisco",
+    "open" : "12am",
+    "phone": "(415) 239-3000"
+  }
 }, {
   "id": 5,
   "title": "Techno Awakening",
@@ -123,7 +147,14 @@ const events = [{
   "colorFade": 'rgba(126, 88, 221, 0.12)',
   "distance": 1.9,
   "price": "$5",
-  "start_time": "Friday, 9:00pm"
+  "start_time": "Friday, 9:00pm",
+  "latitude": 37.7257086206,
+  "longitude": -122.450943927,
+  "venue": {
+    "name": "The Red Victorian",
+    "open": "8pm",
+    "phone": "(415) 864-1014"
+  }
 }, {
   "id": 6,
   "title": "Young Cali Takeover",
@@ -139,7 +170,14 @@ const events = [{
   "colorFade": 'rgba(221, 83, 149, 0.12)',
   "distance": 1.4,
   "price": "$5",
-  "start_time": "Thursday, 11:00pm"
+  "start_time": "Thursday, 11:00pm",
+  "latitude": 37.7721648277,
+  "longitude": -122.422752879,
+  "venue": {
+    "name": "Pa'ina Lounge & Restaurant",
+    "open": "1pm",
+    "phone": "(415) 829-2642"
+  }
 }]
 
 var newMatches = [{
@@ -203,7 +241,7 @@ export default class LikedList extends Component {
     return(
       <View style={styles.eventSummaryContainer}>
         <Swiper>
-          <View >
+          <View style={{margin: 5}}>
             <LikedCardFront
             image={x.image}
             colorFade={x.colorFade}
@@ -221,9 +259,13 @@ export default class LikedList extends Component {
             start_time={x.start_time}
             />
           </View>
-          <View>
-            <LikedCardVenue></LikedCardVenue>
-          </View>
+            <LikedCardVenue
+                latitude={x.latitude}
+                longitude={x.longitude}
+                name={x.venue.name}
+                open={x.venue.open}
+                phone={x.venue.phone}
+              />
         </Swiper>
       </View>
   )}
@@ -253,25 +295,3 @@ export default class LikedList extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    margin: 0
-  },
-  matches:{
-  borderTopColor:'#da533c',
-  borderBottomColor:'#e3e3e3'
-  },
-  eventCard: {
-    flex: 1,
-    width: 300,
-    height: 300
-  },
-  eventSummaryContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    height: 300,
-  },
-
-});
