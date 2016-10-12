@@ -20,12 +20,13 @@ import {
 const theme = getTheme();
 const styles = require('./styles');
 
-const ColoredFab = MKButton.coloredFab()
-  .withStyle(styles.fab)
-  .build();
-
 const LikedCardMenu = React.createClass({
   render(){
+
+    let ColoredFab = MKButton.coloredFab()
+      .withBackgroundColor(this.props.buttonColor)
+      .build();
+
     var base64Icon = 'http://www.getmdl.io/assets/demos/welcome_card.jpg';
     var action = (<Text> My action</Text>);
     var menu = (
@@ -44,17 +45,22 @@ const LikedCardMenu = React.createClass({
     return (
       <View>
           <View style={styles.menuButtonContainer} >
-              <TouchableOpacity style = {styles.buttons} onPress = {() => ''}>
-                <ColoredFab>
+              <TouchableOpacity onPress = {() => ''}>
+                <ColoredFab
+                  backgroundColor={this.props.buttonColor}>
                   <Image style={{width:20, height:20}} source={require('../../assets/icons/dislike_blank.png')} />
                 </ColoredFab>
               </TouchableOpacity>
-              <ColoredFab>
-                <Image style={{width:25, height:25}} source={require('../../assets/icons/share_blank.png')} />
-              </ColoredFab>
-              <ColoredFab>
-                <Text style={{fontSize:16}}>$15</Text>
-              </ColoredFab>
+              <TouchableOpacity onPress = {() => ''}>
+                <ColoredFab>
+                  <Image style={{width:25, height:25}} source={require('../../assets/icons/share_blank.png')} />
+                </ColoredFab>
+              </TouchableOpacity>
+              <TouchableOpacity onPress = {() => ''}>
+                <ColoredFab>
+                  <Text style={{fontSize:16}}>{this.props.price}</Text>
+                </ColoredFab>
+              </TouchableOpacity>
             </View>
       </View>
     )

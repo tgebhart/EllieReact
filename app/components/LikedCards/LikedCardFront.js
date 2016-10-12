@@ -43,7 +43,9 @@ const LikedCardFront = React.createClass({
     );
     return (
         <View style={styles.container}>
-           <LikedCardMenu>
+           <LikedCardMenu
+           buttonColor={this.props.color}
+           price={this.props.price}>
           </LikedCardMenu>
           <View style={{padding: 3}}>
           </View>

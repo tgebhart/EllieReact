@@ -47,6 +47,17 @@ var styles = StyleSheet.create({
     nopeText: {
         fontSize: 16,
         color: 'red',
+    },
+    flipCard: {
+        flex: 1,
+        borderWidth: 1
+    },
+
+    face: {
+        flex: 1
+    },
+    back: {
+        flex: 1
     }
 });
 
@@ -112,8 +123,13 @@ class SwipeCards extends Component {
       ]),
 
       onPanResponderRelease: (e, {vx, vy}) => {
+        var transform = this.props.perspective ? [{ perspective: this.props.perspective }] : []
         this.state.pan.flattenOffset();
         var velocity;
+
+        if (vx < 1) {
+
+        }
 
         if (vx >= 0) {
           velocity = clamp(vx, 3, 5);
@@ -250,7 +266,8 @@ SwipeCards.propTypes = {
     yupStyle: View.propTypes.style,
     yupTextStyle: Text.propTypes.style,
     nopeStyle: View.propTypes.style,
-    nopeTextStyle: Text.propTypes.style
+    nopeTextStyle: Text.propTypes.style,
+    perspective: React.PropTypes.number,
 };
 
 SwipeCards.defaultProps = {
@@ -261,7 +278,8 @@ SwipeCards.defaultProps = {
     yupStyle: styles.yup,
     yupTextStyle: styles.yupText,
     nopeStyle: styles.nope,
-    nopeTextStyle: styles.nopeText
+    nopeTextStyle: styles.nopeText,
+    perspetive: 0
 };
 
 export default SwipeCards

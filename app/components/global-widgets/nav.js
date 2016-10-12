@@ -31,7 +31,7 @@ export default class Nav extends Component {
       </View>
     );
   }
-    message(){
+  message(){
     return (
       <View  style={styles.container}>
       <TouchableOpacity onPress ={this.props.onPress}>
@@ -44,9 +44,9 @@ export default class Nav extends Component {
   }
   likedlist(){
     return (
-      <View  style={styles.container}>
+      <View  style={styles.likedlistContainer}>
       <TouchableOpacity onPress ={this.props.onPress}>
-        <Image source ={require('../../assets/images/logo.png')} resizeMode = "contain" style={{width:100, height:30}} />
+        <Icon name="arrow-back" color='rgb(0,0,0)' height="25" style={{fontSize: 30, margin: 10}} />
       </TouchableOpacity>
       <View style = {{width:25, height:25, margin:10}}/>
       </View>
@@ -61,8 +61,11 @@ export default class Nav extends Component {
         else if (this.props.type == "profile"){
           return (
           <View>{this.profile()}</View>
-        );
-        }
+        );}
+        else if (this.props.type == "likedlist"){
+          return (
+          <View>{this.likedlist()}</View>
+        );}
         else{
         return (
           <View>{this.home()}</View>
@@ -72,13 +75,22 @@ export default class Nav extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height:60,
+    height: 60,
     flexDirection:'row',
-    paddingTop:10,
+    paddingTop: 10,
     justifyContent: 'center',
     alignItems:'center',
     backgroundColor: '#fff',
     borderBottomWidth:1,
     borderColor:'rgba(0,0,0,0.1)'
   },
+  likedlistContainer: {
+    height: 60,
+    flexDirection: 'row',
+    paddingTop: 10,
+    justifyContent: 'flex-start',
+    backgroundColor: '#fff',
+    borderBottomWidth:1,
+    borderColor:'rgba(0,0,0,0.1)'
+  }
 });

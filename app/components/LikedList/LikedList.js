@@ -180,48 +180,6 @@ const events = [{
   }
 }]
 
-var newMatches = [{
-  "id": 1,
-  "first_name": "Sarah",
-  "image" : image7
-}, {
-  "id": 2,
-  "first_name": "Pamela",
-  "image" : image8
-}, {
-  "id": 3,
-  "first_name": "Diana",
-  "image" : image9
-}, {
-  "id": 4,
-  "first_name": "Christina",
-  "image" : image10
-}, {
-  "id": 5,
-  "first_name": "Rebecca",
-  "image" : image11
-}, {
-  "id": 6,
-  "first_name": "Wanda",
-  "image" : image5
-}, {
-  "id": 7,
-  "first_name": "Sara",
-  "image" : image6
-}, {
-  "id": 8,
-  "first_name": "Judith",
-  "image" : image7
-}, {
-  "id": 9,
-  "first_name": "Ruby",
-  "image" : image1
-}, {
-  "id": 10,
-  "first_name": "Sandra",
-  "image" : image11
-}]
-
 import MapView from 'react-native-maps';
 
 var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -231,7 +189,7 @@ export default class LikedList extends Component {
     super(props)
 
     this.state = {
-      dataSource: ds.cloneWithRows(newMatches),
+      dataSource: [],
       convoData: ds.cloneWithRows(events),
       items: [],
     }
@@ -282,7 +240,7 @@ export default class LikedList extends Component {
   render() {
     return (
       <View style = {{flex:1}}>
-        <Nav type = 'likedlist' onPress = {() => this.props.navigator.replace({id:'home'})} />
+        <Nav  type = "likedlist" onPress = {() => this.props.navigator.replace({id:'home'})} />
         <ListView
           horizontal={false}
           scrollEnabled = {true}
