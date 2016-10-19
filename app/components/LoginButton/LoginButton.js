@@ -6,8 +6,6 @@ const {
   AccessToken,
 } = FBSDK;
 
-import MainScreen from '../MainScreen/MainScreen.js'
-
 var FBLoginButton = React.createClass({
   render: function() {
     return (
@@ -23,7 +21,7 @@ var FBLoginButton = React.createClass({
               } else {
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {
-                    alert(data.accessToken.toString())
+                    console.log(data.accessToken.toString())
                   }
                 )
               }

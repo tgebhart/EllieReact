@@ -54,14 +54,14 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>fb859974750768076</string>
+          <string>fb1531561520485355</string>
         </array>
       </dict>
     </array>
     <key>FacebookAppID</key>
-    <string>859974750768076</string>
+    <string>1531561520485355</string>
     <key>FacebookDisplayName</key>
-    <string>Ellie</string>
+    <string>Ellie App</string>
     <key>UIAppFonts</key>
     <array>
       <string>Ionicons.ttf</string>

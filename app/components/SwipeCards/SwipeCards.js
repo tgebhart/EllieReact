@@ -6,6 +6,7 @@ import {
     View,
     Animated,
     PanResponder,
+    TouchableOpacity,
     Image
 } from 'react-native';
 
@@ -69,6 +70,7 @@ class SwipeCards extends Component {
       pan: new Animated.ValueXY(),
       enter: new Animated.Value(0.5),
       card: this.props.cards ? this.props.cards[0] : null,
+      rotate: new Animated.Value(Number(props.flip)),
     }
   }
 
@@ -127,8 +129,13 @@ class SwipeCards extends Component {
         this.state.pan.flattenOffset();
         var velocity;
 
-        if (vx < 1) {
-
+        if (vx == 0) {
+          transform.push({
+            rotateY: this.state.rotate.interpolate({
+            inputRange: [0, 1],
+            outputRange: [ '0deg', '180deg' ]
+        })}
+      )
         }
 
         if (vx >= 0) {
@@ -204,9 +211,10 @@ class SwipeCards extends Component {
             <View style={this.props.containerStyle}>
                 { this.state.card
                     ? (
-                    <Animated.View style={[this.props.cardStyle, animatedCardstyles]} {...this._panResponder.panHandlers}>
+
+                      <Animated.View style={[this.props.cardStyle, animatedCardstyles]} {...this._panResponder.panHandlers}>
                         {this.renderCard(this.state.card)}
-                    </Animated.View>
+                      </Animated.View>
                 )
                     : this.renderNoMoreCards() }
 
@@ -268,9 +276,12 @@ SwipeCards.propTypes = {
     nopeStyle: View.propTypes.style,
     nopeTextStyle: Text.propTypes.style,
     perspective: React.PropTypes.number,
+    flip: React.PropTypes.bool,
+
 };
 
 SwipeCards.defaultProps = {
+    flip: false,
     loop: false,
     showYup: true,
     showNope: true,
@@ -279,7 +290,7 @@ SwipeCards.defaultProps = {
     yupTextStyle: styles.yupText,
     nopeStyle: styles.nope,
     nopeTextStyle: styles.nopeText,
-    perspetive: 0
+    perspetive: 0,
 };
 
 export default SwipeCards

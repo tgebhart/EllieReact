@@ -17,6 +17,11 @@ categoryText:{
   fontWeight: 'bold',
   fontFamily: 'System'
 },
+flipCard: {
+  flex: 1,
+  backgroundColor: 'rgba(255,255,255,1)',
+  borderWidth: 0,
+},
 textContainer:{
   flex: 1,
   alignItems: 'center',
@@ -92,6 +97,21 @@ linearGradient: {
   flex: 1,
   paddingLeft: 15,
   paddingRight: 15,
+},
+descriptionTitle: {
+  fontFamily: 'System',
+  backgroundColor: 'transparent',
+  fontSize: 30,
+  fontWeight: '400',
+  color: 'rgba(255, 255, 255, 0.8)',
+  marginTop: 18
+},
+descriptionText: {
+  fontFamily: 'System',
+  backgroundColor: 'transparent',
+  fontSize: 17,
+  fontWeight: '400',
+  color: 'rgba(255, 255, 255, 1)',
 },
 searchTimeContainer: {
   flex: 1,

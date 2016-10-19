@@ -23,6 +23,19 @@ import FlipCard from 'react-native-flip-card';
 const { BlurView, VibrancyView } = require('react-native-blur');
 
 const styles = require('./styles');
+const description = "Lorem ipsum dolor sit amet, eos munere expetenda dignissim eu, \
+                nec causae similique cu. Et nam paulo vitae eligendi, te sed omnis \
+                cetero maiorum. Everti consequat mei et. Vidit eirmod gloriatur an \
+                vim, has errem molestiae repudiandae id. Sed fabellas ullamcorper no, \
+                ea everti tamquam nostrum quo, homero omnium interpretaris cu vim. \
+                At insolens adversarium eum, ne natum zril his. Ex nam vide commune, \
+                ad mei labore nusquam eligendi. Vis accusamus aliquando ex. Altera \
+                vidisse imperdiet ius an, habeo mandamus volutpat at per, eam \
+                cu mundi dissentiet. Ea pri nostrum maluisset. \
+                Quo ubique constituam at, mei contentiones definitionem ea. \
+                Eos cu tollit dictas abhorreant, quaeque lobortis et pro, cum ex \
+                brute facilis. Has eu indoctum torquatos. Ius error option quaerendum ei. \
+                Saperet antiopam hendrerit usu id."
 
 var image1 = require('../../assets/images/image1.png')
 var image2 = require('../../assets/images/image2.png')
@@ -46,7 +59,8 @@ const Cards = [{
   "colorFade" : 'rgba(126, 88, 221, 0.12)',
   "distance": 1.1,
   "price": "$15",
-  "start_time": "Thursday, 8:00pm"
+  "start_time": "Thursday, 8:00pm",
+  "description": description
 }, {
   "id": 2,
   "title": "Fall Into Diversity",
@@ -62,7 +76,8 @@ const Cards = [{
   "colorFade": 'rgba(221, 83, 149, 0.12)',
   "distance": 2.1,
   "price": "$25",
-  "start_time": "Friday, 8:00pm"
+  "start_time": "Friday, 8:00pm",
+  "description": description
 }, {
   "id": 3,
   "title": "DanceFridays",
@@ -78,7 +93,8 @@ const Cards = [{
   "colorFade": 'rgba(81, 136, 219, 0.12)',
   "distance": 0.8,
   "price": "$10",
-  "start_time": "Friday, 10:00pm"
+  "start_time": "Friday, 10:00pm",
+  "description": description
 }, {
   "id": 4,
   "title": "The Russian Party",
@@ -94,7 +110,8 @@ const Cards = [{
   "colorFade": 'rgba(221, 109, 83, 0.12)',
   "distance": 1.8,
   "price": "Free",
-  "start_time": "Saturday, 9:00pm"
+  "start_time": "Saturday, 9:00pm",
+  "description": description
 }, {
   "id": 5,
   "title": "Techno Awakening",
@@ -110,7 +127,8 @@ const Cards = [{
   "colorFade": 'rgba(126, 88, 221, 0.12)',
   "distance": 1.9,
   "price": "$5",
-  "start_time": "Friday, 9:00pm"
+  "start_time": "Friday, 9:00pm",
+  "description": description
 }, {
   "id": 6,
   "title": "Young Cali Takeover",
@@ -126,7 +144,8 @@ const Cards = [{
   "colorFade": 'rgba(221, 83, 149, 0.12)',
   "distance": 1.4,
   "price": "$5",
-  "start_time": "Thursday, 11:00pm"
+  "start_time": "Thursday, 11:00pm",
+  "description": description
 }]
 
 export default class Home extends Component {
@@ -145,6 +164,15 @@ export default class Home extends Component {
   }
   Card(x){
     return (
+      <FlipCard
+        style={styles.flipCard}
+        friction={20}
+        perspective={1000}
+        flipHorizontal={true}
+        flipVertical={false}
+        flip={false}
+        clickable={true}
+        onFlipped={(isFlipped)=>{console.log('isFlipped', isFlipped)}}>
       <View style={styles.shadowContainer}>
         <View style={styles.card}>
           <Image source ={x.image} resizeMode="cover" style={styles.cardImage}>
@@ -178,6 +206,26 @@ export default class Home extends Component {
           </View>
         </View>
       </View>
+      <View style={styles.shadowContainer}>
+        <View style={styles.card}>
+          <View style={{flex: 1, alignItems: 'center', backgroundColor: x.color, alignSelf:'center', width: 350, height: 450,}}>
+            <View style={{flex: 1, alignItems: 'center', backgroundColor:x.color, padding:10}}>
+              <Text style={styles.descriptionTitle}>{x.title}</Text>
+            </View>
+            <View style={{flex: 1, backgroundColor:x.color, padding:25, alignItems: 'center', alignSelf: 'center', height:300}}>
+            <ScrollView
+            horizontal={false}
+            >
+              <Text style={styles.descriptionText}>{x.description}</Text>
+            </ScrollView>
+            </View>
+            <View style={{flex: 1, alignItems: 'center', alignSelf: 'center', backgroundColor:x.color}}>
+              <Image source={require('../../assets/icons/flip.png')}></Image>
+            </View>
+          </View>
+        </View>
+      </View>
+    </FlipCard>
     )
   }
   handleYup(card) {
@@ -202,7 +250,8 @@ export default class Home extends Component {
 
   nope() {
     console.log(this.refs['swiper'])
-    this.refs['swiper']._goToNextCard()  }
+    this.refs['swiper']._goToNextCard()
+  }
 
   setSearchVisible(visible) {
     this.setState({searchVisible: visible});
@@ -222,7 +271,9 @@ export default class Home extends Component {
           renderCard={(cardData) => this.Card(cardData)}
           renderNoMoreCards={() => this.noMore()}
           handleYup={this.handleYup}
-          handleNope={this.handleNope} />
+          handleNope={this.handleNope}>
+          </SwipeCards>
+
           <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.setSearchVisible(true)}>
               <Image name='search' size={30} color="#888" style={{marginTop:0}} source={require('../../assets/icons/search.png')} />
