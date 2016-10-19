@@ -4,6 +4,7 @@
  Licensed under APLv2 (http://opensource.org/licenses/Apache-2.0)
  */
 
+
 export default function uritemplate() {
 
 // Below are the functions we originally used from jQuery.
@@ -434,4 +435,4 @@ export default function uritemplate() {
 
     return parse;
 
-}());
+};

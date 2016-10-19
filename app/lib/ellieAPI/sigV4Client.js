@@ -1,6 +1,7 @@
 'use-strict';
 import CryptoJS from 'crypto-js';
 import axios from 'axios';
+import React from 'react'
 
 export default class sigV4Client {
 
@@ -13,6 +14,7 @@ export default class sigV4Client {
     this.X_AMZ_SECURITY_TOKEN = 'x-amz-security-token';
     this.HOST = 'host';
     this.AUTHORIZATION = 'Authorization';
+    this.HOSTNAME = 'api.aivibe.com';
 
     this.awsSigV4Client = { };
 
@@ -55,15 +57,15 @@ export default class sigV4Client {
 
   buildCanonicalRequest(method, path, queryParams, headers, payload) {
       return method + '\n' +
-          buildCanonicalUri(path) + '\n' +
-          buildCanonicalQueryString(queryParams) + '\n' +
-          buildCanonicalHeaders(headers) + '\n' +
-          buildCanonicalSignedHeaders(headers) + '\n' +
-          hexEncode(hash(payload));
+          this.buildCanonicalUri(path) + '\n' +
+          this.buildCanonicalQueryString(queryParams) + '\n' +
+          this.buildCanonicalHeaders(headers) + '\n' +
+          this.buildCanonicalSignedHeaders(headers) + '\n' +
+          this.hexEncode(this.hash(payload));
   }
 
   hashCanonicalRequest(request) {
-      return hexEncode(hash(request));
+      return this.hexEncode(this.hash(request));
   }
 
   buildCanonicalUri(uri) {
@@ -119,51 +121,51 @@ export default class sigV4Client {
   }
 
   buildStringToSign(datetime, credentialScope, hashedCanonicalRequest) {
-    return AWS_SHA_256 + '\n' +
+    return this.AWS_SHA_256 + '\n' +
           datetime + '\n' +
           credentialScope + '\n' +
           hashedCanonicalRequest;
   }
 
   buildCredentialScope(datetime, region, service) {
-    return datetime.substr(0, 8) + '/' + region + '/' + service + '/' + AWS4_REQUEST
+    return datetime.substr(0, 8) + '/' + region + '/' + service + '/' + this.AWS4_REQUEST
   }
 
   calculateSigningKey(secretKey, datetime, region, service) {
-    return hmac(hmac(hmac(hmac(AWS4 + secretKey, datetime.substr(0, 8)), region), service), AWS4_REQUEST);
+    return this.hmac(this.hmac(this.hmac(this.hmac(this.AWS4 + secretKey, datetime.substr(0, 8)), region), service), this.AWS4_REQUEST);
   }
 
   calculateSignature(key, stringToSign) {
-    return hexEncode(hmac(key, stringToSign));
+    return this.hexEncode(this.hmac(key, stringToSign));
   }
 
   buildAuthorizationHeader(accessKey, credentialScope, headers, signature) {
-    return AWS_SHA_256 + ' Credential=' + accessKey + '/' + credentialScope + ', SignedHeaders=' + buildCanonicalSignedHeaders(headers) + ', Signature=' + signature;
+    return this.AWS_SHA_256 + ' Credential=' + accessKey + '/' + credentialScope + ', SignedHeaders=' + this.buildCanonicalSignedHeaders(headers) + ', Signature=' + signature;
   }
 
   makeRequest(request) {
-    var verb = assertDefined(request.verb, 'verb');
-    var path = assertDefined(request.path, 'path');
-    var queryParams = copy(request.queryParams);
+    var verb = this.assertDefined(request.verb, 'verb');
+    var path = this.assertDefined(request.path, 'path');
+    var queryParams = this.copy(request.queryParams);
     if (queryParams === undefined) {
         queryParams = {};
     }
-    var headers = copy(request.headers);
+    var headers = this.copy(request.headers);
     if (headers === undefined) {
         headers = {};
     }
 
     //If the user has not specified an override for Content type the use default
     if(headers['Content-Type'] === undefined) {
-        headers['Content-Type'] = config.defaultContentType;
+        headers['Content-Type'] = this.config.defaultContentType;
     }
 
     //If the user has not specified an override for Accept type the use default
     if(headers['Accept'] === undefined) {
-        headers['Accept'] = config.defaultAcceptType;
+        headers['Accept'] = this.config.defaultAcceptType;
     }
 
-    var body = apiGateway.core.utils.copy(request.body);
+    var body = this.copy(request.body);
     if (body === undefined || verb === 'GET') { // override request body and set to empty when signing GET requests
         body = '';
     }  else {
@@ -176,32 +178,32 @@ export default class sigV4Client {
     }
 
     var datetime = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z').replace(/[:\-]|\.\d{3}/g, '');
-    headers[X_AMZ_DATE] = datetime;
-    var parser = document.createElement('a');
-    parser.href = awsSigV4Client.endpoint;
-    headers[HOST] = parser.hostname;
+    headers[this.X_AMZ_DATE] = datetime;
+    var parser = React.createElement('a', {href: this.awsSigV4Client.endpoint});
+    // parser.href = this.awsSigV4Client.endpoint;
+    headers[this.HOST] = this.HOSTNAME;
 
-    var canonicalRequest = buildCanonicalRequest(verb, path, queryParams, headers, body);
-    var hashedCanonicalRequest = hashCanonicalRequest(canonicalRequest);
-    var credentialScope = buildCredentialScope(datetime, awsSigV4Client.region, awsSigV4Client.serviceName);
-    var stringToSign = buildStringToSign(datetime, credentialScope, hashedCanonicalRequest);
-    var signingKey = calculateSigningKey(awsSigV4Client.secretKey, datetime, awsSigV4Client.region, awsSigV4Client.serviceName);
-    var signature = calculateSignature(signingKey, stringToSign);
-    headers[AUTHORIZATION] = buildAuthorizationHeader(this.awsSigV4Client.accessKey, credentialScope, headers, signature);
-    if(awsSigV4Client.sessionToken !== undefined && awsSigV4Client.sessionToken !== '') {
-        headers[X_AMZ_SECURITY_TOKEN] = awsSigV4Client.sessionToken;
+    var canonicalRequest = this.buildCanonicalRequest(verb, path, queryParams, headers, body);
+    var hashedCanonicalRequest = this.hashCanonicalRequest(canonicalRequest);
+    var credentialScope = this.buildCredentialScope(datetime, this.awsSigV4Client.region, this.awsSigV4Client.serviceName);
+    var stringToSign = this.buildStringToSign(datetime, credentialScope, hashedCanonicalRequest);
+    var signingKey = this.calculateSigningKey(this.awsSigV4Client.secretKey, datetime, this.awsSigV4Client.region, this.awsSigV4Client.serviceName);
+    var signature = this.calculateSignature(signingKey, stringToSign);
+    headers[this.AUTHORIZATION] = this.buildAuthorizationHeader(this.awsSigV4Client.accessKey, credentialScope, headers, signature);
+    if(this.awsSigV4Client.sessionToken !== undefined && this.awsSigV4Client.sessionToken !== '') {
+        headers[this.X_AMZ_SECURITY_TOKEN] = this.awsSigV4Client.sessionToken;
     }
-    delete headers[HOST];
+    delete headers[this.HOST];
 
-    var url = config.endpoint + path;
-    var queryString = buildCanonicalQueryString(queryParams);
+    var url = this.config.endpoint + path;
+    var queryString = this.buildCanonicalQueryString(queryParams);
     if (queryString != '') {
         url += '?' + queryString;
     }
 
     //Need to re-attach Content-Type if it is not specified at this point
     if(headers['Content-Type'] === undefined) {
-        headers['Content-Type'] = config.defaultContentType;
+        headers['Content-Type'] = this.config.defaultContentType;
     }
 
     var signedRequest = {
@@ -210,6 +212,7 @@ export default class sigV4Client {
         headers: headers,
         data: body
     };
+    console.log(signedRequest)
     return axios(signedRequest);
   };
 

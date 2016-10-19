@@ -34,9 +34,9 @@ export default class Profile extends Component {
 
   getEventInfo() {
     var agc = new apigClient({
-       accessKey: "ASIAI5VGBQLJ626YG3XQ",
-       secretKey: "L12tBy2RtUZG4yu/IcgxcYIAY4WkPfQWCG4X+VE4",
-       sessionToken: "AgoGb3JpZ2luEEwaCXVzLXdlc3QtMiKAAmhfZz9y9BiQ+h7Z9pUR/SXPUWwfiURfcv2qqhGQouhfHTETY1Hlz2/ZSuLyfZA90GLSZiDaEqjbOQ7q0DxZ9EtWH+mhupljSjdvCYTlRfiqqwicxilSJ66w18oguMrcqDGFxdCbmnAwP4MvBGRktv1orlD6ZRprh3Eu7OUN9RTzQ10HlS8EdM6mBZvk/xlsEfSXfzaPOsOsCzO5pdxV7c537D7Ue/heG/QPiwZQWmVILoni1ZXoKBAr+UqvfrJm3803VN2a0psOzhX2Of240nTKNXpy6eaNzFah+WR+n4NEznL28RRj4fba460U2hsU/JK/Nk70aD776zRyECewvSIqywQIIhAAGgw2ODI2NzY2NTk0ODQiDBE0EwvbjxfISazYgiqoBM3WHn3B9KyDgyZee89ken0s3szYg8anhKsKy+aw0r7UN33291dzk/GqAWYT41lef1I2rvSJ3ZeEq9ZaZdSiWxYUL5Hr14Uq2Q6OEemHFIvUJi1wKAcd2GnKHgu7C4bVqLim2oD8jSpmqGX8uRvG0cCdRaf2fRuO9JZlKtd64aqKQiwDRUQkjd+UtlGlJ4WT9WvkI84y+WMpUFOAVuWCB6jVDGEZXWE9kQY7kd0z8Hi9usXZcYfSElG1zF/Z8QrGb3wFxMiXSWzuBDplijad0wj7JGJGXaIln7xrW+PjLyKy+VFHwgTLJGSf1N1liheOg+1nTEjEsDUUpmLtcBiraUE5QaFd4loRpBk6uwigG0/slluhXj5sgH76cTlnwC65dmF0nC6LwzsIL41o3dZBMsuWA0giAHWn872vlbksgyBcXRS1gQdYatLr+QirraCwePk2OUeECYCPiqHLuJAourH8UcW3mO57zmShDzEjdt92vsWNFn78yTJWrXU4HXsAIrfiGK6yrNSjYVhQG4NdggWq8YDD6BbFGf3929hwR7Z2GpiLMse9y80ZJdNf/oogtU25G3DoMdvF8F3E99ixXt0mrS0OI3bQcr0o0EuOvGNCpBvWNcS+yaR643rH+i1FIxHwteHjUvmf7UdtqhF97SUqODW2VatVCBS8RPlfAzgZPdMaEwDaiSlcJYeeWf1daeEOO/W8ZvUibeKPntZqVomin/BQhVh2HjD7/JrABQ==",
+       accessKey: "ASIAILEBVUTQQPCAO4KQ",
+       secretKey: "gnLyG0XDoco+tSqes2lmdMGvo7jdSS9Ue4iJkYZG",
+       sessionToken: "AgoGb3JpZ2luEE8aCXVzLXdlc3QtMiKAAhBt6zQ3nnSZ9ZjtRm+KqmSBmYnIMwQIQ1cTlqsZc5yvJ3GJaUUWs6P4LktYThP5ojEyY5S6sz44pqpPhh/SqWpClK2YTlVXl9Mf5AexN5Muw5px999vxTrARf7nHTf4GVRPQvSR1yjpVwfgBs8z1umNNKOavYnTd9DtEaB8P72sEoIg8D+98sWnrILnGle+mZCE0e4kEWFW5OSiHQCrdG6B7q0zhRunJDJRiOGGAbEqtpR4KhcPPtM+gclizph1+OmXPOK/ASZsQxLxI6YougElzR1pF2upaoU0QTRocQxVGQ/fgrEBVYDrB24fq18WUH6ofH4V9jxS1DC7MvbgowcqywQIJRAAGgw2ODI2NzY2NTk0ODQiDAt9WjvSKA+/ynWTMCqoBMn4WKy528YEIpNwvxLa0BGiKYNqITJfzFunBJwZJM+vSjj9DHOpoZTNLy8uvQcxbYMzWS/M1A1PD7Chs6vBPDrycDhbbx3E4F22vjcDcWvq5pIVdFf5CUf89+2wyeg6sn7Kj3Nfn8y7lpLAJhkRAP0HRS19AkOBhX+dPDeEnHqvMYaBVyVqH1ovkHdVVofVr+DfeH1OxZsaQZuF9s80ApU7ZHzSVynlOagqCkabG8PZg6/acHa6NJ9kAV4YJoryY/64xWAo2v8qcaByhx2VsVnHZPOs7n7tvG6qjNh+5FUK1WhGXeybk0b6HRXcD02vZJJ2aS0dpupuPjHHaqH+tsuKzp+0/kRsZUpX/wZ8JQKLSh16sN7KuNKjWS1+4VOk/qwNabMRml9InJSoXbPtOTFreWyOalIggZmjBSynaz+gJiNUzFjBhyBDk/FXXUlcQq+74UUJoK9AEPezIJz3LVum6Bj2z0Qixt8pf+zLMvTq6MPEQ/7xkf9fOnJkO+PqXxTMHtsvi0b9mD7xN5KezHiJJkhfTBDXz+x6IkwOwFz+brXHgNUos/9hJMHdGYdbo4qLj/t4QD+j5stxRAQS/6578Smsj556XZbZ69FvzJLzM6WrKBbX1Pmf1QnNdBJzj5pBybxNaQYeqvxXkNvV0Ij5WRq8pd+79KbJ82IZzOLlvjMZqwnVNbSU636eIXzDNRqt91cTbL9PBO0lvkUW/JQm18pnDVI0JTD11ZvABQ==",
        region: 'us-west-2'
      });
 
@@ -49,9 +49,11 @@ export default class Profile extends Component {
 
     console.log(agc)
 
-    agc.eventsGet(params, body, additionalParams)
+    agc.meGet(params, body, additionalParams)
      .then(function(result){
-     console.log(result)
+     console.log(result);
+   }).catch((error) => {
+     console.error(error);
    });
   }
 
@@ -64,7 +66,7 @@ export default class Profile extends Component {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            fbat: 'EAAVw8nRhUZBsBAKGkj1S4E3dsbZCivZAiEoanovZCVWzgTyWaTcg7eweVoDbF0ZByU6n7mEpNlzyNfFMnnObUXIhWbsq51Vf37VZA10pzZC3FyMdhMFMdYZBku1BHCUcpZCjM85YRXrudbcnNk60je17MxBHA404GYnyE9SYVUHhwAl0zO2MgP8bfIl7k99uaPy6x69bMyrcXGia6ZC4yqBHNzE3KZCCuLttV8ZD',
+            fbat: 'EAAVw8nRhUZBsBAEOBCYl0ZAUfa09uHb5dm1wI452075R7Sk6WFUtX9MQ6xPU4llIOF68JDLPEMhURcAv68UCQiEHgHZAcYDmSX3aYCeQZCa8UHg3GUjWvUp25M02IupfPpZCywbISlRiHsjt2vKF7wGlNGgyAFQqmSYRhWpUojU39qLL5DvdhQXuTHMXZAvIc6ZBawVYgzTLFPRUYPZCG5eLVfTklZCkc58oZD',
           })
         }).then((response) => response.json())
       .then((responseJson) => {
@@ -91,6 +93,9 @@ export default class Profile extends Component {
        <TouchableOpacity onPress={this.getEventInfo()} style={styles.button}>
         <Text>POST</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={this._onPressButtonPOST()} style={styles.button}>
+       <Text>Login</Text>
+     </TouchableOpacity>
 
       <View style={styles.row}>
        <Text style={{color:'#444', fontSize:15}}>Same Sweater Productions</Text>

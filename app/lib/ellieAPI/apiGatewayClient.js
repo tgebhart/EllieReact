@@ -29,7 +29,7 @@ export default class apiGatewayClient {
 
   makeRequest(request, authType, additionalParams, apiKey) {
       //Default the request to use the simple http client
-      var clientToUse = simpleHttpClient;
+      var clientToUse = this.simpleHttpClient;
 
       //Attach the apiKey to the headers request if one was provided
       if (apiKey !== undefined && apiKey !== '' && apiKey !== null) {
@@ -42,12 +42,12 @@ export default class apiGatewayClient {
 
       // If the user specified any additional headers or query params that may not have been modeled
       // merge them into the appropriate request properties
-      request.headers = mergeInto(request.headers, additionalParams.headers);
-      request.queryParams = mergeInto(request.queryParams, additionalParams.queryParams);
+      request.headers = this.mergeInto(request.headers, additionalParams.headers);
+      request.queryParams = this.mergeInto(request.queryParams, additionalParams.queryParams);
 
       //If an auth type was specified inject the appropriate auth client
       if (authType === 'AWS_IAM') {
-          clientToUse = sigV4Client;
+          clientToUse = this.sigV4Client;
       }
 
       //Call the selected http client to make the request, returning a promise once the request is sent
