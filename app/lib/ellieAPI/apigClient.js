@@ -134,7 +134,8 @@ export default class apigClient {
           path: this.pathComponent + '/events',
           //path: this.pathComponent + uritemplate('/events').expand(this.parseParametersToObject(params, [])),
           headers: this.parseParametersToObject(params, []),
-          queryParams: this.parseParametersToObject(params, ['categories', 'nextPageId', 'limit', 'minPrice', 'nearbyRadius', 'gps', 'fromTime', 'rEngine', 'toTime', 'maxPrice']),
+          queryParams: '?categories=&fromTime=&gps=&limit=5&maxPrice=&minPrice=&nearbyRadius=&nextPageId=&rEngine=&toTime="',
+          //queryParams: this.parseParametersToObject(params, ['categories', 'nextPageId', 'limit', 'minPrice', 'nearbyRadius', 'gps', 'fromTime', 'rEngine', 'toTime', 'maxPrice']),
           body: body
       };
 

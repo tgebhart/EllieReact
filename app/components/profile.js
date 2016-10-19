@@ -34,9 +34,9 @@ export default class Profile extends Component {
 
   getEventInfo() {
     var agc = new apigClient({
-       accessKey: "ASIAILEBVUTQQPCAO4KQ",
-       secretKey: "gnLyG0XDoco+tSqes2lmdMGvo7jdSS9Ue4iJkYZG",
-       sessionToken: "AgoGb3JpZ2luEE8aCXVzLXdlc3QtMiKAAhBt6zQ3nnSZ9ZjtRm+KqmSBmYnIMwQIQ1cTlqsZc5yvJ3GJaUUWs6P4LktYThP5ojEyY5S6sz44pqpPhh/SqWpClK2YTlVXl9Mf5AexN5Muw5px999vxTrARf7nHTf4GVRPQvSR1yjpVwfgBs8z1umNNKOavYnTd9DtEaB8P72sEoIg8D+98sWnrILnGle+mZCE0e4kEWFW5OSiHQCrdG6B7q0zhRunJDJRiOGGAbEqtpR4KhcPPtM+gclizph1+OmXPOK/ASZsQxLxI6YougElzR1pF2upaoU0QTRocQxVGQ/fgrEBVYDrB24fq18WUH6ofH4V9jxS1DC7MvbgowcqywQIJRAAGgw2ODI2NzY2NTk0ODQiDAt9WjvSKA+/ynWTMCqoBMn4WKy528YEIpNwvxLa0BGiKYNqITJfzFunBJwZJM+vSjj9DHOpoZTNLy8uvQcxbYMzWS/M1A1PD7Chs6vBPDrycDhbbx3E4F22vjcDcWvq5pIVdFf5CUf89+2wyeg6sn7Kj3Nfn8y7lpLAJhkRAP0HRS19AkOBhX+dPDeEnHqvMYaBVyVqH1ovkHdVVofVr+DfeH1OxZsaQZuF9s80ApU7ZHzSVynlOagqCkabG8PZg6/acHa6NJ9kAV4YJoryY/64xWAo2v8qcaByhx2VsVnHZPOs7n7tvG6qjNh+5FUK1WhGXeybk0b6HRXcD02vZJJ2aS0dpupuPjHHaqH+tsuKzp+0/kRsZUpX/wZ8JQKLSh16sN7KuNKjWS1+4VOk/qwNabMRml9InJSoXbPtOTFreWyOalIggZmjBSynaz+gJiNUzFjBhyBDk/FXXUlcQq+74UUJoK9AEPezIJz3LVum6Bj2z0Qixt8pf+zLMvTq6MPEQ/7xkf9fOnJkO+PqXxTMHtsvi0b9mD7xN5KezHiJJkhfTBDXz+x6IkwOwFz+brXHgNUos/9hJMHdGYdbo4qLj/t4QD+j5stxRAQS/6578Smsj556XZbZ69FvzJLzM6WrKBbX1Pmf1QnNdBJzj5pBybxNaQYeqvxXkNvV0Ij5WRq8pd+79KbJ82IZzOLlvjMZqwnVNbSU636eIXzDNRqt91cTbL9PBO0lvkUW/JQm18pnDVI0JTD11ZvABQ==",
+       accessKey: "ASIAJVOM3LHCEMAOICBA",
+       secretKey: "zO+kRLhNYgzuSrjSdHF1QGnsfjWBDoF3OJBe5Kkh",
+       sessionToken: "AgoGb3JpZ2luEGMaCXVzLXdlc3QtMiKAAlJL0rEQfhQLiosEDbztF5seEfw1S1BeR8W6Cutv1iafCI15Aa5OOH89iY6qd9c9A9VzHiygnFJkf9hl8gFFTMRJ6/dicV5BdcRoOfsbcT78s3WQnYRmKvzmIURMflNsDOWC//33JQrWri6faCA7LlvKZkf1xTAZ93EzM5SU19NgpxMuAE0JJTDHWn3JA/cT26yLIjuKrVdUhFeFIX0IEgXWXEm2Ae1pWdN+RTVTInbu+hfeVv4+zmLadHbQ2LmVx+wSuHcbToK03oAI0cY+1EnasMj2MA9K/NbiwJ9lb1pkobO/R3I/cxahhTVae62bJa/EsMphYTU6nA8Zwzc4XnwqywQIOBAAGgw2ODI2NzY2NTk0ODQiDHv8/VbCNq3tKXqYPiqoBIH2XYOlCYAB6AG5ix6wkxxdpXlQ6h/mhNL7Mpt25M7rxaDR2XasUPNSN9Wa1eoAOCVjaUl4+SnVnw+q94fuAlJuAc0/2E4f54w+3unmxwS6+vJyiKrmkjaSdoH7GMAb0MWMZukwZDWfHNECL8pcp4CHtbKkY2p1vfaUPT2C1QsiUBj3gyIKQ9tgqePHQ897tMFkZZNxIpYLUsA/0mu2tlAhAAD+5Rd16RMJYYD0fczfBDPLQYItBxB0BJlfVsGZ+xwfsCwnE0M/58UMwk/xIhR5uS+4CYWIe/RbHTuT01f6wRcUA1B0Q0xwysWcIIka0w1DXAczSGxrA9fSIoN4zjsJjBUo9XN27Ugpj9DKptp2VI7BPwdug5GIOnpnOaTI7O307lhdwpELjiahg/IOZkZilvD20c871z30XyJ1qZ7SBrNE9S1TKzJej119j9/FkqI1rG/HXw45LicjA13xMTf6t1QdhE2DfDG0OX5eCzzYeZ74u40VdRnmCIqH20aKodvCpO3Ww/G+6h0lomzGxh1wrw6q/dv7sv2iuCdVq+10fStE1mh/TK1c5ctRYdkthYYJeso/Ip97KUX3PgyluRadBcqpYeJXssWi+q4FZ1E7rv0XZIC9VsY8InS2rvAzj95FNACwzWzllzXb34/KWbFNMR1wFO1MXN3eQ0cOveeaEe1zB5z4PIWlM8bHhmUHEcRMJanTij6sme2B4E2FuWDjyPgV0ronuTDp75/ABQ==",
        region: 'us-west-2'
      });
 
@@ -49,7 +49,7 @@ export default class Profile extends Component {
 
     console.log(agc)
 
-    agc.meGet(params, body, additionalParams)
+    agc.eventsGet(params, body, additionalParams)
      .then(function(result){
      console.log(result);
    }).catch((error) => {
