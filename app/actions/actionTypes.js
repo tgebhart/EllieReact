@@ -1,1 +1,21 @@
+// Token Actions
+
 export const LOGIN = 'LOGIN';
+export const REQUEST_SESSION_TOKEN = 'REQUEST_SESSION_TOKEN';
+export const RECEIVE_SESSION_TOKEN = 'RECEIVE_SESSION_TOKEN';
+export const ERROR_REQUEST_SESSION_TOKEN = 'ERROR_REQUEST_SESSION_TOKEN';
+export const RECEIVE_FBAT = 'RECEIVE_FBAT';
+export const PUSH_ROUTE = 'PUSH_ROUTE';
+export const POP_ROUTE = 'POP_ROUTE';
+
+// API Actions
+
+export const REQUEST_FETCH_EVENTS = 'REQUEST_FETCH_EVENTS';
+export const RECEIVE_EVENTS = 'RECEIVE_EVENTS';
+export const ERROR_FETCH_EVENTS = 'ERROR_FETCH_EVENTS';
+
+// User-Event Actions
+
+export const LIKE_EVENT = 'LIKE_EVENT';
+export const DISLIKE_EVENT = 'DISLIKE_EVENT';
+export const REMOVE_SEEN_EVENT = 'REMOVE_SEEN_EVENT';

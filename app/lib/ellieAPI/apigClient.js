@@ -4,7 +4,6 @@ import uritemplate from './url-template'
 export default class apigClient {
 
   constructor(config) {
-    console.log(config)
     this.config = config;
     if(config === undefined) {
         this.config = {
@@ -119,26 +118,34 @@ export default class apigClient {
       }
       var object = { };
       for (var i = 0; i < keys.length; i++) {
+        if (params[keys[i]] === undefined) {
+          object[keys[i]] = '';
+        }
+        else {
           object[keys[i]] = params[keys[i]];
+        }
       }
       return object;
   }
 
   eventsGet(params, body, additionalParams) {
-      if(additionalParams === undefined) { additionalParams = {}; }
-
-      //this.assertParametersDefined(params, ['categories', 'nextPageId', 'limit', 'minPrice', 'nearbyRadius', 'gps', 'fromTime', 'rEngine', 'toTime', 'maxPrice'], ['body']);
+      if(additionalParams === undefined) {
+        additionalParams = {};
+      }
+      if (params['limit'] === undefined) {
+        // default to 10 events
+        params['limit'] = 10
+      }
 
        eventsGetRequest = {
           verb: 'get'.toUpperCase(),
           path: this.pathComponent + '/events',
           //path: this.pathComponent + uritemplate('/events').expand(this.parseParametersToObject(params, [])),
           headers: this.parseParametersToObject(params, []),
-          queryParams: '?categories=&fromTime=&gps=&limit=5&maxPrice=&minPrice=&nearbyRadius=&nextPageId=&rEngine=&toTime="',
-          //queryParams: this.parseParametersToObject(params, ['categories', 'nextPageId', 'limit', 'minPrice', 'nearbyRadius', 'gps', 'fromTime', 'rEngine', 'toTime', 'maxPrice']),
+          //queryParams: '?categories=&fromTime=&gps=&limit=5&maxPrice=&minPrice=&nearbyRadius=&nextPageId=&rEngine=&toTime="',
+          queryParams: this.parseParametersToObject(params, ['categories', 'nextPageId', 'limit', 'minPrice', 'nearbyRadius', 'gps', 'fromTime', 'rEngine', 'toTime', 'maxPrice']),
           body: body
       };
-
 
       return this.apiGatewayClient.makeRequest(eventsGetRequest, this.authType, additionalParams, this.config.apiKey);
   }
@@ -151,7 +158,7 @@ export default class apigClient {
 
        eventsOptionsRequest = {
           verb: 'options'.toUpperCase(),
-          path: this.pathComponent + uritemplate('/events').expand(this.parseParametersToObject(params, [])),
+          path: this.pathComponent + '/events',
           headers: this.parseParametersToObject(params, []),
           queryParams: this.parseParametersToObject(params, []),
           body: body
@@ -169,7 +176,7 @@ export default class apigClient {
 
        eventsIdGetRequest = {
           verb: 'get'.toUpperCase(),
-          path: this.pathComponent + uritemplate('/events/{id}').expand(parseParametersToObject(params, ['id'])),
+          path: this.pathComponent + '/events' + this.parseParametersToObject(params, ['id']),
           headers: this.parseParametersToObject(params, []),
           queryParams: this.parseParametersToObject(params, []),
           body: body
@@ -187,7 +194,7 @@ export default class apigClient {
 
        eventsIdOptionsRequest = {
           verb: 'options'.toUpperCase(),
-          path: this.pathComponent + uritemplate('/events/{id}').expand(this.parseParametersToObject(params, [])),
+          path: this.pathComponent + '/events' + this.parseParametersToObject(params, []),
           headers: this.parseParametersToObject(params, []),
           queryParams: this.parseParametersToObject(params, []),
           body: body
@@ -205,7 +212,7 @@ export default class apigClient {
 
        fbLoginPostRequest = {
           verb: 'post'.toUpperCase(),
-          path: this.pathComponent + uritemplate('/fb-login').expand(this.parseParametersToObject(params, [])),
+          path: this.pathComponent + '/fb-login',
           headers: this.parseParametersToObject(params, []),
           queryParams: this.parseParametersToObject(params, []),
           body: body
@@ -223,7 +230,7 @@ export default class apigClient {
 
        fbLoginOptionsRequest = {
           verb: 'options'.toUpperCase(),
-          path: this.pathComponent + uritemplate('/fb-login').expand(this.parseParametersToObject(params, [])),
+          path: this.pathComponent + '/fb-login',
           headers: this.parseParametersToObject(params, []),
           queryParams: this.parseParametersToObject(params, []),
           body: body
@@ -241,7 +248,7 @@ export default class apigClient {
 
        meGetRequest = {
           verb: 'get'.toUpperCase(),
-          path: this.pathComponent + uritemplate('/me').expand(this.parseParametersToObject(params, [])),
+          path: this.pathComponent + '/me',
           headers: this.parseParametersToObject(params, []),
           queryParams: this.parseParametersToObject(params, []),
           body: body
@@ -258,7 +265,7 @@ export default class apigClient {
 
        meOptionsRequest = {
           verb: 'options'.toUpperCase(),
-          path: this.pathComponent + uritemplate('/me').expand(this.parseParametersToObject(params, [])),
+          path: this.pathComponent + '/me',
           headers: this.parseParametersToObject(params, []),
           queryParams: this.parseParametersToObject(params, []),
           body: body

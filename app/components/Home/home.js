@@ -22,6 +22,8 @@ import LinearGradientView from 'react-native-linear-gradient';
 import FlipCard from 'react-native-flip-card';
 const { BlurView, VibrancyView } = require('react-native-blur');
 
+import { fetchEvents } from '../../actions/apiActions'
+
 const styles = require('./styles');
 const description = "Lorem ipsum dolor sit amet, eos munere expetenda dignissim eu, \
                 nec causae similique cu. Et nam paulo vitae eligendi, te sed omnis \
@@ -151,7 +153,6 @@ const Cards = [{
 export default class Home extends Component {
   constructor(props){
     super(props)
-
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       searchTimes: ds.cloneWithRows([
@@ -162,7 +163,15 @@ export default class Home extends Component {
       cards: Cards
     }
   }
+
+  static contextTypes = {
+    store: React.PropTypes.object
+  }
+
+
   Card(x){
+    var colorFade = 'rgba(126, 88, 221, 0.12)',
+    var color = 'rgba(126, 88, 221, 1.0)'
     return (
       <FlipCard
         style={styles.flipCard}
@@ -175,8 +184,8 @@ export default class Home extends Component {
         onFlipped={(isFlipped)=>{console.log('isFlipped', isFlipped)}}>
       <View style={styles.shadowContainer}>
         <View style={styles.card}>
-          <Image source ={x.image} resizeMode="cover" style={styles.cardImage}>
-          <LinearGradientView style={styles.linearGradient} colors={[x.colorFade, x.color]}>
+          <Image source ={x.promotionalImage} resizeMode="cover" style={styles.cardImage}>
+          <LinearGradientView style={styles.linearGradient} colors={[x.colorFade, color]}>
             <View style={{backgroundColor:x.color, marginLeft:140, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
               <Text style={styles.categoryText}>{x.category}</Text>
             </View>
@@ -266,7 +275,7 @@ export default class Home extends Component {
 
         <SwipeCards
           ref = {'swiper'}
-          cards={this.state.cards}
+          cards={this.Cards}
           containerStyle = {{  backgroundColor: '#f7f7f7', alignItems:'center', margin:20}}
           renderCard={(cardData) => this.Card(cardData)}
           renderNoMoreCards={() => this.noMore()}

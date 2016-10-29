@@ -53,7 +53,6 @@ export default class Nav extends Component {
     );
   }
   render() {
-    console.log(this.props)
     if(this.props.type == "message"){
         return (
           <View>{this.message()}</View>

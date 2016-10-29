@@ -212,7 +212,6 @@ export default class sigV4Client {
         headers: headers,
         data: body
     };
-    console.log(signedRequest)
     return axios(signedRequest);
   };
 

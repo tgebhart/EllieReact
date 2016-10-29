@@ -16,6 +16,7 @@
     "react-native-linear-gradient": "latest",
     "react-native-maps": "latest",
     "react-native-material-kit": "^0.3.2",
+    "react-native-router-flux": "^3.36.0",
     "react-native-swiper": "latest",
     "react-native-vector-icons": "latest",
     "react-redux": "latest",
