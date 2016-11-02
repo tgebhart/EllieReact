@@ -1,10 +1,11 @@
 import * as types from './actionTypes';
+import { removeSeenEvent } from './apiActions'
 
 
-export function likeEvent(eventID, flipped, showedTime, likedTime) {
+export function likeEvent(event, flipped, showedTime, likedTime) {
   return {
     type: types.LIKE_EVENT,
-    eventID: eventID,
+    event: event,
     flipped: flipped,
     viewTime: likedTime - showedTime
   }
@@ -19,22 +20,15 @@ export function dislikeEvent(eventID, flipped, showedTime, dislikedTime) {
   }
 }
 
-export function removeSeenEvent(eventID) {
-  return {
-    type: types.REMOVE_SEEN_EVENT,
-    eventID: eventID
-  }
-}
-
-export function handleEventInteraction(eventID, flipped, showedTime, endTime, didLike) {
+export function handleEventInteraction(event, flipped, showedTime, endTime, didLike) {
 
   return function(dispatch) {
     if (didLike) {
-      dispatch(likeEvent(eventID, flipped, showedTime, endTime))
+      dispatch(likeEvent(event, flipped, showedTime, endTime))
     }
     else {
-      dispatch(dislikeEvent(eventID, flipped, showedTime, endTime))
+      dispatch(dislikeEvent(event.eventId, flipped, showedTime, endTime))
     }
-    dispatch(removeSeenEvent(eventID))
+    dispatch(removeSeenEvent(event.eventId))
   }
 }

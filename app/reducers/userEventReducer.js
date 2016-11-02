@@ -3,6 +3,7 @@ import * as actions from '../actions/userEventActions';
 
 
 var likeDislikeInitialState = {
+	events: [],
 	likedEvents: [],
   dislikedEvents: [],
 	error: undefined
@@ -15,7 +16,7 @@ export function likeDislike(state = likeDislikeInitialState, action) {
 				likedEvents: [
           ...state.likedEvents,
           {
-            eventID: action.eventID,
+            event: action.event,
             viewTime: action.viewTime,
             flipped: action.flipped,
             timestamp: Date.now()
@@ -35,11 +36,6 @@ export function likeDislike(state = likeDislikeInitialState, action) {
           }
         ]
 			});
-
-    case types.REMOVE_SEEN_EVENT:
-      return Object.assign({}, state, {
-        events: state.events,
-      })
 
 		default:
 			return state

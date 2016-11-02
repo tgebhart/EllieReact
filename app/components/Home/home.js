@@ -1,6 +1,4 @@
-
-
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Image,
@@ -14,6 +12,8 @@ import {
   ListView
 } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import Nav from '../global-widgets/nav';
 import SwipeCards from '../SwipeCards/SwipeCards.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -22,135 +22,12 @@ import LinearGradientView from 'react-native-linear-gradient';
 import FlipCard from 'react-native-flip-card';
 const { BlurView, VibrancyView } = require('react-native-blur');
 
-import { fetchEvents } from '../../actions/apiActions'
+import { fetchEventsIfNeeded } from '../../actions/apiActions'
+import { handleEventInteraction } from '../../actions/userEventActions'
 
 const styles = require('./styles');
-const description = "Lorem ipsum dolor sit amet, eos munere expetenda dignissim eu, \
-                nec causae similique cu. Et nam paulo vitae eligendi, te sed omnis \
-                cetero maiorum. Everti consequat mei et. Vidit eirmod gloriatur an \
-                vim, has errem molestiae repudiandae id. Sed fabellas ullamcorper no, \
-                ea everti tamquam nostrum quo, homero omnium interpretaris cu vim. \
-                At insolens adversarium eum, ne natum zril his. Ex nam vide commune, \
-                ad mei labore nusquam eligendi. Vis accusamus aliquando ex. Altera \
-                vidisse imperdiet ius an, habeo mandamus volutpat at per, eam \
-                cu mundi dissentiet. Ea pri nostrum maluisset. \
-                Quo ubique constituam at, mei contentiones definitionem ea. \
-                Eos cu tollit dictas abhorreant, quaeque lobortis et pro, cum ex \
-                brute facilis. Has eu indoctum torquatos. Ius error option quaerendum ei. \
-                Saperet antiopam hendrerit usu id."
 
-var image1 = require('../../assets/images/image1.png')
-var image2 = require('../../assets/images/image2.png')
-var image3 = require('../../assets/images/image3.png')
-var image4 = require('../../assets/images/image4.png')
-var image5 = require('../../assets/images/image5.png')
-var image6 = require('../../assets/images/image6.png')
-
-const Cards = [{
-  "id": 1,
-  "title": "Set Up",
-  "category": "Comedy",
-  "age": "21+",
-  "dancing": "Dancing",
-  "openbar": "Open Bar",
-  "volume": "Quiet",
-  "dress": "Casual",
-  "friends": 5,
-  "image": image1,
-  "color": 'rgba(126, 88, 221, 1.0)',
-  "colorFade" : 'rgba(126, 88, 221, 0.12)',
-  "distance": 1.1,
-  "price": "$15",
-  "start_time": "Thursday, 8:00pm",
-  "description": description
-}, {
-  "id": 2,
-  "title": "Fall Into Diversity",
-  "category": "Social",
-  "age": "All Ages",
-  "dancing": "Diversity",
-  "openbar": "Open Bar",
-  "volume": "Quiet",
-  "dress": "Casual",
-  "friends": 10,
-  "image": image2,
-  "color": 'rgba(221, 83, 149, 1.0)',
-  "colorFade": 'rgba(221, 83, 149, 0.12)',
-  "distance": 2.1,
-  "price": "$25",
-  "start_time": "Friday, 8:00pm",
-  "description": description
-}, {
-  "id": 3,
-  "title": "DanceFridays",
-  "category": "Party",
-  "age": "18+",
-  "dancing": "Dancing",
-  "openbar": "Open Bar",
-  "volume": "Loud",
-  "dress": "Dress Code",
-  "friends": 2,
-  "image": image3,
-  "color": 'rgba(81, 136, 219, 1.0)',
-  "colorFade": 'rgba(81, 136, 219, 0.12)',
-  "distance": 0.8,
-  "price": "$10",
-  "start_time": "Friday, 10:00pm",
-  "description": description
-}, {
-  "id": 4,
-  "title": "The Russian Party",
-  "category": "Party",
-  "age": "All Ages",
-  "dancing": "Music",
-  "openbar": "Open Bar",
-  "volume": "Loud",
-  "dress": "Casual",
-  "friends": 3,
-  "image": image4,
-  "color": 'rgba(221, 109, 83, 1.0)',
-  "colorFade": 'rgba(221, 109, 83, 0.12)',
-  "distance": 1.8,
-  "price": "Free",
-  "start_time": "Saturday, 9:00pm",
-  "description": description
-}, {
-  "id": 5,
-  "title": "Techno Awakening",
-  "category": "Party",
-  "age": "21+",
-  "dancing": "Comedy",
-  "openbar": "Open Bar",
-  "volume": "Loud",
-  "dress": "Dress Code",
-  "friends": 10,
-  "image": image5,
-  "color": 'rgba(126, 88, 221, 1.0)',
-  "colorFade": 'rgba(126, 88, 221, 0.12)',
-  "distance": 1.9,
-  "price": "$5",
-  "start_time": "Friday, 9:00pm",
-  "description": description
-}, {
-  "id": 6,
-  "title": "Young Cali Takeover",
-  "category": "Party",
-  "age": "18+",
-  "dancing": "Dancing",
-  "openbar": "Open Bar",
-  "volume": "Loud",
-  "dress": "Casual",
-  "friends": 5,
-  "image": image6,
-  "color": 'rgba(221, 83, 149, 1.0)',
-  "colorFade": 'rgba(221, 83, 149, 0.12)',
-  "distance": 1.4,
-  "price": "$5",
-  "start_time": "Thursday, 11:00pm",
-  "description": description
-}]
-
-export default class Home extends Component {
+class Home extends Component {
   constructor(props){
     super(props)
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -160,7 +37,8 @@ export default class Home extends Component {
       searchCities: ds.cloneWithRows([
         'SAN FRANCISCO', 'NEARBY']),
       searchVisible: false,
-      cards: Cards
+      initialPosition: undefined,
+      cards: undefined
     }
   }
 
@@ -168,10 +46,83 @@ export default class Home extends Component {
     store: React.PropTypes.object
   }
 
+  componentWillMount() {
+    this.setState({cards: this.props.state.eventsGet.events})
+  }
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+     (position) => {
+       this.setState({ initialPosition: { latitude: position.coords.latitude, longitude: position.coords.longitude }});
+     },
+     (error) => alert(JSON.stringify(error)),
+     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+   );
+ }
+
+ distance(lat1, lon1, lat2, lon2) {
+   var p = 0.017453292519943295;    // Math.PI / 180
+   var c = Math.cos;
+   var a = 0.5 - c((lat2 - lat1) * p)/2 +
+          c(lat1 * p) * c(lat2 * p) *
+          (1 - c((lon2 - lon1) * p))/2;
+
+   return Math.round(12742 * Math.asin(Math.sqrt(a)) * 0.621371 *10)/10; // 2 * R * mi_to_km * 10 for formatting; R = 6371 km
+  }
+
+  getStartTimeFormat(startTime) {
+    var num_to_day = {
+      0: 'Sunday',
+      1: 'Monday',
+      2: 'Tuesday',
+      3: 'Wednesday',
+      4: 'Thursday',
+      5: 'Friday',
+      6: 'Saturday'
+    }
+    let date = new Date(startTime*1000)
+    date.setHours(date.getHours() + 6) // timezone to PDT from weird GMT conversion (fix on backend)
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let dow = date.getDay()
+    let day = date.getDate()
+    let now = new Date()
+
+    var prefix = ''
+
+    if (day - now.getDate() > 12) {
+      return date.getMonth() + '/' + day + " " + date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
+    }
+
+    if (day - now.getDate() > 6) {
+      prefix = 'Next'
+    }
+
+    return prefix + num_to_day[dow] + " " + date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
+
+  }
+
 
   Card(x){
-    var colorFade = 'rgba(126, 88, 221, 0.12)',
+
+    if (this.state.initialPosition !== undefined) {
+      var currentLat = this.state.initialPosition.latitude
+      var currentLong = this.state.initialPosition.longitude
+      var distance = this.distance(currentLat, currentLong, x.venue.latitude, x.venue.longitude)
+      x.distance = distance
+    }
+
+    x.showTime = Date.now()
+    x.flipped = false
+
+    console.log(this.props)
+    console.log(this.context.store.getState())
+
+    var formatted_start_time = this.getStartTimeFormat(x.startTime)
+
+    var colorFade = 'rgba(126, 88, 221, 0.12)'
     var color = 'rgba(126, 88, 221, 1.0)'
+    var tags = ['Dancing', 'Open Bar', 'Free Entry', 'Loud', 'Live Music', 5]
     return (
       <FlipCard
         style={styles.flipCard}
@@ -181,54 +132,56 @@ export default class Home extends Component {
         flipVertical={false}
         flip={false}
         clickable={true}
-        onFlipped={(isFlipped)=>{console.log('isFlipped', isFlipped)}}>
+        onFlipped={(isFlipped)=>{x.flipped = true}}>
       <View style={styles.shadowContainer}>
         <View style={styles.card}>
-          <Image source ={x.promotionalImage} resizeMode="cover" style={styles.cardImage}>
-          <LinearGradientView style={styles.linearGradient} colors={[x.colorFade, color]}>
+          <Image source ={{uri: x.promotionalImages[0]}} resizeMode="cover" style={styles.cardImage}>
+          <LinearGradientView style={styles.linearGradient} colors={[colorFade, color]}>
             <View style={{backgroundColor:x.color, marginLeft:140, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
               <Text style={styles.categoryText}>{x.category}</Text>
             </View>
             </LinearGradientView>
           </Image>
-          <View style={{flex: 1, backgroundColor: x.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
-            <Text style={styles.titleText}>{x.title} </Text>
+          <View style={{flex: 1, backgroundColor:color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
+            <View style={styles.titleTextContainer}>
+              <Text style={styles.titleText} numberOfLines={3}>{x.name} </Text>
+            </View>
             <View style={styles.tagContainerMaster}>
               <View style={styles.tagContainer}>
-                <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.dancing}</Text>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.volume}</Text>
+                <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[0]}</Text>
+                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[1]}</Text>
               </View>
               <View style={styles.tagContainer}>
-                <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.openbar}</Text>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.dress}</Text>
+                <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[2]}</Text>
+                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[3]}</Text>
               </View>
               <View style={styles.tagContainer}>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.age}</Text>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{x.friends} friends</Text>
+                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[4]}</Text>
+                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[5]} friends</Text>
               </View>
             </View>
             <View style={styles.bottomInfoContainer}>
               <Text style={styles.bottomInfoText}>{x.distance} miles</Text>
-              <Text style={styles.bottomInfoText}>{x.price} </Text>
-              <Text style={styles.bottomInfoText}>{x.start_time} </Text>
+              <Text style={styles.bottomInfoText}>{x.ticketPrice} </Text>
+              <Text style={styles.bottomInfoText}>{formatted_start_time} </Text>
             </View>
           </View>
         </View>
       </View>
       <View style={styles.shadowContainer}>
         <View style={styles.card}>
-          <View style={{flex: 1, alignItems: 'center', backgroundColor: x.color, alignSelf:'center', width: 350, height: 450,}}>
-            <View style={{flex: 1, alignItems: 'center', backgroundColor:x.color, padding:10}}>
-              <Text style={styles.descriptionTitle}>{x.title}</Text>
+          <View style={{flex: 1, alignItems: 'center', backgroundColor:color, alignSelf:'center', width: 350, height: 450,}}>
+            <View style={{flex: 1, alignItems: 'center', backgroundColor:color, padding:10}}>
+              <Text style={styles.descriptionTitle}>{x.name}</Text>
             </View>
-            <View style={{flex: 1, backgroundColor:x.color, padding:25, alignItems: 'center', alignSelf: 'center', height:300}}>
+            <View style={{flex: 1, backgroundColor:color, padding:25, alignItems: 'center', alignSelf: 'center', height:300}}>
             <ScrollView
             horizontal={false}
             >
               <Text style={styles.descriptionText}>{x.description}</Text>
             </ScrollView>
             </View>
-            <View style={{flex: 1, alignItems: 'center', alignSelf: 'center', backgroundColor:x.color}}>
+            <View style={{flex: 1, alignItems: 'center', alignSelf: 'center', backgroundColor:color}}>
               <Image source={require('../../assets/icons/flip.png')}></Image>
             </View>
           </View>
@@ -237,13 +190,19 @@ export default class Home extends Component {
     </FlipCard>
     )
   }
+
   handleYup(card) {
-    console.log(`Yup for ${card.text}`)
+    let { dispatch } = this.props
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), true))
+    dispatch(fetchEventsIfNeeded())
   }
 
   handleNope(card) {
-    console.log(`Nope for ${card.text}`)
+    let { dispatch } = this.props
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), false))
+    dispatch(fetchEventsIfNeeded())
   }
+
   noMore(){
     return (
       <View style={styles.card} >
@@ -253,12 +212,12 @@ export default class Home extends Component {
   }
 
   yup() {
-    console.log(this.refs['swiper'])
+    this.handleYup(this.refs.swiper.state.card)
     this.refs['swiper']._goToNextCard()
   }
 
   nope() {
-    console.log(this.refs['swiper'])
+    this.handleNope(this.refs.swiper.state.card)
     this.refs['swiper']._goToNextCard()
   }
 
@@ -275,11 +234,13 @@ export default class Home extends Component {
 
         <SwipeCards
           ref = {'swiper'}
-          cards={this.Cards}
-          containerStyle = {{  backgroundColor: '#f7f7f7', alignItems:'center', margin:20}}
+          cards={this.context.store.getState().eventsGet.events}
+          containerStyle = {{backgroundColor: '#f7f7f7', alignItems:'center', margin:20}}
           renderCard={(cardData) => this.Card(cardData)}
           renderNoMoreCards={() => this.noMore()}
           handleYup={this.handleYup}
+          loop={false}
+          dispatch = {this.props.dispatch}
           handleNope={this.handleNope}>
           </SwipeCards>
 
@@ -362,3 +323,10 @@ export default class Home extends Component {
     )
 }
 }
+
+Home.propTypes = {
+
+  dispatch: PropTypes.func.isRequired
+}
+
+export default connect()(Home)

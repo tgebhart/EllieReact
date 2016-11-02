@@ -49,10 +49,17 @@ buttonSmall:{
   alignItems:'center',
   borderRadius:25
 },
+titleTextContainer: {
+  flex: 1,
+  height: 25,
+  width: 300,
+  alignItems: 'center',
+  justifyContent: 'space-between'
+},
 titleText:{
   fontFamily: 'System',
   backgroundColor: 'transparent',
-  fontSize: 24,
+  fontSize: 22,
   fontWeight: '400',
   color: 'rgba(255, 255, 255, 0.8)'
 },
@@ -63,7 +70,7 @@ bottomInfoText:{
 },
 tagContainerMaster:{
   width: 300,
-  marginTop: 25,
+  marginTop: 50,
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between'
@@ -76,7 +83,7 @@ tagContainer:{
 },
 bottomInfoContainer:{
   width: 330,
-  marginTop: 35,
+  marginTop: 20,
   flexDirection:'row',
   alignItems:'center',
   justifyContent:'space-between'

@@ -16,6 +16,7 @@ import LoginScreen from '../components/LoginScreen/LoginScreen'
 
 const store = createStore(combineReducers(reducers), applyMiddleware(thunk))
 
+
 export default class Index extends Component {
 
 

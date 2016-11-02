@@ -37,7 +37,6 @@ export default class Index extends Component {
 
   componentDidMount() {
     this.getInitialRoute()
-    console.log(this.context.store.getState())
   }
 
   getInitialEvents = async () => {
@@ -62,13 +61,17 @@ export default class Index extends Component {
           })
         })
         .catch((error) => {
-          console.log("error in using fbllt to get API creds", error)
-          this.setState({isLoading: false})
+          console.log("error in using fbllt to get API credentials", error)
+          this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
         })
       }
+      else {
+        console.log("No fbllt found, login with Facebook")
+        this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
+      }
     } catch (error) {
-      console.log("No fbllt found, login with Facebook", error)
-      this.setState({isLoading: false})
+      console.log("Error on asyncstorage, login with Facebook", error)
+      this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
     }
   }
 
@@ -80,6 +83,7 @@ export default class Index extends Component {
       return (
         <Home
         {...this.props}
+        store={this.context.store}
         state = {this.context.store.getState()}
         navigator={navigator} />
         );

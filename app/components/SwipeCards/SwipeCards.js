@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-
+import { connect } from 'react-redux';
+import { handleEventInteraction } from '../../actions/userEventActions'
+import { fetchEventsIfNeeded } from '../../actions/apiActions'
 import {
     StyleSheet,
     Text,
@@ -74,7 +76,7 @@ class SwipeCards extends Component {
     }
   }
 
-  _goToNextCard() {
+  _goToNextCard = () => {
     let currentCardIdx = this.props.cards.indexOf(this.state.card);
     let newIdx = currentCardIdx + 1;
 
@@ -145,10 +147,11 @@ class SwipeCards extends Component {
         }
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
-
+          let { dispatch } = this.props
+          console.log(this.props)
           this.state.pan.x._value > 0
-            ? this.props.handleYup(this.state.card)
-            : this.props.handleNope(this.state.card)
+            ? this.swipeHandleYup(this.state.card)
+            : this.swipeHandleNope(this.state.card)
 
           this.props.cardRemoved
             ? this.props.cardRemoved(this.props.cards.indexOf(this.state.card))
@@ -166,6 +169,20 @@ class SwipeCards extends Component {
         }
       }
     })
+  }
+
+  swipeHandleYup(card) {
+    let { dispatch } = this.props
+    console.log(this.props)
+    console.log(this.context)
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), true))
+    dispatch(fetchEventsIfNeeded())
+  }
+
+  swipeHandleNope(card) {
+    let { dispatch } = this.props
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), false))
+    dispatch(fetchEventsIfNeeded())
   }
 
   _resetState() {
@@ -277,7 +294,6 @@ SwipeCards.propTypes = {
     nopeTextStyle: Text.propTypes.style,
     perspective: React.PropTypes.number,
     flip: React.PropTypes.bool,
-
 };
 
 SwipeCards.defaultProps = {
