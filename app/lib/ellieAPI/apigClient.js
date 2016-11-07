@@ -146,7 +146,6 @@ export default class apigClient {
           queryParams: this.parseParametersToObject(params, ['categories', 'nextPageId', 'limit', 'minPrice', 'nearbyRadius', 'gps', 'fromTime', 'rEngine', 'toTime', 'maxPrice']),
           body: body
       };
-
       return this.apiGatewayClient.makeRequest(eventsGetRequest, this.authType, additionalParams, this.config.apiKey);
   }
 
@@ -203,6 +202,290 @@ export default class apigClient {
 
       return this.apiGatewayClient.makeRequest(eventsIdOptionsRequest, this.authType, additionalParams, this.config.apiKey);
   };
+
+
+  uiOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, [], ['body']);
+
+      var uiOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: pathComponent + '/ui',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(uiOptionsRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  uiRecordPut(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      //this.assertParametersDefined(params, ['body'], ['body']);
+
+      var uiRecordPutRequest = {
+          verb: 'put'.toUpperCase(),
+          path: this.pathComponent + '/ui/record',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+      console.log(uiRecordPutRequest)
+      return this.apiGatewayClient.makeRequest(uiRecordPutRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  uiRecordOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, [], ['body']);
+
+      var uiRecordOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: this.pathComponent + '/ui/record',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(uiRecordOptionsRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+  kinesisGet(params, body, additionalParams) {
+      if(additionalParams === undefined) {
+        additionalParams = {};
+      }
+
+      var kinesisGetRequest = {
+          verb: 'get'.toUpperCase(),
+          path: pathComponent + '/kinesis',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+      return this.apiGatewayClient.makeRequest(kinesisGetRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      var kinesisOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: this.pathComponent + '/kinesis',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisOptionsRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameGet(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['stream-name'], ['body']);
+
+      var kinesisStreamNameGetRequest = {
+          verb: 'get'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameGetRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNamePost(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['stream-name'], ['body']);
+
+      var kinesisStreamNamePostRequest = {
+          verb: 'post'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNamePostRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameDelete(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['stream-name'], ['body']);
+
+      var kinesisStreamNameDeleteRequest = {
+          verb: 'delete'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: tgis.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameDeleteRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, [], ['body']);
+
+      var kinesisStreamNameOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameOptionsRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameRecordPut(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['stream-name'], ['body']);
+
+      var kinesisStreamNameRecordPutRequest = {
+          verb: 'put'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}/record',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameRecordPutRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameRecordOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, [], ['body']);
+
+      var kinesisStreamNameRecordOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}/record',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameRecordOptionsRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameRecordsGet(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['stream-name', 'Shard-Iterator'], ['body']);
+
+      var kinesisStreamNameRecordsGetRequest = {
+          verb: 'get'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}/records',
+          headers: this.parseParametersToObject(params, ['Shard-Iterator']),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameRecordsGetRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameRecordsPut(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['stream-name'], ['body']);
+
+      var kinesisStreamNameRecordsPutRequest = {
+          verb: 'put'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}/records',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameRecordsPutRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameRecordsOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, [], ['body']);
+
+      var kinesisStreamNameRecordsOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}/records',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameRecordsOptionsRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameSharditeratorGet(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['stream-name', 'shard-id'], ['body']);
+
+      var kinesisStreamNameSharditeratorGetRequest = {
+          verb: 'get'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}/sharditerator',
+          queryParams: this.parseParametersToObject(params, ['shard-id']),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameSharditeratorGetRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  kinesisStreamNameSharditeratorOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, [], ['body']);
+
+      var kinesisStreamNameSharditeratorOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: this.pathComponent + '/kinesis/{stream-name}/sharditerator',
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(kinesisStreamNameSharditeratorOptionsRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
 
 
   fbLoginPost(params, body, additionalParams) {

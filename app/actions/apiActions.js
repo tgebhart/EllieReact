@@ -9,6 +9,27 @@ export function requestFetchEvents() {
   }
 }
 
+export function postingLikedEvents() {
+  return {
+    type: types.POSTING_EVENTS,
+    postedAt: Date.now()
+  }
+}
+
+export function postConfirmation(result) {
+  return {
+    type: types.POST_EVENT_CONFIRMATION,
+    confirmedAt: Date.now()
+  }
+}
+
+export function errorPost(error) {
+  return {
+    type: types.ERROR_POST_EVENT,
+    error: error
+  }
+}
+
 export function receiveEvents(result) {
   return {
     type: types.RECEIVE_EVENTS,
@@ -40,19 +61,19 @@ export function fetchEvents() {
 
     const { accessKey, secretKey, sessionToken, region } = getState().sessionTokens
     const { params, body, additionalParams } = getState().eventsGet.homeQueryParams
-    const nextPageId = getState().nextPageId
+    console.log(getState())
+    const nextPageId = getState().eventsGet.nextPageId
     var agc = new apigClient({
        accessKey: accessKey,
        secretKey: secretKey,
        sessionToken: sessionToken,
        region: region
      });
-     if (body['rEngine'] !== undefined) {
-       body.nextPageId = nextPageId
+     if (params['rEngine'] === undefined) {
+       params.nextPageId = nextPageId
      }
 
     dispatch(requestFetchEvents())
-
     return agc.eventsGet(params, body, additionalParams).then((result) => {
       console.log(result)
       dispatch(receiveEvents(result))
@@ -71,13 +92,12 @@ export function removeSeenEvent(eventID) {
 }
 
 export function shouldFetchEvents(state) {
-  console.log(state.eventsGet.fetching)
   const events = state.eventsGet.events
-  if (events.length <= 5) {
-    return true
-  }
-  else if (state.eventsGet.fetching) {
+  if (state.eventsGet.fetching) {
     return false
+  }
+  else if (events.length <= 5) {
+    return true
   }
   return false
 }
@@ -85,9 +105,69 @@ export function shouldFetchEvents(state) {
 export function fetchEventsIfNeeded() {
 
   return (dispatch, getState) => {
-    console.log(getState())
     if (shouldFetchEvents(getState())) {
       return dispatch(fetchEvents())
     }
   }
+}
+
+function buildPostBody(event, liked) {
+  console.log(event)
+  var flipped = 0
+  if (event.event.flipped) {
+    flipped = 1
+  }
+  var like = 0
+  if (liked) {
+    like = 1
+  }
+  var distance = event.distance
+  if (distance === undefined) {
+    distance = -1
+  }
+  return {
+    Data: {
+      EventId: event.event.eventId,
+      Distance: distance,
+      Liked: like,
+      Disliked: 1-like,
+      Flipped: flipped,
+      Timestamp: event.event.showTime,
+      Removed: 0,
+      ViewTime: event.viewTime
+    }
+  }
+}
+
+export function postLikedEvent() {
+
+  return (dispatch, getState) => {
+
+    const { accessKey, secretKey, sessionToken, region } = getState().sessionTokens
+    var events = getState().likeDislike.likedEvents
+    var params = {};
+		var body = buildPostBody(events[events.length-1], true)
+		additionalParams = {
+	  	headers: {},
+	  	queryParams: {}
+		};
+    console.log(getState())
+    var agc = new apigClient({
+       accessKey: accessKey,
+       secretKey: secretKey,
+       sessionToken: sessionToken,
+       region: region
+     });
+
+    dispatch(postingLikedEvents())
+    return agc.uiRecordPut(params, body, additionalParams).then((result) => {
+      console.log(result)
+      dispatch(postConfirmation(result))
+    })
+    .catch((error) => {
+      console.log(error)
+      dispatch(errorPost(error))
+    })
+  }
+
 }

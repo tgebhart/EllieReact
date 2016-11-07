@@ -167,7 +167,7 @@ export default class sigV4Client {
 
     var body = this.copy(request.body);
     if (body === undefined || verb === 'GET') { // override request body and set to empty when signing GET requests
-        body = '';
+        delete headers['Content-Type'];
     }  else {
         body = JSON.stringify(body);
     }

@@ -11,7 +11,6 @@ import {
 
 import {
   MKButton,
-  MKColor,
   MKIconToggle,
   getTheme,
 } from 'react-native-material-kit';

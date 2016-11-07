@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 
 import {
-  MKButton,
-  MKColor,
+
   MKIconToggle,
   getTheme,
 } from 'react-native-material-kit';
@@ -18,7 +17,6 @@ import {
 import LinearGradientView from 'react-native-linear-gradient'
 
 import LikedCardMenu from './LikedCardMenu.js'
-
 
 const theme = getTheme();
 const styles = require('./styles');
@@ -50,7 +48,7 @@ const LikedCardFront = React.createClass({
           <View style={{padding: 3}}>
           </View>
           <View style={styles.card}>
-            <Image source ={this.props.image} resizeMode="cover" style={styles.cardImage}>
+            <Image source ={{uri: this.props.image}} resizeMode="cover" style={styles.cardImage}>
             <LinearGradientView style={homeStyles.linearGradient} colors={[this.props.colorFade, this.props.color]}>
               <View style={{backgroundColor:this.props.color, marginLeft: 155, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
                 <Text style={homeStyles.categoryText}>{this.props.category}</Text>
@@ -58,8 +56,10 @@ const LikedCardFront = React.createClass({
               </LinearGradientView>
             </Image>
             <View style={{flex: 1, backgroundColor: this.props.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
-              <Text style={homeStyles.titleText}>{this.props.title} </Text>
-              <View style={homeStyles.tagContainerMaster}>
+              <View style={styles.titleTextContainer}>
+                <Text style={styles.titleText} numberOfLines={3}>{this.props.title} </Text>
+              </View>
+              <View style={styles.tagContainerMaster}>
                 <View style={homeStyles.tagContainer}>
                   <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.dancing}</Text>
                   <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.volume}</Text>

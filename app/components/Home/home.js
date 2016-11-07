@@ -9,10 +9,13 @@ import {
   ScrollView,
   Dimensions,
   Animated,
-  ListView
+  ListView,
+  Platform
 } from 'react-native';
 
 import { connect } from 'react-redux';
+
+import { requestPermission } from 'react-native-android-permissions';
 
 import Nav from '../global-widgets/nav';
 import SwipeCards from '../SwipeCards/SwipeCards.js';
@@ -22,7 +25,7 @@ import LinearGradientView from 'react-native-linear-gradient';
 import FlipCard from 'react-native-flip-card';
 const { BlurView, VibrancyView } = require('react-native-blur');
 
-import { fetchEventsIfNeeded } from '../../actions/apiActions'
+import { fetchEventsIfNeeded, postLikedEvent } from '../../actions/apiActions'
 import { handleEventInteraction } from '../../actions/userEventActions'
 
 const styles = require('./styles');
@@ -47,17 +50,38 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    this.setState({cards: this.props.state.eventsGet.events})
+
   }
 
   componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-     (position) => {
-       this.setState({ initialPosition: { latitude: position.coords.latitude, longitude: position.coords.longitude }});
-     },
-     (error) => alert(JSON.stringify(error)),
-     {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-   );
+    this.setState({cards: this.props.events})
+
+    if (Platform.OS === 'ios') {
+      navigator.geolocation.getCurrentPosition(
+       (position) => {
+         this.setState({ initialPosition: { latitude: position.coords.latitude, longitude: position.coords.longitude }});
+       },
+       (error) => alert(JSON.stringify(error)),
+       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+     );
+    }
+    else {
+      requestPermission("android.permission.ACCESS_FINE_LOCATION").then((result) => {
+        console.log("Granted!", result);
+        navigator.geolocation.getCurrentPosition(
+         (position) => {
+           this.setState({ initialPosition: { latitude: position.coords.latitude, longitude: position.coords.longitude }});
+         },
+         (error) => alert(JSON.stringify(error)),
+         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+       );
+          }, (result) => {
+            console.log("Not Granted!");
+            console.log(result);
+          });
+        // for the correct StatusBar behaviour with translucent={true} we need to wait a bit and ask for permission after the first render cycle
+        // (check https://github.com/facebook/react-native/issues/9413 for more info
+      }
  }
 
  distance(lat1, lon1, lat2, lon2) {
@@ -95,7 +119,7 @@ class Home extends Component {
     }
 
     if (day - now.getDate() > 6) {
-      prefix = 'Next'
+      prefix = 'Next '
     }
 
     return prefix + num_to_day[dow] + " " + date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
@@ -115,10 +139,7 @@ class Home extends Component {
     x.showTime = Date.now()
     x.flipped = false
 
-    console.log(this.props)
-    console.log(this.context.store.getState())
-
-    var formatted_start_time = this.getStartTimeFormat(x.startTime)
+    x.formattedStartTime = this.getStartTimeFormat(x.startTime)
 
     var colorFade = 'rgba(126, 88, 221, 0.12)'
     var color = 'rgba(126, 88, 221, 1.0)'
@@ -163,7 +184,7 @@ class Home extends Component {
             <View style={styles.bottomInfoContainer}>
               <Text style={styles.bottomInfoText}>{x.distance} miles</Text>
               <Text style={styles.bottomInfoText}>{x.ticketPrice} </Text>
-              <Text style={styles.bottomInfoText}>{formatted_start_time} </Text>
+              <Text style={styles.bottomInfoText}>{x.formattedStartTime} </Text>
             </View>
           </View>
         </View>
@@ -175,9 +196,7 @@ class Home extends Component {
               <Text style={styles.descriptionTitle}>{x.name}</Text>
             </View>
             <View style={{flex: 1, backgroundColor:color, padding:25, alignItems: 'center', alignSelf: 'center', height:300}}>
-            <ScrollView
-            horizontal={false}
-            >
+            <ScrollView horizontal={false} >
               <Text style={styles.descriptionText}>{x.description}</Text>
             </ScrollView>
             </View>
@@ -193,13 +212,14 @@ class Home extends Component {
 
   handleYup(card) {
     let { dispatch } = this.props
-    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), true))
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), card.distance, true))
+    dispatch(postLikedEvent(card))
     dispatch(fetchEventsIfNeeded())
   }
 
   handleNope(card) {
     let { dispatch } = this.props
-    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), false))
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), card.distance, false))
     dispatch(fetchEventsIfNeeded())
   }
 
@@ -228,14 +248,15 @@ class Home extends Component {
   render() {
     var sysWidth = Dimensions.get('window').width
     var sysHeight = Dimensions.get('window').height
+
     return (
       <View style={styles.container}>
         <Nav chat = {() => this.props.navigator.replace({id: "messages"})} toProfile = {() => this.props.navigator.replace({id:'profile'})} />
 
         <SwipeCards
           ref = {'swiper'}
-          cards={this.context.store.getState().eventsGet.events}
-          containerStyle = {{backgroundColor: '#f7f7f7', alignItems:'center', margin:20}}
+          cards={this.props.events}
+          containerStyle = {{backgroundColor: '#f7f7f7', alignItems:'center', margin:20, height:450}}
           renderCard={(cardData) => this.Card(cardData)}
           renderNoMoreCards={() => this.noMore()}
           handleYup={this.handleYup}
@@ -264,6 +285,7 @@ class Home extends Component {
               animationType={"slide"}
               transparent={true}
               visible={this.state.searchVisible}
+              onRequestClose={() => {alert("Modal has been closed.")}}
               >
               <View style={{height: sysHeight, width: sysWidth}}>
                 <TouchableOpacity style={{height: sysHeight-350, backgroundColor:'rgba(0,0,0,0.4)'}} onPress = {() => this.setSearchVisible(false)}>
@@ -329,4 +351,10 @@ Home.propTypes = {
   dispatch: PropTypes.func.isRequired
 }
 
-export default connect()(Home)
+function mapStateToProps(state) {
+  return {
+    events: state.eventsGet.events
+  }
+}
+
+export default connect(mapStateToProps)(Home)

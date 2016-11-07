@@ -175,13 +175,13 @@ class SwipeCards extends Component {
     let { dispatch } = this.props
     console.log(this.props)
     console.log(this.context)
-    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), true))
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), card.distance, true))
     dispatch(fetchEventsIfNeeded())
   }
 
   swipeHandleNope(card) {
     let { dispatch } = this.props
-    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), false))
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), card.distance, false))
     dispatch(fetchEventsIfNeeded())
   }
 

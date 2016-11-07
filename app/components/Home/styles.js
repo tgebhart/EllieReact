@@ -1,5 +1,4 @@
 var {StyleSheet, Platform, System} = require('react-native');
-var {MKColor} = require('react-native-material-kit');
 
 module.exports = StyleSheet.create({
 
@@ -18,8 +17,7 @@ categoryText:{
   fontFamily: 'System'
 },
 flipCard: {
-  flex: 1,
-  backgroundColor: 'rgba(255,255,255,1)',
+  height: 100,
   borderWidth: 0,
 },
 textContainer:{

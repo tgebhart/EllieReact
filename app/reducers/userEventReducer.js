@@ -19,6 +19,7 @@ export function likeDislike(state = likeDislikeInitialState, action) {
             event: action.event,
             viewTime: action.viewTime,
             flipped: action.flipped,
+						distance: action.distance,
             timestamp: Date.now()
           }
         ]
@@ -32,6 +33,7 @@ export function likeDislike(state = likeDislikeInitialState, action) {
             eventID: action.eventID,
             viewTime: action.viewTime,
             flipped: action.flipped,
+						distance: action.distance,
             timestamp: Date.now()
           }
         ]

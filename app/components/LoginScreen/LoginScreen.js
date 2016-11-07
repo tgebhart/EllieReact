@@ -50,7 +50,7 @@ export default class LoginScreen extends Component {
 
   render() {
     let { dispatch } = this.props.store
-    console.log(this.props)
+    console.log("Login Props",this.props)
     return(
     <View style={{flex: 1, alignItems: 'center', marginTop: 300}}>
       <LoginButton

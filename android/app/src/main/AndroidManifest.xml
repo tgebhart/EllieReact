@@ -1,16 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ellie"
-    android:versionCode="1"
-    android:versionName="1.0">
+    package="com.ellie">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.MANAGE_USERS"/>
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="22" />
-        
+        android:targetSdkVersion="25" />
+
     <application
       android:name=".MainApplication"
       android:allowBackup="true"
@@ -18,10 +18,14 @@
       android:icon="@mipmap/ic_launcher"
       android:theme="@style/AppTheme">
       <meta-data
-      android:name="com.google.android.geo.API_KEY"
-      android:value="AIzaSyAf9gKb7vONydurgKPr71R4taPs3U13hQ8"
-      android:name="com.google.android.maps.v2.API_KEY"
-      android:value="424178332260-ghfrlg17til9stq56g35v3si6dhno1b4.apps.googleusercontent.com"/>
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyAf9gKb7vONydurgKPr71R4taPs3U13hQ8"/>
+      <!-- <meta-data
+        android:name="com.google.android.maps.v2.API_KEY"
+        android:value="424178332260-ghfrlg17til9stq56g35v3si6dhno1b4.apps.googleusercontent.com"/> -->
+      <meta-data
+        android:name="com.facebook.sdk.ApplicationId"
+        android:value="@string/facebook_app_id"/>
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"

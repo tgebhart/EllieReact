@@ -1,8 +1,4 @@
 <resources>
-
-
-
-
-
     <string name="app_name">Ellie</string>
+    <string name="facebook_app_id">1531561520485355</string>
 </resources>

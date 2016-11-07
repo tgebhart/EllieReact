@@ -60,3 +60,36 @@ export function eventsGet(state = eventsGetInitialState, action) {
 			return state
 		}
 }
+
+
+var postEventInitialState = {
+	postedAt: undefined,
+	confirmedAt: undefined,
+	posting: false,
+	error: undefined
+}
+
+export function eventsPost(state = postEventInitialState, action) {
+
+	switch(action.type){
+
+		case types.POSTING_EVENTS:
+			return Object.assign({}, state, {
+				fetching: true,
+				postedAt: action.postedAt
+			});
+
+		case types.POST_EVENT_CONFIRMATION:
+			return Object.assign({}, state, {
+				confirmedAt: action.confirmedAt,
+				fetching: false
+			});
+
+		case types.ERROR_POST_EVENT:
+			return Object.assign({}, state, {
+				error: action.error,
+				fetching: false
+			})
+			
+	}
+}

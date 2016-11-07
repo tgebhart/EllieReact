@@ -41,14 +41,36 @@ module.exports = StyleSheet.create({
  },
  cardImage: {
    height: 150,
+   width: 300,
+ },
+ titleText:{
+   fontFamily: 'System',
+   backgroundColor: 'transparent',
+   fontSize: 18,
+   fontWeight: '400',
+   color: 'rgba(255, 255, 255, 0.8)'
+ },
+ titleTextContainer: {
+   flex: 1,
+   height: 25,
+   width: 280,
+   alignItems: 'center',
+   justifyContent: 'space-between'
  },
  tagContainer:{
    flexDirection: 'column',
    alignItems: 'center',
    justifyContent: 'space-between'
  },
+ tagContainerMaster:{
+   width: 300,
+   marginTop: 0,
+   flexDirection: 'row',
+   alignItems: 'center',
+   justifyContent: 'space-between'
+ },
  bottomInfoContainer:{
-   marginTop: 10,
+   marginBottom: 5,
    flexDirection:'row',
    alignItems:'center',
    width: 280,

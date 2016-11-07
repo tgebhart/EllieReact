@@ -70,7 +70,7 @@ export default class Index extends Component {
         this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
       }
     } catch (error) {
-      console.log("Error on asyncstorage, login with Facebook", error)
+      console.log("Error on async storage, login with Facebook", error)
       this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
     }
   }
@@ -83,8 +83,6 @@ export default class Index extends Component {
       return (
         <Home
         {...this.props}
-        store={this.context.store}
-        state = {this.context.store.getState()}
         navigator={navigator} />
         );
     }
@@ -106,7 +104,6 @@ export default class Index extends Component {
       return (
         <LikedList
         {...this.props}
-        store = {this.context.store}
         navigator={navigator} />
       );
     }
