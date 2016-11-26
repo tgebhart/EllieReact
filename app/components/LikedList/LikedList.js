@@ -11,13 +11,6 @@ import {
   View
 } from 'react-native';
 
-import {
-  MKButton,
-  MKColor,
-  MKIconToggle,
-  getTheme,
-} from 'react-native-material-kit';
-
 import Nav from '../global-widgets/nav'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Swiper from 'react-native-swiper';

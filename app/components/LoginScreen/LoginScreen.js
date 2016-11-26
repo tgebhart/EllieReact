@@ -17,19 +17,25 @@ const {
 } = FBSDK;
 
 import { receiveFbat, fetchSessionToken } from '../../actions/tokenActions'
+import { fetchEvents } from '../../actions/apiActions'
 import apigClient from '../../lib/ellieAPI/apigClient'
+
+const styles = require('./styles');
 
 var STORAGE_KEY = '@Ellie:fbllt';
 
 export default class LoginScreen extends Component {
   constructor(props){
     super(props)
+    this.state = {
+      isLoading: false,
+    }
   }
 
-  componentWillMount() {
-  }
+  componentWillMount() {}
 
   async prepareToEnter() {
+    let { dispatch } = this.props.store
     var fbllt = this.props.store.getState().sessionTokens.fbllt
     console.log("fbllt: ", fbllt)
     if (fbllt) {
@@ -38,6 +44,15 @@ export default class LoginScreen extends Component {
       } catch (error) {
         console.error(error)
       }
+      dispatch(fetchSessionToken(fbllt)).then(() => {
+        this.getInitialEvents().then(() => {
+          this.props.navigator.replace({id:'home'})
+        })
+      })
+      .catch((error) => {
+        console.log("error in using fbllt to get API credentials", error)
+        this.props.navigator.replace({id:'home'})
+      })
     }
     else {
       console.log("did not store fbllt", this.props.store.getState())
@@ -48,36 +63,60 @@ export default class LoginScreen extends Component {
     this.props.navigator.replace({id:'home'})
   }
 
+  getInitialEvents = async () => {
+    let { dispatch } = this.props.store
+    var params = {}
+    var body = {}
+    var additionalParams = {
+      headers: {},
+      queryParams: {}
+    }
+    await dispatch(fetchEvents(params, body, additionalParams))
+  }
+
   render() {
     let { dispatch } = this.props.store
     console.log("Login Props",this.props)
+    if (this.state.isLoading) {
+      return <View style={{flex: 1, alignItems: 'center', marginTop: 300}}><Text>Loading Awesomeness ... </Text></View>
+    }
     return(
-    <View style={{flex: 1, alignItems: 'center', marginTop: 300}}>
-      <LoginButton
-        publishPermissions={["publish_actions"]}
-        onLoginFinished = {
-          (error, result) => {
-            if (error) {
-              alert("login has error: " + result.error);
-            } else if (result.isCancelled) {
-              alert("login is cancelled.");
-            } else {
-              AccessToken.getCurrentAccessToken().then(
-                (data) => {
-                  dispatch(receiveFbat(data))
-                  console.log(this.props.store.getState())
-                  dispatch(fetchSessionToken(data.accessToken)).then(() => {
+      <View>
+      <View style={styles.loginTitleTextContainer}>
+        <Text style={styles.loginTitleText}>
+          Login to Ellie
+        </Text>
+      </View>
+      <View style={styles.loginButtonContainer}>
+        <LoginButton
+          publishPermissions={["publish_actions"]}
+          onLoginFinished = {
+            (error, result) => {
+              if (error) {
+                alert("login has error: " + error);
+                console.log(error);
+              } else if (result.isCancelled) {
+                alert("login is cancelled.");
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                  (data) => {
+                    this.setState({isLoading: true})
+                    dispatch(receiveFbat(data))
+                    console.log(this.props.store.getState())
+                    console.log(data)
+                    dispatch(fetchSessionToken(data.accessToken)).then(() => {
                     this.prepareToEnter().then(() => {
-                      this.enterHome()
+                        //this.enterHome()
                     });
-                  })
-                }
-              )
+                    })
+                  }
+                )
+              }
             }
           }
-        }
-        onLogoutFinished={() => alert("logout.")}/>
-    </View>
+          onLogoutFinished={() => alert("logout.")}/>
+      </View>
+      </View>
   );
   }
 }

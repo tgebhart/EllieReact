@@ -1,15 +1,13 @@
 var {StyleSheet, Platform} = require('react-native');
-var {MKColor} = require('react-native-material-kit');
 
 module.exports = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
   container: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
     padding: 5,
     marginTop: Platform.OS === 'android' ? 56 : 0,
   },
@@ -40,6 +38,7 @@ module.exports = StyleSheet.create({
    width: 300,
  },
  cardImage: {
+   flex: 1,
    height: 150,
    width: 300,
  },
@@ -100,14 +99,13 @@ module.exports = StyleSheet.create({
   menuContainer: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
     marginTop: Platform.OS === 'android' ? 56 : 0,
   },
   fab: {
   },
   mapContainer: {
    height: 300,
-   width: 350,
    margin: 5,
    marginLeft: 12,
    marginTop: 10,

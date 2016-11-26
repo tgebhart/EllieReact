@@ -1,14 +1,18 @@
-var {StyleSheet, Platform, System} = require('react-native');
+var {StyleSheet, Platform, System, Dimensions} = require('react-native');
+
+var sysHeight = Dimensions.get('window').height;
+var sysWidth = Dimensions.get('window').width;
 
 module.exports = StyleSheet.create({
 
 container: {
   flex: 1,
-  backgroundColor: '#f7f7f7',
+  backgroundColor: '#FFFFFF',
 },
 shadowContainer: {
   shadowOpacity: 5.0,
-  shadowRadius:5.0
+  shadowRadius: 5.0,
+  borderRadius: 5
 },
 categoryText:{
   color: 'rgba(255,255,255, 0.8)',
@@ -17,8 +21,14 @@ categoryText:{
   fontFamily: 'System'
 },
 flipCard: {
-  height: 100,
+  // height: 300,
+  marginTop: 20,
+  marginBottom: 5,
   borderWidth: 0,
+},
+swipCardContainer: {
+  backgroundColor: '#FFFFFF',
+  alignItems:'center',
 },
 textContainer:{
   flex: 1,
@@ -87,11 +97,11 @@ bottomInfoContainer:{
   justifyContent:'space-between'
 },
  card: {
-  flex: 1,
+  // flex: 1,
   alignItems: 'center',
   alignSelf:'center',
-  width: 350,
-  height: 450,
+  // width: sysWidth,
+  // height: sysHeight,
   borderRadius: 5,
   shadowRadius: 5.0,
   shadowOpacity: 5.0,

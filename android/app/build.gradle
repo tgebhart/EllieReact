@@ -129,11 +129,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-material-kit')
     compile project(':react-native-blur')
     compile 'com.fivehundredpx:blurringview:1.0.0'
-    compile project(':RNPermissionsModule')
+    //compile project(':RNPermissionsModule')
     compile project(':react-native-maps')
-    compile project(':RNMaterialKit')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-vector-icons')
     compile project(':react-native-fbsdk')

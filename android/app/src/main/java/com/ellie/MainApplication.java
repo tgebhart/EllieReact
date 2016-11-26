@@ -3,24 +3,24 @@ package com.ellie;
 import android.app.Application;
 import android.util.Log;
 
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
-import com.facebook.appevents.AppEventsLogger;
-
 import com.facebook.react.ReactApplication;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.airbnb.android.react.maps.MapsPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.cmcewen.blurview.BlurViewPackage;
+//import com.burnweb.rnpermissions.RNPermissionsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.cmcewen.blurview.BlurViewPackage;
-import com.burnweb.rnpermissions.RNPermissionsPackage;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,14 +33,6 @@ public class MainApplication extends Application implements ReactApplication {
     return mCallbackManager;
   }
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    FacebookSdk.sdkInitialize(getApplicationContext());
-    // If you want to use AppEventsLogger to log events.
-    AppEventsLogger.activateApp(this);
-  }
-
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     protected boolean getUseDeveloperSupport() {
@@ -51,12 +43,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-          new MapsPackage(),
-          new LinearGradientPackage(),
-          new ReactMaterialKitPackage(),
-          new BlurViewPackage(),
-          new RNPermissionsPackage(),
-          new FBSDKPackage(mCallbackManager)
+            new ReactMaterialKitPackage(),
+            new VectorIconsPackage(),
+            new ReactMaterialKitPackage(),
+            new MapsPackage(),
+            new LinearGradientPackage(),
+            new FBSDKPackage(mCallbackManager),
+            new BlurViewPackage()
+            //new RNPermissionsPackage()
       );
     }
   };
@@ -64,5 +58,13 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public ReactNativeHost getReactNativeHost() {
       return mReactNativeHost;
+  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    FacebookSdk.sdkInitialize(getApplicationContext());
+    // If you want to use AppEventsLogger to log events.
+    AppEventsLogger.activateApp(this);
   }
 }

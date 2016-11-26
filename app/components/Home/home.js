@@ -4,6 +4,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  PermissionsAndroid,
   View,
   Modal,
   ScrollView,
@@ -15,7 +16,7 @@ import {
 
 import { connect } from 'react-redux';
 
-import { requestPermission } from 'react-native-android-permissions';
+// import { requestPermission } from 'react-native-android-permissions';
 
 import Nav from '../global-widgets/nav';
 import SwipeCards from '../SwipeCards/SwipeCards.js';
@@ -49,9 +50,7 @@ class Home extends Component {
     store: React.PropTypes.object
   }
 
-  componentWillMount() {
-
-  }
+  componentWillMount() {}
 
   componentDidMount() {
     this.setState({cards: this.props.events})
@@ -66,23 +65,27 @@ class Home extends Component {
      );
     }
     else {
-      requestPermission("android.permission.ACCESS_FINE_LOCATION").then((result) => {
-        console.log("Granted!", result);
-        navigator.geolocation.getCurrentPosition(
-         (position) => {
-           this.setState({ initialPosition: { latitude: position.coords.latitude, longitude: position.coords.longitude }});
-         },
-         (error) => alert(JSON.stringify(error)),
-         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-       );
-          }, (result) => {
-            console.log("Not Granted!");
-            console.log(result);
-          });
-        // for the correct StatusBar behaviour with translucent={true} we need to wait a bit and ask for permission after the first render cycle
-        // (check https://github.com/facebook/react-native/issues/9413 for more info
+        PermissionsAndroid.requestPermission(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            'title': 'Cool Photo App Camera Permission',
+            'message': 'Cool Photo App needs access to your camera ' +
+                       'so you can take awesome pictures.'
+          }
+        ).then((result) => {
+          navigator.geolocation.getCurrentPosition(
+           (position) => {
+             this.setState({ initialPosition: { latitude: position.coords.latitude, longitude: position.coords.longitude }});
+           },
+           (error) => alert(JSON.stringify(error)),
+           {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+         );
+            }, (result) => {
+              console.log("Not Granted!");
+              console.log(result);
+            });
       }
- }
+    }
 
  distance(lat1, lon1, lat2, lon2) {
    var p = 0.017453292519943295;    // Math.PI / 180
@@ -256,16 +259,16 @@ class Home extends Component {
         <SwipeCards
           ref = {'swiper'}
           cards={this.props.events}
-          containerStyle = {{backgroundColor: '#f7f7f7', alignItems:'center', margin:20, height:450}}
+          containerStyle = {styles.swipeCardContainer}
           renderCard={(cardData) => this.Card(cardData)}
           renderNoMoreCards={() => this.noMore()}
           handleYup={this.handleYup}
           loop={false}
           dispatch = {this.props.dispatch}
           handleNope={this.handleNope}>
-          </SwipeCards>
+        </SwipeCards>
 
-          <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
+          <View style={{flexDirection:'row', alignItems:'center', justifyContent:'center', marginBottom:30, backgroundColor:'#FFFFFF'}}>
             <TouchableOpacity style = {styles.buttons} onPress = {() => this.setSearchVisible(true)}>
               <Image name='search' size={30} color="#888" style={{marginTop:0}} source={require('../../assets/icons/search.png')} />
             </TouchableOpacity>

@@ -8,41 +8,21 @@ import {
   Image,
 } from 'react-native';
 
-import {
-  MKButton,
-  MKColor,
-  MKIconToggle,
-  getTheme,
-} from 'react-native-material-kit';
-
 import LinearGradientView from 'react-native-linear-gradient'
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-const theme = getTheme();
 const styles = require('./styles');
 const homeStyles = require('../Home/styles')
 
-const LikedCardVenue = React.createClass({
+class LikedCardVenue extends Component {
+  constructor(props){
+    super(props)
+  }
 
 
   render(){
-    var base64Icon = 'http://www.getmdl.io/assets/demos/welcome_card.jpg';
-    var action = (<Text> My action</Text>);
-    var menu = (
-       <MKIconToggle
-        checked={true}
-        onCheckedChange={this._onIconChecked}
-        onPress={this._onIconClicked}
-        >
-        <Text pointerEvents="none"
-              style={styles.toggleTextOff}>Off</Text>
-        <Text state_checked={true}
-              pointerEvents="none"
-              style={[styles.toggleText, styles.toggleTextOn]}>On</Text>
-      </MKIconToggle>
-    );
     return (
       <View style={styles.mapContainer}>
         <MapView style={styles.map}
@@ -91,6 +71,6 @@ const LikedCardVenue = React.createClass({
       </View>
     )
   }
-});
+}
 
-module.exports = LikedCardVenue;
+export default LikedCardVenue;
