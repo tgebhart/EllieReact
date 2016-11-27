@@ -194,16 +194,14 @@ class Home extends Component {
       </View>
       <View style={styles.shadowContainer}>
         <View style={styles.card}>
-          <View style={{flex: 1, alignItems: 'center', backgroundColor:color, alignSelf:'center', width: 350, height: 450,}}>
-            <View style={{flex: 1, alignItems: 'center', backgroundColor:color, padding:10}}>
+          <View style={{ alignItems: 'center', backgroundColor:color, alignSelf:'center', width: 350, height: 450}}>
+            <View style={{alignItems: 'center', backgroundColor:color, padding:10}}>
               <Text style={styles.descriptionTitle}>{x.name}</Text>
             </View>
-            <View style={{flex: 1, backgroundColor:color, padding:25, alignItems: 'center', alignSelf: 'center', height:300}}>
-            <ScrollView horizontal={false} >
+            <ScrollView contentContainerStyle={{flex: 1, backgroundColor:color, padding:25, alignItems: 'center', alignSelf: 'center', height:300}} horizontal={false} >
               <Text style={styles.descriptionText}>{x.description}</Text>
             </ScrollView>
-            </View>
-            <View style={{flex: 1, alignItems: 'center', alignSelf: 'center', backgroundColor:color}}>
+            <View style={{alignItems: 'center', alignSelf: 'center', backgroundColor:color}}>
               <Image source={require('../../assets/icons/flip.png')}></Image>
             </View>
           </View>
@@ -229,7 +227,7 @@ class Home extends Component {
   noMore(){
     return (
       <View style={styles.card} >
-        <Text>No More Cards</Text>
+        <Text>No More Events</Text>
       </View>
     )
   }
