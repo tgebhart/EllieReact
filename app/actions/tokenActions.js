@@ -26,6 +26,14 @@ export function requestSessionToken(fbt) {
   }
 }
 
+export function requestEmailSessionToken(email, password) {
+  return {
+    type: types.REQUEST_EMAIL_SESSION_TOKEN,
+    email: email,
+    password: password
+  }
+}
+
 export function receiveSessionToken(responseJson) {
   return {
     type: types.RECEIVE_SESSION_TOKEN,
@@ -62,6 +70,35 @@ export function fetchSessionToken(fbllt) {
         })
       }).then((response) => response.json())
         .then((responseJson) => {
+          console.log(responseJson)
+          dispatch(receiveSessionToken(responseJson))
+    })
+    .catch((error) => {
+      console.error(error)
+      dispatch(errorRequestSessionToken(error))
+    });
+  }
+}
+
+export function fetchEmailSessionToken(email, password) {
+
+  return function(dispatch) {
+
+    dispatch(requestEmailSessionToken(email, password))
+
+    return fetch('https://api.aivibe.com/login/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      }).then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
           dispatch(receiveSessionToken(responseJson))
     })
     .catch((error) => {

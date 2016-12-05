@@ -14,6 +14,12 @@ import {
   Platform
 } from 'react-native';
 
+const FBSDK = require('react-native-fbsdk');
+const {
+  GraphRequest,
+  GraphRequestManager,
+} = FBSDK;
+
 import { connect } from 'react-redux';
 
 // import { requestPermission } from 'react-native-android-permissions';
@@ -24,12 +30,15 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Iconz from 'react-native-vector-icons/Ionicons';
 import LinearGradientView from 'react-native-linear-gradient';
 import FlipCard from 'react-native-flip-card';
+
 const { BlurView, VibrancyView } = require('react-native-blur');
 
-import { fetchEventsIfNeeded, postLikedEvent } from '../../actions/apiActions'
-import { handleEventInteraction } from '../../actions/userEventActions'
+import { fetchEventsIfNeeded, postLikedEvent } from '../../actions/apiActions';
+import { handleEventInteraction } from '../../actions/userEventActions';
+import { fetchUserProfile } from '../../actions/facebookActions';
 
 const styles = require('./styles');
+
 
 class Home extends Component {
   constructor(props){
@@ -42,7 +51,8 @@ class Home extends Component {
         'SAN FRANCISCO', 'NEARBY']),
       searchVisible: false,
       initialPosition: undefined,
-      cards: undefined
+      cards: undefined,
+      user: undefined
     }
   }
 
@@ -53,7 +63,7 @@ class Home extends Component {
   componentWillMount() {}
 
   componentDidMount() {
-    this.setState({cards: this.props.events})
+    this.setState({cards: this.props.events, user: this.props.user})
 
     if (Platform.OS === 'ios') {
       navigator.geolocation.getCurrentPosition(
@@ -68,9 +78,8 @@ class Home extends Component {
         PermissionsAndroid.requestPermission(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
           {
-            'title': 'Cool Photo App Camera Permission',
-            'message': 'Cool Photo App needs access to your camera ' +
-                       'so you can take awesome pictures.'
+            'title': 'Ellie Location Access',
+            'message': 'Ellie needs access to your location to find events near you!'
           }
         ).then((result) => {
           navigator.geolocation.getCurrentPosition(
@@ -252,7 +261,7 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <Nav chat = {() => this.props.navigator.replace({id: "messages"})} toProfile = {() => this.props.navigator.replace({id:'profile'})} />
+        <Nav picture_url={this.props.user.picture_url} name={this.props.user.name} />
 
         <SwipeCards
           ref = {'swiper'}
@@ -286,7 +295,7 @@ class Home extends Component {
               animationType={"slide"}
               transparent={true}
               visible={this.state.searchVisible}
-              onRequestClose={() => {alert("Modal has been closed.")}}
+              onRequestClose={() => {console.log("Modal has been closed.")}}
               >
               <View style={{height: sysHeight, width: sysWidth}}>
                 <TouchableOpacity style={{height: sysHeight-350, backgroundColor:'rgba(0,0,0,0.4)'}} onPress = {() => this.setSearchVisible(false)}>
@@ -337,7 +346,6 @@ class Home extends Component {
                     <Text style={styles.searchButtonText}>SEARCH</Text>
                 </TouchableOpacity>
                 </View>
-
               </View>
               </View>
             </Modal>
@@ -354,7 +362,8 @@ Home.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    events: state.eventsGet.events
+    events: state.eventsGet.events,
+    user: state.getUserProfile
   }
 }
 

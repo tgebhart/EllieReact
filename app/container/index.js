@@ -8,7 +8,6 @@ import * as reducers from '../reducers';
 import Components from '../components/index';
 
 import Home from '../components/Home/home';
-import Messages from '../components/messages';
 import Profile from '../components/profile';
 import LikedList from '../components/LikedList/LikedList'
 import LoginScreen from '../components/LoginScreen/LoginScreen'

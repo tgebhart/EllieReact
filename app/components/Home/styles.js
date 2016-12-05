@@ -73,6 +73,7 @@ titleText:{
 },
 bottomInfoText:{
   fontSize: 14,
+  padding: 3,
   fontWeight: '400',
   color: 'rgb(255, 255, 255)'
 },

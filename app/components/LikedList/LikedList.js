@@ -41,7 +41,6 @@ class LikedList extends Component {
   }
 
   componentWillMount() {
-    console.log(this.props)
   }
 
   eventSummary(x) {
@@ -50,34 +49,36 @@ class LikedList extends Component {
     var tags = ['Dancing', 'Open Bar', 'Free Entry', 'Loud', 'Live Music', 5]
     return(
       <View style={styles.eventSummaryContainer}>
-        <Swiper>
-          <View style={{margin: 5}}>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          <View>
             <LikedCardFront
-            image={x.event.promotionalImages[0]}
-            colorFade={colorFade}
-            color={color}
-            category={x.event.category}
-            title={x.event.name}
-            dancing={tags[0]}
-            volume={tags[1]}
-            openbar={tags[2]}
-            dress={tags[3]}
-            age={tags[4]}
-            friends={tags[5]}
-            distance={x.distance}
-            price={x.event.ticketPrice}
-            start_time={x.event.formattedStartTime}
-            />
+              image={x.event.promotionalImages[0]}
+              colorFade={colorFade}
+              color={color}
+              category={x.event.category}
+              title={x.event.name}
+              dancing={tags[0]}
+              volume={tags[1]}
+              openbar={tags[2]}
+              dress={tags[3]}
+              age={tags[4]}
+              friends={tags[5]}
+              distance={x.distance}
+              price={x.event.ticketPrice}
+              start_time={x.event.formattedStartTime}
+              facebook_event_id={x.event.facebook_event_id}/>
           </View>
-            <LikedCardVenue
-                latitude={x.event.venue.latitude}
-                longitude={x.event.venue.longitude}
-                name={x.event.venue.name}
-                open={x.event.venue.open}
-                phone={x.event.venue.phone}
-                infoTags={x.event.venue.infoTags}
-              />
-        </Swiper>
+          <LikedCardVenue
+              latitude={x.event.venue.latitude}
+              longitude={x.event.venue.longitude}
+              name={x.event.venue.name}
+              open={x.event.venue.open}
+              phone={x.event.venue.phone}
+              infoTags={x.event.venue.infoTags}
+          />
+        </ScrollView>
       </View>
   )}
 

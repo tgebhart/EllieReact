@@ -11,7 +11,7 @@ var FBLoginButton = React.createClass({
     return (
       <View>
         <LoginButton
-          publishPermissions={["publish_actions"]}
+          publishPermissions={["rsvp_event"]}
           onLoginFinished={
             (error, result) => {
               if (error) {

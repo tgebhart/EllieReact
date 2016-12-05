@@ -257,6 +257,37 @@ export default class apigClient {
       return this.apiGatewayClient.makeRequest(uiRecordOptionsRequest, this.authType, additionalParams, this.config.apiKey);
   };
 
+  loginPost(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      var loginPostRequest = {
+          verb: 'post'.toUpperCase(),
+          path: this.pathComponent + '/login' + this.parseParametersToObject(params, []),
+          headers: this.parseParametersToObject(params, []),
+          queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(loginPostRequest, this.authType, this.additionalParams, this.config.apiKey);
+  };
+
+
+  loginOptions(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      var loginOptionsRequest = {
+          verb: 'options'.toUpperCase(),
+          path: this.pathComponent + '/login' + this.parseParametersToObject(params, []),
+          headers: this.parseParametersToObject(params, []),
+          queryParams: apiGateway.core.utils.parseParametersToObject(params, []),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(loginOptionsRequest, this.authType, this.additionalParams, this.config.apiKey);
+  };
+
   kinesisGet(params, body, additionalParams) {
       if(additionalParams === undefined) {
         additionalParams = {};

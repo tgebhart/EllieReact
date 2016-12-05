@@ -29,6 +29,13 @@ export function sessionTokens(state = sessionTokenInitialState, action) {
 				requestSessionToken: true
 			});
 
+		case types.REQUEST_EMAIL_SESSION_TOKEN:
+			return Object.assign({}, state, {
+				requestSessionToken: true,
+				email: action.email,
+				password: action.password
+		});
+
 		case types.RECEIVE_SESSION_TOKEN:
 			return Object.assign({}, state, {
 				sessionToken: action.sessionToken,

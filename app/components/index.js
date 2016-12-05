@@ -12,15 +12,17 @@ import {
 import { Provider } from 'react-redux';
 
 import Home from './Home/home';
-import Messages from './messages';
 import Profile from './profile';
 import LikedList from './LikedList/LikedList'
 import LoginScreen from './LoginScreen/LoginScreen'
 
-import { fetchSessionToken } from '../actions/tokenActions'
-import { fetchEvents } from '../actions/apiActions'
+import { fetchSessionToken, fetchEmailSessionToken } from '../actions/tokenActions';
+import { fetchEvents } from '../actions/apiActions';
+import { fetchUserProfile } from '../actions/facebookActions';
 
 const STORAGE_KEY = '@Ellie:fbllt';
+const EMAIL_STORAGE_KEY = '@Ellie:email'
+const PASSWORD_STORAGE_KEY = '@Ellie:password'
 
 export default class Index extends Component {
   constructor(props){
@@ -50,6 +52,11 @@ export default class Index extends Component {
     await dispatch(fetchEvents(params, body, additionalParams))
   }
 
+  getUserProfileInfo = async() => {
+    let { dispatch } = this.context.store
+    await dispatch(fetchUserProfile())
+  }
+
   getInitialRoute = async () => {
     let { dispatch } = this.context.store
     try {
@@ -57,7 +64,9 @@ export default class Index extends Component {
       if (value !== null) {
         dispatch(fetchSessionToken(value)).then(() => {
           this.getInitialEvents().then(() => {
-            this.setState({isLoading: false, initialRoute: {id: 'home', name: 'home'}})
+            this.getUserProfileInfo().then(() => {
+              this.setState({isLoading: false, initialRoute: {id: 'home', name: 'home'}})
+            })
           })
         })
         .catch((error) => {
@@ -66,11 +75,27 @@ export default class Index extends Component {
         })
       }
       else {
-        console.log("No fbllt found, login with Facebook")
-        this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
+        console.log("No fbllt found, try looking for email")
+        const evalue = await AsyncStorage.getItem(EMAIL_STORAGE_KEY);
+        const pvalue = await AsyncStorage.getItem(PASSWORD_STORAGE_KEY);
+        if (evalue !== null && pvalue !== null) {
+          dispatch(fetchEmailSessionToken(evalue, pvalue)).then(() => {
+            this.getInitialEvents().then(() => {
+              this.setState({isLoading: false, initialRoute: {id: 'home', name: 'home'}})
+            })
+          })
+          .catch((error) => {
+            console.log("error in using email to get API credentials", error)
+            this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
+          })
+        }
+        else {
+          console.log("No email found, back to login")
+          this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
+        }
       }
     } catch (error) {
-      console.log("Error on async storage, login with Facebook", error)
+      console.log("Error on async storage, back to login", error)
       this.setState({isLoading: false, initialRoute: {id: 'login', name: 'login'}})
     }
   }
@@ -82,13 +107,6 @@ export default class Index extends Component {
     if (routeId === 'home') {
       return (
         <Home
-        {...this.props}
-        navigator={navigator} />
-        );
-    }
-    if (routeId === 'messages') {
-      return (
-        <Messages
         {...this.props}
         navigator={navigator} />
         );

@@ -15,9 +15,6 @@ module.exports = StyleSheet.create({
     height: 300
   },
   eventSummaryContainer: {
-    flex: 1,
-    position: 'relative',
-    flexDirection: 'row',
     height: 300,
     marginBottom: 5
   },

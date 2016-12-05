@@ -25,20 +25,20 @@ class LikedCardFront extends Component {
         <View style={styles.container}>
           <LikedCardMenu
             buttonColor={this.props.color}
+            facebook_event_id={this.props.facebook_event_id}
             price={this.props.price}>
           </LikedCardMenu>
-          <View style={{padding: 3}}/>
           <View style={styles.card}>
             <Image source ={{uri: this.props.image}} resizeMode="cover" style={styles.cardImage}>
-              <LinearGradientView style={homeStyles.linearGradient} colors={[this.props.colorFade, this.props.color]}>
-                <View style={{backgroundColor:this.props.color, marginLeft: 150, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
+              <LinearGradientView style={styles.linearGradient} colors={[this.props.colorFade, this.props.color]}>
+                <View style={{backgroundColor:this.props.color, marginLeft: 150, marginTop: 20, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
                   <Text style={homeStyles.categoryText}>{this.props.category}</Text>
                 </View>
               </LinearGradientView>
             </Image>
-            <View style={{flex:1, width:300, backgroundColor: this.props.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
+            <View style={{flex:1, backgroundColor: this.props.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
               <View style={styles.titleTextContainer}>
-                <Text style={styles.titleText} numberOfLines={3}>{this.props.title} </Text>
+                <Text style={styles.titleText} numberOfLines={3}>{this.props.title}</Text>
               </View>
               <View style={styles.tagContainerMaster}>
                 <View style={homeStyles.tagContainer}>
@@ -56,8 +56,8 @@ class LikedCardFront extends Component {
               </View>
               <View style={styles.bottomInfoContainer}>
                 <Text style={homeStyles.bottomInfoText}>{this.props.distance} miles</Text>
-                <Text style={homeStyles.bottomInfoText}>{this.props.price} </Text>
-                <Text style={homeStyles.bottomInfoText}>{this.props.start_time} </Text>
+                <Text style={homeStyles.bottomInfoText}>{this.props.price}</Text>
+                <Text style={homeStyles.bottomInfoText}>{this.props.start_time}</Text>
               </View>
             </View>
           </View>

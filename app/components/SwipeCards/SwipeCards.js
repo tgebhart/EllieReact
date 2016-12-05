@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { handleEventInteraction } from '../../actions/userEventActions'
-import { fetchEventsIfNeeded } from '../../actions/apiActions'
+import { fetchEventsIfNeeded, postLikedEvent } from '../../actions/apiActions'
 import {
     StyleSheet,
     Text,
@@ -148,7 +148,6 @@ class SwipeCards extends Component {
 
         if (Math.abs(this.state.pan.x._value) > SWIPE_THRESHOLD) {
           let { dispatch } = this.props
-          console.log(this.props)
           this.state.pan.x._value > 0
             ? this.swipeHandleYup(this.state.card)
             : this.swipeHandleNope(this.state.card)
@@ -173,9 +172,8 @@ class SwipeCards extends Component {
 
   swipeHandleYup(card) {
     let { dispatch } = this.props
-    console.log(this.props)
-    console.log(this.context)
     dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), card.distance, true))
+    dispatch(postLikedEvent(card))
     dispatch(fetchEventsIfNeeded())
   }
 
