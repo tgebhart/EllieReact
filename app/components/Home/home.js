@@ -182,15 +182,15 @@ class Home extends Component {
             <View style={styles.tagContainerMaster}>
               <View style={styles.tagContainer}>
                 <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[0]}</Text>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[1]}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[1]}</Text>
               </View>
               <View style={styles.tagContainer}>
                 <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[2]}</Text>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[3]}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[3]}</Text>
               </View>
               <View style={styles.tagContainer}>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[4]}</Text>
-                <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[5]} friends</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[4]}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[5]} friends</Text>
               </View>
             </View>
             <View style={styles.bottomInfoContainer}>
