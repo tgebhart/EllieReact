@@ -131,7 +131,7 @@ descriptionText: {
 },
 searchTimeContainer: {
   marginTop: 10,
-  height: 10,
+  height: 20,
   marginLeft: 5,
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -142,6 +142,7 @@ searchTimeText: {
   fontSize: 12,
   fontWeight: '400',
   paddingLeft: 5,
+  paddingRight: 5,
 },
 selectedSearchTimeText: {
   color: '#ffef57',
@@ -150,6 +151,7 @@ selectedSearchTimeText: {
   fontSize: 12,
   fontWeight: '400',
   paddingLeft: 5,
+  paddingRight: 5,
 },
 searchCategoryContainer: {
   flex: 1,
@@ -210,13 +212,17 @@ categoryTagText: {
   color: 'rgba(0,0,0,0.9)',
   fontWeight: '400',
 },
-searchCityContainer: {
+searchMoreFiltersContainer: {
   flex: 1,
   marginTop: 0,
   alignItems: 'center',
   justifyContent: 'center',
   borderBottomColor: 'rgba(0,0,0,0.3)',
   borderBottomWidth: 2,
+},
+circleIconContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
 },
 searchCityText: {
   color: 'rgb(0,0,0)',

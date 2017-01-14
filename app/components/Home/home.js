@@ -28,6 +28,7 @@ import { connect } from 'react-redux';
 import Nav from '../global-widgets/nav';
 import SwipeCards from '../SwipeCards/SwipeCards.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Iconfa from 'react-native-vector-icons/FontAwesome';
 import Iconz from 'react-native-vector-icons/Ionicons';
 import LinearGradientView from 'react-native-linear-gradient';
 import FlipCard from 'react-native-flip-card';
@@ -37,6 +38,8 @@ const { BlurView, VibrancyView } = require('react-native-blur');
 import { fetchEventsIfNeeded, postLikedEvent } from '../../actions/apiActions';
 import { handleEventInteraction } from '../../actions/userEventActions';
 import { fetchUserProfile } from '../../actions/facebookActions';
+
+import SearchModal from './SearchModal';
 
 const styles = require('./styles');
 const searchDays = ['TODAY', 'TOMORROW', 'WEEKEND', 'NEXT WEEK', 'NEXT WEEKEND']
@@ -315,53 +318,7 @@ class Home extends Component {
               visible={this.state.searchVisible}
               onRequestClose={() => {console.log("Modal has been closed.")}}
               >
-              <View style={{height: sysHeight, width: sysWidth}}>
-                <TouchableOpacity style={{height: sysHeight-350, backgroundColor:'rgba(0,0,0,0.4)'}} onPress = {() => this.setSearchVisible(false)}>
-                </TouchableOpacity>
-              <View style={styles.shadowContainer}>
-                <View style={{height: 350, marginRight: 100,
-                  marginLeft: 10, width: sysWidth - 20, shadowOpacity: 5.0, elevation: 5,
-                  borderRadius: 5, overflow:'hidden', backgroundColor: 'rgb(255,255,255)'}}>
-                  <ListView
-                  contentContainerStyle={styles.searchTimeContainer}
-                  horizontal={true}
-                  scrollEnabled={true}
-                  showHorizontalScrollIndicator={false}
-                  dataSource={this.state.searchTimes}
-                  renderRow={this.renderTimeRow}
-                  />
-                <View style={styles.searchCategoryContainer}>
-                  <TouchableOpacity style={styles.concertTag}>
-                    <Text style={styles.categoryTagText}>Concert</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.comedyTag}>
-                    <Text style={styles.categoryTagText}>Comedy</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.communityTag}>
-                    <Text style={styles.categoryTagText}>Community</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.partyTag}>
-                    <Text style={styles.categoryTagText}>Party</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={styles.theaterTag}>
-                    <Text style={styles.categoryTagText}>Theater</Text>
-                  </TouchableOpacity>
-                </View>
-                <ListView
-                contentContainerStyle={styles.searchCityContainer}
-                horizontal={true}
-                scrollEnabled={true}
-                showHorizontalScrollIndicator={true}
-                dataSource={this.state.searchCities}
-                renderRow={(rowData) => <TouchableOpacity><Text style={styles.searchCityText}>{rowData}</Text></TouchableOpacity>}
-                />
-                <TouchableOpacity style={styles.searchButtonContainer}>
-                    <Icon name="search" height="24" color="rgb(0,0,0)" size={24}/>
-                    <Text style={styles.searchButtonText}>FIND</Text>
-                </TouchableOpacity>
-                </View>
-              </View>
-              </View>
+              <SearchModal/>
             </Modal>
         </View>
 
