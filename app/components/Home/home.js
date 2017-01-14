@@ -52,8 +52,6 @@ class Home extends Component {
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       searchTimes: this.ds.cloneWithRows(searchDays),
-      searchCities: this.ds.cloneWithRows([
-        'SAN FRANCISCO', 'NEARBY']),
       searchVisible: false,
       initialPosition: undefined,
       cards: undefined,
@@ -318,7 +316,7 @@ class Home extends Component {
               visible={this.state.searchVisible}
               onRequestClose={() => {console.log("Modal has been closed.")}}
               >
-              <SearchModal/>
+              <SearchModal searchTimes={this.state.searchTimes} renderTimeRow={this.renderTimeRow}/>
             </Modal>
         </View>
 
