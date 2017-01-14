@@ -4,6 +4,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  TouchableHighlight,
   PermissionsAndroid,
   View,
   Modal,
@@ -38,21 +39,23 @@ import { handleEventInteraction } from '../../actions/userEventActions';
 import { fetchUserProfile } from '../../actions/facebookActions';
 
 const styles = require('./styles');
-
+const searchDays = ['TODAY', 'TOMORROW', 'WEEKEND', 'NEXT WEEK', 'NEXT WEEKEND']
 
 class Home extends Component {
   constructor(props){
     super(props)
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.renderTimeRow = this.renderTimeRow.bind(this);
+    this.selectSearchTime = this.selectSearchTime.bind(this);
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      searchTimes: ds.cloneWithRows([
-        'TODAY', 'TOMORROW', 'WEEKEND', 'NEXT WEEK', 'NEXT WEEKEND']),
-      searchCities: ds.cloneWithRows([
+      searchTimes: this.ds.cloneWithRows(searchDays),
+      searchCities: this.ds.cloneWithRows([
         'SAN FRANCISCO', 'NEARBY']),
       searchVisible: false,
       initialPosition: undefined,
       cards: undefined,
-      user: undefined
+      user: undefined,
+      selectedSearchTime: 'TODAY'
     }
   }
 
@@ -255,6 +258,21 @@ class Home extends Component {
     this.setState({searchVisible: visible});
   }
 
+  renderTimeRow(time, sectionID, rowID, highlightRow) {
+    const isTimeSelected = this.state.selectedSearchTime == time;
+    const searchTimeTextStyle = isTimeSelected ?
+      styles.selectedSearchTimeText : styles.searchTimeText;
+    return (
+      <TouchableHighlight onPress={ () => this.selectSearchTime(time) }>
+        <Text style={searchTimeTextStyle}>{time}</Text>
+      </TouchableHighlight>
+    )
+  }
+
+  selectSearchTime(time) {
+    this.setState({selectedSearchTime: time, searchTimes: this.ds.cloneWithRows(searchDays.slice())})
+  }
+
   render() {
     var sysWidth = Dimensions.get('window').width
     var sysHeight = Dimensions.get('window').height
@@ -304,18 +322,14 @@ class Home extends Component {
                 <View style={{height: 350, marginRight: 100,
                   marginLeft: 10, width: sysWidth - 20, shadowOpacity: 5.0, elevation: 5,
                   borderRadius: 5, overflow:'hidden', backgroundColor: 'rgb(255,255,255)'}}>
-                  <ScrollView
-                  horizontal={true}
-                  >
                   <ListView
                   contentContainerStyle={styles.searchTimeContainer}
                   horizontal={true}
                   scrollEnabled={true}
-                  showHorizontalScrollIndicator={true}
+                  showHorizontalScrollIndicator={false}
                   dataSource={this.state.searchTimes}
-                  renderRow={(rowData) => <TouchableOpacity><Text style={styles.searchTimeText}>{rowData}</Text></TouchableOpacity>}
+                  renderRow={this.renderTimeRow}
                   />
-                  </ScrollView>
                 <View style={styles.searchCategoryContainer}>
                   <TouchableOpacity style={styles.concertTag}>
                     <Text style={styles.categoryTagText}>Concert</Text>
@@ -343,7 +357,7 @@ class Home extends Component {
                 />
                 <TouchableOpacity style={styles.searchButtonContainer}>
                     <Icon name="search" height="24" color="rgb(0,0,0)" size={24}/>
-                    <Text style={styles.searchButtonText}>SEARCH</Text>
+                    <Text style={styles.searchButtonText}>FIND</Text>
                 </TouchableOpacity>
                 </View>
               </View>
@@ -352,7 +366,7 @@ class Home extends Component {
         </View>
 
     )
-}
+  }
 }
 
 Home.propTypes = {

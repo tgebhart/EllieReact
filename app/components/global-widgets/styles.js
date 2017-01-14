@@ -15,6 +15,11 @@ container: {
   borderBottomWidth:1,
   borderColor:'rgba(0,0,0,0.1)'
 },
+exploreContainer: {
+  flexDirection: 'column',
+  backgroundColor: '#fff',
+  paddingTop: 5,
+},
 likedlistContainer: {
   height: 60,
   flexDirection: 'row',

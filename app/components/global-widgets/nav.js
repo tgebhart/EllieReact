@@ -20,7 +20,11 @@ export default class Nav extends Component {
         <TouchableOpacity>
           <Image source = {{uri: this.props.picture_url}} style={styles.profileImageCircle}></Image>
         </TouchableOpacity>
-        <Text style={{fontSize:12, fontWeight:'300', color:'#444', margin:5}}>{this.props.name}</Text>
+        <Text style={{fontSize:12, fontWeight:'300', color:'#444', margin:5}}>{this.props.name}:</Text>
+        <View style={styles.exploreContainer}>
+            <Text style={{fontSize:12, fontWeight:'300', color:'#444', margin:0}}>{this.props.headerFilter}</Text>
+            <Text style={{fontSize:12, fontWeight:'900', color:'#ffef57', marginTop:-10, backgroundColor: 'transparent'}}>_____________</Text>
+        </View>
       </View>
     );
   }
