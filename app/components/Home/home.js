@@ -42,21 +42,34 @@ import { fetchUserProfile } from '../../actions/facebookActions';
 import SearchModal from './SearchModal';
 
 const styles = require('./styles');
-const searchDays = ['TODAY', 'TOMORROW', 'WEEKEND', 'NEXT WEEK', 'NEXT WEEKEND']
+const searchDays = ['TODAY', 'TOMORROW', 'WEEKEND', 'NEXT WEEK', 'NEXT WEEKEND'];
+
+const nightOutImage = require('../../assets/images/night_out.png');
+const dayOutImage = require('../../assets/images/day_out.png');
+const afterWorkImage = require('../../assets/images/after_work.png');
+const exploreImage = require('../../assets/images/explore.png');
+const hereAndNowImage = require('../../assets/images/here_and_now.png');
+
+const useCases = [{'name':'Night Out', 'image': nightOutImage}, {'name':'Day Out', 'image': dayOutImage},
+                  {'name':'After Work', 'image': afterWorkImage}, {'name':'Explore', 'image': exploreImage},
+                  {'name':'Here and Now', 'image': hereAndNowImage}]
 
 class Home extends Component {
   constructor(props){
     super(props)
     this.renderTimeRow = this.renderTimeRow.bind(this);
     this.selectSearchTime = this.selectSearchTime.bind(this);
+    this.renderUseCaseRow = this.renderUseCaseRow.bind(this);
     this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       searchTimes: this.ds.cloneWithRows(searchDays),
+      searchUseCases: this.ds.cloneWithRows(useCases),
       searchVisible: false,
       initialPosition: undefined,
       cards: undefined,
       user: undefined,
-      selectedSearchTime: 'TODAY'
+      selectedSearchTime: 'TODAY',
+      selectedUseCase: 'Explore'
     }
   }
 
@@ -259,7 +272,7 @@ class Home extends Component {
     this.setState({searchVisible: visible});
   }
 
-  renderTimeRow(time, sectionID, rowID, highlightRow) {
+  renderTimeRow(time) {
     const isTimeSelected = this.state.selectedSearchTime == time;
     const searchTimeTextStyle = isTimeSelected ?
       styles.selectedSearchTimeText : styles.searchTimeText;
@@ -272,6 +285,26 @@ class Home extends Component {
 
   selectSearchTime(time) {
     this.setState({selectedSearchTime: time, searchTimes: this.ds.cloneWithRows(searchDays.slice())})
+  }
+
+  renderUseCaseRow(useCase) {
+    const isUseCaseSelected = this.state.selectedUseCase == useCase.name;
+    if (isUseCaseSelected) {
+      return (
+        <TouchableOpacity onPress={ () => this.selectUseCase(useCase) } style={{paddingLeft: 5, paddingRight: 5}}>
+          <Image source={useCase.image} style={styles.useCaseImage}><Text style={styles.useCaseTextSelected}>{useCase.name}</Text></Image>
+        </TouchableOpacity>
+      )
+    }
+    return (
+      <TouchableOpacity onPress={ () => this.selectUseCase(useCase) } style={{paddingLeft: 5, paddingRight: 5}}>
+        <Image source={useCase.image} style={styles.useCaseImage}><View style={styles.useCaseImageBlur}><Text style={styles.useCaseText}>{useCase.name}</Text></View></Image>
+      </TouchableOpacity>
+    )
+  }
+
+  selectUseCase(useCase) {
+    this.setState({selectedUseCase: useCase.name, searchUseCases: this.ds.cloneWithRows(useCases.slice())})
   }
 
   render() {
@@ -316,7 +349,12 @@ class Home extends Component {
               visible={this.state.searchVisible}
               onRequestClose={() => {console.log("Modal has been closed.")}}
               >
-              <SearchModal searchTimes={this.state.searchTimes} renderTimeRow={this.renderTimeRow}/>
+              <SearchModal
+                searchTimes={this.state.searchTimes}
+                renderTimeRow={this.renderTimeRow}
+                useCases={this.state.searchUseCases}
+                renderUseCaseRow={this.renderUseCaseRow}
+              />
             </Modal>
         </View>
 

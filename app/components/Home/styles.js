@@ -167,52 +167,30 @@ useCaseImageBlur: {
   height: 120,
   width: 75,
   borderRadius: 5.0,
+  paddingRight: 10,
+  paddingLeft: 10,
   justifyContent: 'center',
   backgroundColor: 'rgba(255,255,255,0.7)',
   alignItems: 'center'
 },
-nightOutImage: {
+useCaseImage: {
   height: 120,
   width: 75,
   borderRadius: 5.0,
-  justifyContent: 'center',
-  backgroundColor: 'transparent',
-  alignItems: 'center'
-},
-dayOutImage: {
-  height: 120,
-  width: 75,
-  borderRadius: 5.0,
-  justifyContent: 'center',
-  backgroundColor: 'transparent',
-  alignItems: 'center'
-},
-afterWorkImage: {
-  height: 120,
-  width: 75,
-  borderRadius: 5.0,
-  justifyContent: 'center',
-  backgroundColor: 'transparent',
-  alignItems: 'center'
-},
-exploreImage: {
-  height: 120,
-  width: 75,
-  borderRadius: 5.0,
-  justifyContent: 'center',
-  backgroundColor: 'transparent',
-  alignItems: 'center'
-},
-hereAndNowImage: {
-  height: 120,
-  width: 75,
-  borderRadius: 5.0,
+  paddingRight: 10,
+  paddingLeft: 10,
   justifyContent: 'center',
   backgroundColor: 'transparent',
   alignItems: 'center'
 },
 useCaseText: {
   fontSize: 12,
+  textAlign: 'center',
+  fontWeight: '400',
+},
+useCaseTextSelected: {
+  fontSize: 12,
+  color: 'rgb(255,255,255)',
   textAlign: 'center',
   fontWeight: '400',
 },
