@@ -130,8 +130,7 @@ descriptionText: {
   color: 'rgba(255, 255, 255, 1)',
 },
 searchTimeContainer: {
-  marginTop: 10,
-  height: 20,
+  marginTop: -20,
   marginLeft: 5,
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -153,9 +152,7 @@ selectedSearchTimeText: {
   paddingLeft: 5,
   paddingRight: 5,
 },
-searchCategoryContainer: {
-  flex: 1,
-  height: 80,
+searchUseCaseContainer: {
   borderBottomColor: 'rgba(0,0,0,0.3)',
   borderTopColor: 'rgba(0,0,0,0.3)',
   borderTopWidth: 2,
@@ -166,50 +163,57 @@ searchCategoryContainer: {
   justifyContent: 'space-between',
   flexDirection: 'row'
 },
-concertTag: {
-  backgroundColor: 'rgba(211, 227, 251, 0.7)',
-  height: 100,
-  width: 60,
+useCaseImageBlur: {
+  height: 120,
+  width: 75,
   borderRadius: 5.0,
   justifyContent: 'center',
+  backgroundColor: 'rgba(255,255,255,0.7)',
   alignItems: 'center'
 },
-comedyTag: {
-  backgroundColor: 'rgba(221, 83, 149, 0.9)',
-  height: 100,
-  width: 60,
+nightOutImage: {
+  height: 120,
+  width: 75,
   borderRadius: 5.0,
   justifyContent: 'center',
+  backgroundColor: 'transparent',
   alignItems: 'center'
 },
-communityTag: {
-  backgroundColor: 'rgba(19, 210, 199, 0.9)',
-  height: 100,
-  width: 60,
+dayOutImage: {
+  height: 120,
+  width: 75,
   borderRadius: 5.0,
   justifyContent: 'center',
+  backgroundColor: 'transparent',
   alignItems: 'center'
 },
-partyTag: {
-  backgroundColor: 'rgba(219, 209, 244, 0.7)',
-  height: 100,
-  width: 60,
+afterWorkImage: {
+  height: 120,
+  width: 75,
   borderRadius: 5.0,
   justifyContent: 'center',
+  backgroundColor: 'transparent',
   alignItems: 'center'
 },
-theaterTag: {
-  backgroundColor: 'rgba(244, 215, 209, 0.7)',
-  height: 100,
-  width: 60,
+exploreImage: {
+  height: 120,
+  width: 75,
   borderRadius: 5.0,
   justifyContent: 'center',
+  backgroundColor: 'transparent',
   alignItems: 'center'
 },
-categoryTagText: {
-  fontSize: 10,
-  fontFamily: 'Helvetica',
-  color: 'rgba(0,0,0,0.9)',
+hereAndNowImage: {
+  height: 120,
+  width: 75,
+  borderRadius: 5.0,
+  justifyContent: 'center',
+  backgroundColor: 'transparent',
+  alignItems: 'center'
+},
+useCaseText: {
+  fontSize: 12,
+  textAlign: 'center',
   fontWeight: '400',
 },
 searchMoreFiltersContainer: {
