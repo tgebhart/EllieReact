@@ -15,8 +15,8 @@ shadowContainer: {
   borderRadius: 5
 },
 categoryText:{
-  color: 'rgba(255,255,255, 0.8)',
-  fontSize: 12,
+  color: 'rgba(0,0,0, 0.8)',
+  fontSize: 14,
   fontWeight: 'bold',
   fontFamily: 'System'
 },
@@ -59,7 +59,7 @@ buttonSmall:{
 },
 titleTextContainer: {
   flex: 1,
-  height: 25,
+  height: 40,
   width: 300,
   alignItems: 'center',
   justifyContent: 'space-between'
@@ -67,8 +67,9 @@ titleTextContainer: {
 titleText:{
   fontFamily: 'System',
   backgroundColor: 'transparent',
-  fontSize: 22,
+  fontSize: 20,
   fontWeight: '400',
+  letterSpacing: 1,
   color: 'rgba(0,0,0,0.8)'
 },
 bottomInfoText:{
@@ -79,14 +80,12 @@ bottomInfoText:{
 },
 tagContainerMaster:{
   width: 300,
-  marginTop: 50,
-  flexDirection: 'row',
-  alignItems: 'center',
+  flexDirection: 'column',
   justifyContent: 'space-between'
 },
 tagContainer:{
-  width: 100,
-  flexDirection: 'column',
+  width: 300,
+  flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'space-between'
 },
@@ -228,6 +227,6 @@ searchButtonText: {
   fontFamily: 'Helvetica',
   color: 'rgb(0,0,0)',
   fontWeight: '400',
-}
+},
 
 });

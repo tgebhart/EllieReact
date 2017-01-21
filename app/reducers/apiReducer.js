@@ -45,7 +45,7 @@ export function eventsGet(state = eventsGetInitialState, action) {
 		case types.REMOVE_SEEN_EVENT:
 			return Object.assign({}, state, {
 				events: state.events.slice(1,)
-			})
+			});
 
 		case types.UPDATE_HOME_QUERY_PARAMS:
 			return Object.assign({}, state, {
@@ -54,11 +54,47 @@ export function eventsGet(state = eventsGetInitialState, action) {
 					body: actions.body,
 					additionalParams: actions.additionalParams
 				}
-			})
+			});
 
 		default:
 			return state
 		}
+}
+
+var likedEventsGetInitialState = {
+	events: [],
+  requestedAt: undefined,
+	receivedAt: undefined,
+	fetching: false,
+	error: undefined
+}
+
+export function likedEventsGet(state = likedEventsGetInitialState, action) {
+
+	switch(action.type) {
+
+	case types.REQUEST_FETCH_LIKED_EVENTS:
+		return Object.assign({}, state, {
+			fetching: true,
+			requestedAt: action.requestedAt
+		});
+
+	case types.RECEIVE_LIKED_EVENTS:
+		return Object.assign({}, state, {
+			receivedAt: action.receivedAt,
+			events: [...state.events, ...action.events],
+			fetching: false
+		});
+
+	case types.ERROR_FETCH_LIKED_EVENTS:
+		return Object.assign({}, state, {
+			error: action.error,
+			fetching: false
+		});
+
+	default:
+		return state
+	}
 }
 
 
@@ -90,6 +126,6 @@ export function eventsPost(state = postEventInitialState, action) {
 				error: action.error,
 				fetching: false
 			})
-			
+
 	}
 }

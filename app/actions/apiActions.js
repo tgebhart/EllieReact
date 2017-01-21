@@ -9,6 +9,13 @@ export function requestFetchEvents() {
   }
 }
 
+export function requestFetchLikedEvents() {
+  return {
+    type: types.REQUEST_FETCH_LIKED_EVENTS,
+    requestedAt: Date.now()
+  }
+}
+
 export function postingLikedEvents() {
   return {
     type: types.POSTING_EVENTS,
@@ -39,9 +46,24 @@ export function receiveEvents(result) {
   }
 }
 
+export function receiveLikedEvents(result) {
+  return {
+    type: types.RECEIVE_LIKED_EVENTS,
+    events: result.data.events,
+    receivedAt: Date.now()
+  }
+}
+
 export function errorFetchEvents(error) {
   return {
     type: types.ERROR_FETCH_EVENTS,
+    error: error
+  }
+}
+
+export function errorFetchLikedEvents(error) {
+  return {
+    type: types.ERROR_FETCH_LIKED_EVENTS,
     error: error
   }
 }
@@ -80,6 +102,30 @@ export function fetchEvents() {
     })
     .catch((error) => {
       dispatch(errorFetchEvents(error))
+    })
+  }
+}
+
+export function fetchLikedEvents() {
+
+  return (dispatch, getState) => {
+    const { accessKey, secretKey, sessionToken, region } = getState().sessionTokens
+    const { params, body, additionalParams } = getState().eventsGet.homeQueryParams
+    console.log(getState())
+    var agc = new apigClient({
+      accessKey: accessKey,
+      secretKey: secretKey,
+      sessionToken: sessionToken,
+      region: region
+    });
+
+    dispatch(requestFetchLikedEvents())
+    return agc.meLikesGet(params, body, additionalParams).then((result) => {
+      console.log('melikesgetresult', result)
+      dispatch(receiveLikedEvents(result))
+    })
+    .catch((error) =>{
+      dispatch(errorFetchLikedEvents(error))
     })
   }
 }

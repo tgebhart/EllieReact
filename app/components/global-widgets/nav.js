@@ -43,6 +43,7 @@ export default class Nav extends Component {
       <TouchableOpacity onPress ={this.props.onPress}>
         <Icon name="arrow-back" color='rgb(0,0,0)' height="25" style={{fontSize: 30, margin: 10}} />
       </TouchableOpacity>
+        <Text style={{fontSize:25, marginLeft: 115, marginTop: 10}}>Lists</Text>
       <View style = {{width:25, height:25, margin:10}}/>
       </View>
     );

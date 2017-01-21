@@ -42,7 +42,7 @@ import { fetchUserProfile } from '../../actions/facebookActions';
 import SearchModal from './SearchModal';
 
 const styles = require('./styles');
-const searchDays = ['TODAY', 'TOMORROW', 'WEEKEND', 'NEXT WEEK', 'NEXT WEEKEND'];
+import { colorMap } from '../../assets/colors/colorMap';
 
 const nightOutImage = require('../../assets/images/night_out.png');
 const dayOutImage = require('../../assets/images/day_out.png');
@@ -50,6 +50,7 @@ const afterWorkImage = require('../../assets/images/after_work.png');
 const exploreImage = require('../../assets/images/explore.png');
 const hereAndNowImage = require('../../assets/images/here_and_now.png');
 
+const searchDays = ['TODAY', 'TOMORROW', 'WEEKEND', 'NEXT WEEK', 'NEXT WEEKEND'];
 const useCases = [{'name':'Night Out', 'image': nightOutImage}, {'name':'Day Out', 'image': dayOutImage},
                   {'name':'After Work', 'image': afterWorkImage}, {'name':'Explore', 'image': exploreImage},
                   {'name':'Here and Now', 'image': hereAndNowImage}]
@@ -143,16 +144,59 @@ class Home extends Component {
 
     var prefix = ''
 
-    if (day - now.getDate() > 12) {
+    if (day - now.getDate() > 6) {
       return date.getMonth() + '/' + day + " " + date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
     }
-
-    if (day - now.getDate() > 6) {
-      prefix = 'Next '
-    }
+    //
+    // if (day - now.getDate() > 6) {
+    //   prefix = 'Next '
+    // }
 
     return prefix + num_to_day[dow] + " " + date.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})
 
+  }
+
+  chopDurationTag(tag) {
+    idx = tag.indexOf("hrs") + 3
+    return tag.substr(0, idx)
+  }
+
+  findAndChopDuration(tags) {
+    for (i=0; i < tags.length; i++) {
+      if (tags[i].includes("min")) {
+        tags[i] = this.chopDurationTag(tags[i])
+      }
+    }
+    return tags
+  }
+
+  makeTagList(tags) {
+    var ret = ['', '', '', '', '']
+    num_tags = tags.num_tags
+    if (num_tags >= 5) {
+      for (i=0; i < tags.length; i++) {
+        ret[i] = tags.tags[i+1]
+      }
+    }
+    if (num_tags == 4) {
+      ret[0] = tags.tags[1]
+      ret[1] = tags.tags[2]
+      ret[2] = tags.tags[3]
+      ret[4] = tags.tags[4]
+    }
+    if (num_tags == 3) {
+      ret[1] = tags.tags[1]
+      ret[2] = tags.tags[2]
+      ret[4] = tags.tags[3]
+    }
+    if (num_tags == 2) {
+      ret[1] = tags.tags[1]
+      ret[3] = tags.tags[2]
+    }
+    if (num_tags == 1) {
+      ret[1] = tags.tags[1]
+    }
+    return this.findAndChopDuration(ret)
   }
 
 
@@ -165,14 +209,19 @@ class Home extends Component {
       x.distance = distance
     }
 
-    x.showTime = Date.now()
+    x.showTime = Date.now() / 1000; //divide by 1000 for seconds
     x.flipped = false
 
     x.formattedStartTime = this.getStartTimeFormat(x.startTime)
 
-    var colorFade = 'rgba(126, 88, 221, 0.12)'
-    var color = 'rgba(126, 88, 221, 1.0)'
-    var tags = ['Dancing', 'Open Bar', 'Free Entry', 'Loud', 'Live Music', 5]
+    var color = colorMap.other.main
+    var colorFade = colorMap.other.fade
+    var category = 'Other'
+    if (x.category) {
+      color = colorMap[x.category.toLowerCase()].main
+      colorFade = colorMap[x.category.toLowerCase()].fade
+    }
+    var tags = this.makeTagList(x.tags)
     return (
       <FlipCard
         style={styles.flipCard}
@@ -186,34 +235,30 @@ class Home extends Component {
       <View style={styles.shadowContainer}>
         <View style={styles.card}>
           <Image source ={{uri: x.promotionalImages[0]}} resizeMode="cover" style={styles.cardImage}>
-          <LinearGradientView style={styles.linearGradient} colors={[colorFade, color]}>
-            <View style={{backgroundColor:x.color, marginLeft:140, height:30, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
-              <Text style={styles.categoryText}>{x.category}</Text>
-            </View>
-            </LinearGradientView>
+            <LinearGradientView style={styles.linearGradient} colors={[colorFade, color]}/>
           </Image>
           <View style={{flex: 1, backgroundColor:color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', width: 350}}>
             <View style={styles.titleTextContainer}>
-              <Text style={styles.titleText} numberOfLines={3}>{x.name} </Text>
+              <Text style={styles.titleText} numberOfLines={2}>{x.name}</Text>
             </View>
             <View style={styles.tagContainerMaster}>
               <View style={styles.tagContainer}>
-                <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[0]}</Text>
-                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[1]}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', padding:5}}>{x.category}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'400', padding:5}}>{tags[2]}</Text>
               </View>
               <View style={styles.tagContainer}>
-                <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[2]}</Text>
-                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[3]}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'400', padding:5}}>{tags[0]}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'400', padding:5}}>{tags[3]}</Text>
               </View>
               <View style={styles.tagContainer}>
-                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[4]}</Text>
-                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{tags[5]} friends</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'400', padding:5}}>{tags[1]}</Text>
+                <Text style={{color:'rgba(0,0,0,1.0)', fontSize:16, fontWeight:'400', padding:5}}>{tags[4]}</Text>
               </View>
             </View>
             <View style={styles.bottomInfoContainer}>
               <Text style={styles.bottomInfoText}>{x.distance} miles</Text>
-              <Text style={styles.bottomInfoText}>{x.ticketPrice} </Text>
-              <Text style={styles.bottomInfoText}>{x.formattedStartTime} </Text>
+              <Text style={styles.bottomInfoText}>$$</Text>
+              <Text style={styles.bottomInfoText}>{x.formattedStartTime}</Text>
             </View>
           </View>
         </View>
@@ -363,7 +408,6 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-
   dispatch: PropTypes.func.isRequired
 }
 

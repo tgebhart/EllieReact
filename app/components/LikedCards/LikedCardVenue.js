@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   Image,
+  TouchableOpacity,
   Platform,
 } from 'react-native';
 
@@ -15,116 +16,58 @@ import LinearGradientView from 'react-native-linear-gradient'
 import MapView from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import VenueStarRating from './VenueStarRating';
 
 const styles = require('./styles');
 const homeStyles = require('../Home/styles')
 
 class LikedCardVenue extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
   }
 
 
-  render(){
-    if (Platform.OS === 'ios') {
-      return (
-        <View style={styles.mapContainer}>
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: this.props.latitude,
-              longitude: this.props.longitude,
-              latitudeDelta: 0.0322,
-              longitudeDelta: 0.0321
-            }}
-            liteMode={true}>
-            <MapView.Marker
-              coordinate={{latitude: this.props.latitude, longitude: this.props.longitude}}
-              title={this.props.name}/>
-            <LinearGradientView style={homeStyles.linearGradient} colors={['rgba(255, 255, 225, 0.0)','rgba(0, 0, 0, 0.5)']}>
-              <View style={styles.venueTitle}>
-                <Text style={styles.titleAt}>at</Text>
-                <Text style={styles.venueTitleText}>{this.props.name}</Text>
-              </View>
-            </LinearGradientView>
-          </MapView>
-          <View style={styles.likedVenueTags}>
-            <View style={styles.venueTagColumn}>
-              <Icon name="car" size={18} color='rgb(0,0,0)'/>
-              <Text style={styles.venueTagText}>Parking</Text>
-            </View>
-            <View style={styles.venueTagColumn}>
-              <Icon name="credit-card" size={18} color='rgb(0,0,0)'/>
-              <Text style={styles.venueTagText}>Credit Cards</Text>
-            </View>
-            <View style={styles.venueTagColumn}>
-              <Icon name="glass" size={18} color='rgb(0,0,0)'/>
-              <Text style={styles.venueTagText}>Alcohol</Text>
-            </View>
-            <View style={styles.venueTagColumn}>
-              <Icon name="child" size={18} color='rgb(0,0,0)'/>
-              <Text style={styles.venueTagText}>For Kids</Text>
-            </View>
-            <View style={styles.venueTagColumn}>
-              <Icon name="users" size={18} color='rgb(0,0,0)'/>
-              <Text style={styles.venueTagText}>For Groups</Text>
-            </View>
-          </View>
-          <View style={styles.venueBottomInfo}>
-            <Text style={styles.venueBottomText}>Opens at {this.props.open}</Text>
-            <Text style={styles.venueBottomText}>{this.props.phone}</Text>
-          </View>
-        </View>
-      )
-  }
-  return (
+
+  render() {
+    return (
     <View style={styles.mapContainer}>
       <MapView
         style={styles.map}
         initialRegion={{
           latitude: this.props.latitude,
-          longitude: this.props.longitude,
+          longitude: this.props.longitude - 0.025,
           latitudeDelta: 0.0322,
           longitudeDelta: 0.0321
         }}
         liteMode={true}>
         <MapView.Marker coordinate={{latitude: this.props.latitude, longitude: this.props.longitude}}>
-          {/* <CustomMapMarker name={this.props.name}/> */}
         </MapView.Marker>
-        <LinearGradientView style={homeStyles.linearGradient} colors={['rgba(255, 255, 225, 0.0)','rgba(0, 0, 0, 0.5)']}>
-          <View style={styles.venueTitle}>
-            <Text style={styles.titleAt}>at</Text>
-            <Text style={styles.venueTitleText}>{this.props.name}</Text>
+        <View style={{width: this.props.venueCardWidth/2, backgroundColor: this.props.imageBlur, flex:1}}>
+          <View style={styles.venueInfoContainer}>
+             <View style={styles.venueTitleContainer}>
+               <Text style={styles.venueTitleText}>{this.props.name.toUpperCase()}</Text>
+             </View>
+             <View style={styles.tagAndButtonContainer}>
+               <View style={styles.moreOptionsButtonContainer}>
+                 <TouchableOpacity style={{paddingTop: 5}}>
+                   <Image source={require('../../assets/icons/moreOptionsButton.png')}></Image>
+                 </TouchableOpacity>
+               </View>
+               <View style={styles.moreInfoContainer}>
+
+               </View>
+             </View>
+             <View style={styles.venueBottomInfo}>
+                <VenueStarRating
+                  rating={this.props.rating}
+                />
+             </View>
           </View>
-        </LinearGradientView>
+        </View>
       </MapView>
-      <View style={styles.likedVenueTags}>
-        <View style={styles.venueTagColumn}>
-          <Icon name="car" size={18} color='rgb(0,0,0)'/>
-          <Text style={styles.venueTagText}>Parking</Text>
-        </View>
-        <View style={styles.venueTagColumn}>
-          <Icon name="credit-card" size={18} color='rgb(0,0,0)'/>
-          <Text style={styles.venueTagText}>Credit Cards</Text>
-        </View>
-        <View style={styles.venueTagColumn}>
-          <Icon name="glass" size={18} color='rgb(0,0,0)'/>
-          <Text style={styles.venueTagText}>Alcohol</Text>
-        </View>
-        <View style={styles.venueTagColumn}>
-          <Icon name="child" size={18} color='rgb(0,0,0)'/>
-          <Text style={styles.venueTagText}>For Kids</Text>
-        </View>
-        <View style={styles.venueTagColumn}>
-          <Icon name="users" size={18} color='rgb(0,0,0)'/>
-          <Text style={styles.venueTagText}>For Groups</Text>
-        </View>
-      </View>
-      <View style={styles.venueBottomInfo}>
-        <Text style={styles.venueBottomText}>Opens at {this.props.open}</Text>
-        <Text style={styles.venueBottomText}>{this.props.phone}</Text>
-      </View>
+
     </View>
+
     )
   }
 

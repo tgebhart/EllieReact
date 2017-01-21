@@ -26,8 +26,6 @@ likedlistContainer: {
   paddingTop: 10,
   justifyContent: 'flex-start',
   backgroundColor: '#fff',
-  borderBottomWidth:1,
-  borderColor:'rgba(0,0,0,0.1)'
 },
 profileImageCircle: {
   height: 30,

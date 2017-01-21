@@ -19,51 +19,45 @@ class LikedCardFront extends Component {
   constructor(props){
     super(props)
   }
-
-  render(){
+  
+  render() {
     return (
-        <View style={styles.container}>
-          <LikedCardMenu
-            buttonColor={this.props.color}
-            facebook_event_id={this.props.facebook_event_id}
-            price={this.props.price}>
-          </LikedCardMenu>
-          <View style={styles.card}>
-            <Image source ={{uri: this.props.image}} resizeMode="cover" style={styles.cardImage}>
-              <LinearGradientView style={styles.linearGradient} colors={[this.props.colorFade, this.props.color]}>
-                <View style={{backgroundColor:this.props.color, marginLeft: 150, marginTop: 20, width:60, borderBottomLeftRadius:5, borderBottomRightRadius:5, justifyContent:'center', alignItems:'center'}}>
-                  <Text style={homeStyles.categoryText}>{this.props.category}</Text>
-                </View>
-              </LinearGradientView>
-            </Image>
-            <View style={{flex:1, backgroundColor: this.props.color, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start'}}>
+      <View style={styles.container}>
+        <View style={styles.card}>
+          <Image source ={{uri: this.props.image}} resizeMode="cover" style={styles.cardImage}>
+            <View style={{backgroundColor: this.props.imageBlur, height:this.props.cardHeight, width:this.props.frontCardWidth}}></View>
+          </Image>
+          <View style={{backgroundColor: this.props.imageBlur, height:this.props.cardHeight, width:2*this.props.frontCardWidth/3, alignSelf:'flex-end'}}>
+            <View style={styles.eventInfoContainer}>
               <View style={styles.titleTextContainer}>
-                <Text style={styles.titleText} numberOfLines={3}>{this.props.title}</Text>
+                <Text style={styles.titleText}>{this.props.title.toUpperCase()}</Text>
               </View>
-              <View style={styles.tagContainerMaster}>
-                <View style={homeStyles.tagContainer}>
-                  <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.dancing}</Text>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.volume}</Text>
+              <View style={styles.tagContainer}>
+                <View style={styles.indiTagContainer}>
+                  <Text style={styles.categoryTagText}>{this.props.category}</Text>
+                  <Text style={styles.tagText}>{this.props.tags[2]}</Text>
                 </View>
-                <View style={homeStyles.tagContainer}>
-                  <Text style={{color:'rgba(80,227,194,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.openbar}</Text>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.dress}</Text>
+                <View style={styles.indiTagContainer}>
+                  <Text style={styles.tagText}>{this.props.tags[0]}</Text>
+                  <Text style={styles.tagText}>{this.props.tags[3]}</Text>
                 </View>
-                <View style={homeStyles.tagContainer}>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.age}</Text>
-                  <Text style={{color:'rgba(255,255,255,1.0)', fontSize:16, fontWeight:'bold', margin:5}}>{this.props.friends} friends</Text>
+                <View style={styles.indiTagContainer}>
+                  <Text style={styles.tagText}>{this.props.tags[1]}</Text>
+                  <Text style={styles.tagText}>{this.props.tags[4]}</Text>
                 </View>
               </View>
               <View style={styles.bottomInfoContainer}>
-                <Text style={homeStyles.bottomInfoText}>{this.props.distance} miles</Text>
-                <Text style={homeStyles.bottomInfoText}>{this.props.price}</Text>
-                <Text style={homeStyles.bottomInfoText}>{this.props.start_time}</Text>
+                <Text style={styles.bottomInfoText}>{this.props.distance} MILES</Text>
+                <Text style={styles.bottomInfoText}>{this.props.price}</Text>
+                <Text style={styles.bottomInfoText}>{this.props.start_time.toUpperCase()}</Text>
               </View>
             </View>
           </View>
         </View>
+      </View>
     )
   }
 }
+
 
 export default LikedCardFront;

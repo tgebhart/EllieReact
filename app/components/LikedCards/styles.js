@@ -3,14 +3,10 @@ var {StyleSheet, Platform, Dimensions} = require('react-native');
 var sysWidth = Dimensions.get('window').width;
 var sysHeight = Dimensions.get('window').height;
 
-var cardHeight = sysHeight / 2 - 20;
+var cardHeight = sysHeight / 4 - 20;
 
-var mapHeight = sysHeight / 4;
-
-var menuWidth = 60;
 var buffer = 15;
-
-var frontCardWidth = sysWidth - menuWidth - buffer;
+var frontCardWidth = sysWidth - buffer;
 var venueCardWidth = sysWidth - buffer;
 
 module.exports = StyleSheet.create({
@@ -21,7 +17,7 @@ module.exports = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    marginTop: Platform.OS === 'android' ? 0 : 20,
+    marginTop: Platform.OS === 'android' ? 0 : 0,
   },
   row: {
     flexDirection: 'row',
@@ -34,36 +30,38 @@ module.exports = StyleSheet.create({
   },
   card: {
    flex: 1,
-   alignItems: 'center',
+   flexDirection:'row',
    alignSelf:'center',
-   borderRadius: 10,
-   marginTop: 10,
-   shadowColor: 'rgb(0, 0, 0)',
+   marginLeft: 10,
+   width: frontCardWidth,
    height: cardHeight,
-   overflow: "hidden",
  },
  textContainer:{
    alignItems: 'center',
    justifyContent: 'center',
  },
  cardImage: {
-   width: frontCardWidth,
-   height: cardHeight/2.2,
+   alignSelf: 'flex-start',
+   width: frontCardWidth/3,
+   height: cardHeight,
+ },
+ eventInfoContainer: {
+   backgroundColor: 'rgba(255,255,255, 0.3)',
+   height: cardHeight,
+   width: 2*frontCardWidth/3,
  },
  titleText:{
    fontFamily: 'System',
+   padding: 10,
    backgroundColor: 'transparent',
-   fontSize: 18,
+   fontSize: 12,
    fontWeight: '400',
-   color: 'rgba(255, 255, 255, 0.8)'
+   letterSpacing: 2,
+   color: 'rgba(0, 0, 0, .8)'
  },
  titleTextContainer: {
-   flex: 1,
-   height: 25,
-   width: frontCardWidth,
+   height: cardHeight/4,
    alignItems: 'center',
-   justifyContent: 'space-between',
-   padding: 10,
  },
  tagContainer:{
    flexDirection: 'column',
@@ -73,20 +71,47 @@ module.exports = StyleSheet.create({
  linearGradient: {
    flex: 1,
  },
- tagContainerMaster:{
-   flex: 1,
+ linearGradientImage: {
+   alignSelf: 'flex-start',
    width: frontCardWidth,
+   height: cardHeight,
+ },
+ tagContainer:{
    flexDirection: 'row',
+   alignItems: 'center',
+   height:11*cardHeight/20,
+   justifyContent: 'space-between',
+   width: 2*frontCardWidth/3
+ },
+ indiTagContainer: {
+   flexDirection: 'column',
    alignItems: 'center',
    justifyContent: 'space-between'
  },
+ tagText: {
+   color:'rgba(0,0,0,1.0)',
+   fontSize:13,
+   fontWeight:'400',
+   padding:5
+ },
+ categoryTagText: {
+   color:'rgba(0,0,0,1.0)',
+   fontSize:13,
+   fontWeight:'bold',
+   padding:5
+ },
  bottomInfoContainer:{
-   flex: 1,
    flexDirection:'row',
    alignItems:'center',
-   width: frontCardWidth,
-   marginBottom: 10,
-   justifyContent:'space-between'
+   justifyContent:'space-between',
+ },
+ bottomInfoText:{
+   fontFamily: 'System',
+   fontSize: 10,
+   padding: 5,
+   letterSpacing: 1,
+   fontWeight: '800',
+   color: 'rgb(255, 255, 255)'
  },
  instructions: {
     textAlign: 'center',
@@ -100,34 +125,12 @@ module.exports = StyleSheet.create({
     fontSize: 12,
     fontWeight: '300',
   },
-  menuButtonContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    paddingRight: 5,
-    paddingLeft: 5,
-    paddingTop: 25,
-    paddingBottom: 25,
-    width: menuWidth,
-  },
-  menuContainer: {
-    flex: 1,
-    alignItems: 'center',
-    width: menuWidth,
-    backgroundColor: '#FFFFFF',
-    marginTop: Platform.OS === 'android' ? 0 : 0,
-  },
   mapContainer: {
-   flex: 1,
    width: venueCardWidth,
    height: cardHeight,
-   margin: 5,
    marginLeft: 5,
-   marginTop: 10,
-   justifyContent: 'flex-end',
+   marginTop: 5,
    alignItems: 'center',
-   borderRadius: 5,
-   overflow: "hidden"
  },
   map: {
     position: 'absolute',
@@ -135,36 +138,51 @@ module.exports = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    height: mapHeight,
+    height: cardHeight,
 },
-  venueTitle: {
-    flex: 1,
-    flexDirection: 'column',
+venueInfoContainer: {
+  backgroundColor: 'rgba(255,255,255,0.6)',
+  flex: 1,
+},
+  venueTitleContainer: {
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    marginBottom: 10,
+    height: cardHeight/3,
 },
   venueTitleText: {
     fontFamily: 'System',
     backgroundColor: 'transparent',
-    fontSize: 22,
+    fontSize: 15,
+    padding: 5,
     fontWeight: '400',
-    color: 'rgba(255, 255, 255, 0.8)',
+    letterSpacing: 1,
+    color: 'rgba(0, 0, 0, 0.8)',
 },
-  titleAt: {
-    fontFamily: 'System',
-    backgroundColor: 'transparent',
-    fontSize: 16,
-    fontWeight: '400',
-    color: 'rgba(255, 255, 255, 0.8)',
-    fontStyle: 'italic'
+tagAndButtonContainer: {
+  height: cardHeight/2,
+  flexDirection: 'row',
 },
-  likedVenueTags: {
+moreOptionsButtonContainer: {
+  width: venueCardWidth/8,
+  flexDirection: 'row',
+  alignItems: 'flex-start',
+  justifyContent: 'center',
+},
+moreInfoContainer: {
+  width: 3*venueCardWidth/8,
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  alignItems: 'flex-end',
+},
+venueRatingContainer: {
+  height: cardHeight/6,
+  flexDirection: 'row',
+  alignItems: 'flex-end'
+},
+likedVenueTags: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginTop: mapHeight,
     padding: 10,
     width: venueCardWidth
 },
@@ -180,12 +198,23 @@ module.exports = StyleSheet.create({
     padding: 10
 },
   venueBottomInfo: {
-    flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: venueCardWidth,
-    paddingBottom: 30
+    height: cardHeight/4,
+},
+venueRatingContainer: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  alignSelf: 'flex-end',
+  justifyContent: 'space-between',
+  paddingBottom: 5,
+  paddingRight: 5
+},
+venueRatingStar: {
+  fontSize: 14,
+  color: 'rgb(0,0,0)',
+  padding: 2
 },
   venueBottomText: {
     fontSize: 14,

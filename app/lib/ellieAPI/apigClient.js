@@ -588,4 +588,40 @@ export default class apigClient {
 
       return this.apiGatewayClient.makeRequest(meOptionsRequest, this.authType, additionalParams, this.config.apiKey);
   };
+
+  meDislikesGet(params, body, additionalParams) {
+    if(additionalParams === undefined) { additionalParams = {}; }
+
+    this.assertParametersDefined(params, [], ['body']);
+
+    var meDislikesGetRequest = {
+        verb: 'get'.toUpperCase(),
+        path: this.pathComponent + '/me/dislikes',
+        headers: this.parseParametersToObject(params, []),
+        queryParams: this.parseParametersToObject(params, []),
+        body: body
+    };
+
+
+    return this.apiGatewayClient.makeRequest(meDislikesGetRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
+
+  meLikesGet(params, body, additionalParams) {
+    if(additionalParams === undefined) { additionalParams = {}; }
+
+    this.assertParametersDefined(params, [], ['body']);
+
+    var meLikesGetRequest = {
+        verb: 'get'.toUpperCase(),
+        path: this.pathComponent + '/me/likes',
+        headers: this.parseParametersToObject(params, []),
+        queryParams: this.parseParametersToObject(params, []),
+        body: body
+    };
+
+
+    return this.apiGatewayClient.makeRequest(meLikesGetRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
 };
