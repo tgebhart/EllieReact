@@ -111,7 +111,7 @@ module.exports = StyleSheet.create({
    padding: 5,
    letterSpacing: 1,
    fontWeight: '800',
-   color: 'rgb(255, 255, 255)'
+   color: 'rgba(0,0,0,0.6)'
  },
  instructions: {
     textAlign: 'center',
@@ -142,7 +142,6 @@ module.exports = StyleSheet.create({
 },
 venueInfoContainer: {
   backgroundColor: 'rgba(255,255,255,0.6)',
-  flex: 1,
 },
   venueTitleContainer: {
     alignItems: 'center',
@@ -162,9 +161,9 @@ tagAndButtonContainer: {
   flexDirection: 'row',
 },
 moreOptionsButtonContainer: {
+  flex: 1,
   width: venueCardWidth/8,
   flexDirection: 'row',
-  alignItems: 'flex-start',
   justifyContent: 'center',
 },
 moreInfoContainer: {
@@ -226,6 +225,37 @@ venueRatingStar: {
     color: 'rgba(255, 255, 255, 0.8)',
     fontWeight: '400',
     backgroundColor: 'rgba(0,0,0,1.0)'
-}
+},
+mapOverlayContainer: {
+  alignSelf: 'flex-end',
+  width: venueCardWidth/2,
+},
+venuePhoneContainer: {
+  height: cardHeight/8,
+  flexDirection: 'row',
+  justifyContent: 'center',
+},
+venuePhoneText: {
+  fontSize: 14,
+  color: 'rgb(0,0,0)',
+  fontFamily: 'System'
+},
+rsvpModalContainer: {
+  height: cardHeight,
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: frontCardWidth,
+  backgroundColor: 'rgba(0,0,0,0.6)',
+},
+moreOptionsButtonsContainer: {
+  left: 60,
+  top: 50,
+  width: 3*frontCardWidth/4,
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+
+},
 
 });

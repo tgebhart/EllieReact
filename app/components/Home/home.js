@@ -209,7 +209,7 @@ class Home extends Component {
       x.distance = distance
     }
 
-    x.showTime = Date.now() / 1000; //divide by 1000 for seconds
+    x.showTime = parseInt(Date.now() / 1000); //divide by 1000 for seconds
     x.flipped = false
 
     x.formattedStartTime = this.getStartTimeFormat(x.startTime)
@@ -284,14 +284,14 @@ class Home extends Component {
 
   handleYup(card) {
     let { dispatch } = this.props
-    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), card.distance, true))
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, parseInt(Date.now()/1000), card.distance, true))
     dispatch(postLikedEvent(card))
     dispatch(fetchEventsIfNeeded())
   }
 
   handleNope(card) {
     let { dispatch } = this.props
-    dispatch(handleEventInteraction(card, card.flipped, card.showTime, Date.now(), card.distance, false))
+    dispatch(handleEventInteraction(card, card.flipped, card.showTime, parseInt(Date.now()/1000), card.distance, false))
     dispatch(fetchEventsIfNeeded())
   }
 

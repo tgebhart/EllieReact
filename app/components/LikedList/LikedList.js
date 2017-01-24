@@ -9,6 +9,7 @@ import {
   Dimensions,
   ScrollView,
   ListView,
+  Modal,
   View
 } from 'react-native';
 
@@ -16,9 +17,10 @@ import Nav from '../global-widgets/nav'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Swiper from 'react-native-swiper';
 
-import LikedCardFront from '../LikedCards/LikedCardFront.js'
-import LikedCardMenu from '../LikedCards/LikedCardMenu.js'
-import LikedCardVenue from '../LikedCards/LikedCardVenue.js'
+import LikedCardFront from '../LikedCards/LikedCardFront';
+import LikedCardMenu from '../LikedCards/LikedCardMenu';
+import LikedCardVenue from '../LikedCards/LikedCardVenue';
+import RSVPModal from '../LikedCards/RSVPModal';
 
 import { fetchLikedEvents } from '../../actions/apiActions';
 
@@ -27,17 +29,17 @@ import MapView from 'react-native-maps';
 const styles = require('./styles');
 import { colorMap } from '../../assets/colors/colorMap';
 
-var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
 class LikedList extends Component {
   constructor(props){
     super(props)
-
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.pressMoreOptions = this.pressMoreOptions.bind(this);
     this.state = {
       dataSource: [],
-      convoData: ds.cloneWithRows(this.props.likedEvents),
+      convoData: this.ds.cloneWithRows(this.props.likedEvents),
       items: [],
       isLoading: true,
+      rsvpVisible: false,
     }
   }
 
@@ -109,7 +111,9 @@ class LikedList extends Component {
     return this.findAndChopDuration(ret)
   }
 
-
+  pressMoreOptions() {
+    this.setState({rsvpVisible: !this.state.rsvpVisible, convoData: this.ds.cloneWithRows(this.props.likedEvents.slice())})
+  }
 
   eventSummary(x) {
     var color = colorMap.other.main
@@ -128,42 +132,46 @@ class LikedList extends Component {
     var buffer = 15;
     var frontCardWidth = sysWidth - buffer;
     var venueCardWidth = sysWidth - buffer;
-    return(
-      <View style={styles.eventSummaryContainer}>
-        <ScrollView
-          horizontal={true}
-          contentContainerStyle={{marginBottom:0}}
-          showsHorizontalScrollIndicator={false}>
-          <LikedCardFront
-              image={x.event.promotionalImages[0]}
-              imageBlur={imageBlur}
-              colorFade={colorFade}
-              color={color}
-              category={x.event.category}
-              title={x.event.name}
-              tags={tags}
-              distance={x.distance}
-              price='$15'//x.event.ticketPrice
-              start_time={x.event.formattedStartTime}
-              facebook_event_id={x.event.facebook_event_id}
-              frontCardWidth={frontCardWidth}
-              cardHeight={cardHeight}
+    return (
+        <View style={styles.eventSummaryContainer}>
+          <ScrollView
+            horizontal={true}
+            contentContainerStyle={{marginBottom:0}}
+            showsHorizontalScrollIndicator={false}>
+            <LikedCardFront
+                image={x.event.promotionalImages[0]}
+                imageBlur={imageBlur}
+                colorFade={colorFade}
+                color={color}
+                category={x.event.category}
+                title={x.event.name}
+                tags={tags}
+                distance={x.distance}
+                price='$15'//x.event.ticketPrice
+                start_time={x.event.formattedStartTime}
+                facebook_event_id={x.event.facebook_event_id}
+                frontCardWidth={frontCardWidth}
+                cardHeight={cardHeight}
+                pressMoreOptions={this.pressMoreOptions}
+                rsvpVisible={x.rsvpVisible}
+              />
+            <LikedCardVenue
+                latitude={x.event.venue.latitude}
+                longitude={x.event.venue.longitude}
+                name={x.event.venue.name}
+                open={x.event.venue.open}
+                phone={x.event.venue.phone}
+                infoTags={x.event.venue.infoTags}
+                venueCardWidth={venueCardWidth}
+                cardHeight={cardHeight}
+                imageBlur={imageBlur}
+                rating={x.event.venue.yelpRating}
+                pressMoreOptions={this.pressMoreOptions}
             />
-          <LikedCardVenue
-              latitude={x.event.venue.latitude}
-              longitude={x.event.venue.longitude}
-              name={x.event.venue.name}
-              open={x.event.venue.open}
-              phone={x.event.venue.phone}
-              infoTags={x.event.venue.infoTags}
-              venueCardWidth={venueCardWidth}
-              cardHeight={cardHeight}
-              imageBlur={imageBlur}
-              rating={x.event.venue.yelpRating}
-          />
-        </ScrollView>
-      </View>
-  )}
+          </ScrollView>
+        </View>
+      )
+  }
 
   renderCards(x) {
     return(

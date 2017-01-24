@@ -203,6 +203,23 @@ export default class apigClient {
       return this.apiGatewayClient.makeRequest(eventsIdOptionsRequest, this.authType, additionalParams, this.config.apiKey);
   };
 
+  eventsBatchGet(params, body, additionalParams) {
+      if(additionalParams === undefined) { additionalParams = {}; }
+
+      this.assertParametersDefined(params, ['ids'], ['body']);
+
+      var eventsBatchGetRequest = {
+          verb: 'get'.toUpperCase(),
+          path: this.pathComponent + '/events/batch' + this.parseParametersToObject(params, []),
+          headers: this.parseParametersToObject(params, []),
+          queryParams: this.parseParametersToObject(params, ['ids']),
+          body: body
+      };
+
+
+      return this.apiGatewayClient.makeRequest(eventsBatchGetRequest, this.authType, additionalParams, this.config.apiKey);
+  };
+
 
   uiOptions(params, body, additionalParams) {
       if(additionalParams === undefined) { additionalParams = {}; }
