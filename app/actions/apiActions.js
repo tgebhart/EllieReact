@@ -46,10 +46,10 @@ export function receiveEvents(result) {
   }
 }
 
-export function receiveLikedEvents(result) {
+export function receiveLikedEvents(filtered) {
   return {
     type: types.RECEIVE_LIKED_EVENTS,
-    events: result.data.events,
+    events: filtered,
     receivedAt: Date.now()
   }
 }
@@ -106,6 +106,18 @@ export function fetchEvents() {
   }
 }
 
+function filterLikedEvents(events) {
+  retSet = new Set();
+  ct = parseInt(Date.now()/1000);
+  for (i=0; i<events.length; i++) {
+    if (events[i].startTime > ct) {
+      retSet.add(events[i].id)
+    }
+    break;
+  }
+  return [...retSet]
+};
+
 export function fetchLikedEvents() {
 
   return (dispatch, getState) => {
@@ -122,7 +134,7 @@ export function fetchLikedEvents() {
     dispatch(requestFetchLikedEvents())
     return agc.meLikesGet(params, body, additionalParams).then((result) => {
       console.log('melikesgetresult', result)
-      dispatch(receiveLikedEvents(result))
+      dispatch(receiveLikedEvents(filterLikedEvents(result.data.events)))
     })
     .catch((error) =>{
       dispatch(errorFetchLikedEvents(error))
